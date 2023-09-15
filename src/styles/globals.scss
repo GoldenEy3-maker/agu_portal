@@ -1,0 +1,9 @@
+@import "./var";
+@import "./default";
+@import "./components/rippleEffect";
+
+.wrapper {
+  display: flex;
+
+  padding: 0.7rem;
+}
