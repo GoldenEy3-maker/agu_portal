@@ -7,6 +7,7 @@ import styles from "./styles.module.scss"
 
 type LinkProps = {
   variant?: "elevated" | "filled" | "outlined"
+  asIcon?: boolean
   activeClassName?: string
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> &
@@ -23,6 +24,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       children,
       variant,
       activeClassName,
+      asIcon,
       ...props
     },
     ref
@@ -52,6 +54,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             [styles._filled ?? ""]: variant === "filled",
             [styles._outlined ?? ""]: variant === "outlined",
             [activeClassName ?? ""]: isActive,
+            [styles._asIcon ?? ""]: asIcon!!,
           })}
           onPointerDown={rippleEffectEvent}
           ref={ref}

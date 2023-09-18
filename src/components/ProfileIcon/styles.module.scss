@@ -1,0 +1,11 @@
+.icon {
+  display: grid;
+  place-items: center;
+
+  background-color: hsl(var(--primary-hsl));
+  color: hsl(var(--on-primary-hsl));
+  border-radius: var(--full-shape);
+
+  width: 2.5rem;
+  height: 2.5rem;
+}

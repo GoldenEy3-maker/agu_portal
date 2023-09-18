@@ -1,7 +1,7 @@
 :root {
   /* HSL BASE */
   --surface-base-hsl: 0, 0%;
-  --primary-base-hsl: 260, 75%;
+  --primary-base-hsl: 260, 65%;
   --primary-container-base-hsl: 260, 70%;
   --danger-base-hsl: 0, 100%;
   --danger-container-base-hsl: 0, 16%;
@@ -11,17 +11,17 @@
   --warning-container-base-hsl: 54, 16%;
 
   /* HSL */
-  --surface-hsl: var(--surface-base-hsl), 95%;
+  --surface-hsl: var(--surface-base-hsl), 90%;
   --surface-container-lowest-hsl: var(--surface-base-hsl), 4%;
-  --surface-container-low-hsl: var(--surface-base-hsl), 10%;
-  --surface-container-hsl: var(--surface-base-hsl), 90%;
+  --surface-container-low-hsl: var(--surface-base-hsl), 95%;
+  --surface-container-hsl: var(--surface-base-hsl), 94%;
   --surface-container-high-hsl: var(--surface-base-hsl), 17%;
   --surface-container-highest-hsl: var(--surface-base-hsl), 22%;
   --on-surface-hsl: var(--surface-base-hsl), 0%;
   --on-surface-variant-hsl: var(--surface-base-hsl), 30%;
 
-  --primary-hsl: var(--primary-base-hsl), 50%;
-  --primary-low-hsl: var(--primary-base-hsl), 55%;
+  --primary-hsl: var(--primary-base-hsl), 55%;
+  --primary-low-hsl: var(--primary-base-hsl), 60%;
   --primary-lowest-hsl: var(--primary-base-hsl), 70%;
   --primary-container-low-hsl: var(--primary-base-hsl), 95%;
   --primary-container-hsl: var(--primary-container-base-hsl), 92%;
@@ -31,6 +31,9 @@
 
   --outline-hsl: var(--surface-base-hsl), 60%;
   --outline-variant-hsl: var(--surface-base-hsl), 80%;
+
+  --selection-bg-hsl: var(--primary-hsl);
+  --selection-clr-hsl: var(--on-primary-hsl);
 
   --danger-hsl: var(--danger-base-hsl), 70%;
   --danger-low-hsl: var(--danger-base-hsl), 65%;
@@ -60,16 +63,17 @@
   --placeholder-hsl: var(--surface-base-hsl), 50%;
 
   /* Sizes */
-  --container-mw: calc(1400px + var(--container-pdi) * 2);
+  --container-mw: calc(1600px + var(--container-pdi) * 2);
   --container-pdi: 1rem;
   --safe-area-pd: 1.5rem;
 
   /* UTILS */
   --primary-bxs: var(--primary-hsl), 0.25;
+  --surface-bxs: 0, 0%, 0%, 0.5;
 
   --small-shape: 8px;
-  --medium-shape: 12px;
-  --large-shape: 16px;
+  --medium-shape: 14px;
+  --large-shape: 18px;
   --extra-large-shape: 28px;
   --full-shape: 9999px;
 

@@ -3,6 +3,7 @@ export const useRippleEffect = () => {
   const minAnimationDuration = 200
 
   const rippleEffectEvent: React.PointerEventHandler<HTMLElement> = (event) => {
+    console.log(event)
     const target = event.currentTarget
     const nestedInteractionNodes = target.querySelectorAll("button, input, a")
 
@@ -16,7 +17,10 @@ export const useRippleEffect = () => {
       if (isClickedOnNestedInteractionNode) return
     }
 
-    const diameter = Math.max(target.clientWidth, target.clientHeight)
+    const targetWidth = target.getBoundingClientRect().width
+    const targetHeight = target.getBoundingClientRect().height
+
+    const diameter = Math.max(targetWidth, targetHeight)
     const radius = diameter / 2
 
     const x = event.clientX - target.getBoundingClientRect().left - radius
@@ -46,9 +50,9 @@ export const useRippleEffect = () => {
       ripple.style.opacity = "0"
       ripple.style.transition = `opacity ${remainingTime}ms linear`
 
-      setTimeout(() => {
-        ripple.remove()
-      }, remainingTime)
+      // setTimeout(() => {
+      //   ripple.remove()
+      // }, remainingTime)
 
       target.removeEventListener("pointerup", handleFadeOutRipple)
       target.removeEventListener("pointercancel", handleFadeOutRipple)

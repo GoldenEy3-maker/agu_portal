@@ -56,13 +56,13 @@ a:hover {
 }
 
 ::-moz-selection {
-  color: hsl(var(--surface-hsl));
-  background: hsl(var(--primary-hsl));
+  color: hsl(var(--selection-clr-hsl));
+  background-color: hsl(var(--selection-bg-hsl));
 }
 
 ::selection {
-  color: hsl(var(--surface-hsl));
-  background: hsl(var(--primary-hsl));
+  color: hsl(var(--selection-clr-hsl));
+  background-color: hsl(var(--selection-bg-hsl));
 }
 
 a {

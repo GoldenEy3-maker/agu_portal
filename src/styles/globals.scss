@@ -4,6 +4,32 @@
 
 .wrapper {
   display: flex;
+  flex-direction: column;
+}
 
-  padding: 0.7rem;
+.horizontal-wrapper {
+  display: flex;
+
+  padding: var(--safe-area-pd);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  max-width: var(--container-mw);
+  padding-inline: var(--container-pdi);
+  margin-inline: auto;
+}
+
+footer {
+  --selection-bg-hsl: var(--surface-hsl);
+  --selection-clr-hsl: var(--primary-hsl);
+
+  background-color: hsl(var(--primary-hsl));
+  color: hsl(var(--on-primary-hsl));
+
+  padding: 2rem;
 }

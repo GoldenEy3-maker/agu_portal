@@ -1,30 +1,26 @@
-import { useRouter } from "next/router"
 import {
-  BiBarChartSquare,
   BiBell,
+  BiCalendar,
   BiCog,
   BiFolder,
   BiGroup,
   BiHelpCircle,
   BiHome,
-  BiHomeAlt,
   BiLogOut,
   BiMessageSquareDetail,
-  BiSolidBarChartSquare,
   BiSolidBell,
+  BiSolidCalendar,
   BiSolidCog,
   BiSolidFolder,
   BiSolidGroup,
   BiSolidHelpCircle,
   BiSolidHome,
-  BiSolidMessageAltDetail,
   BiSolidMessageSquareDetail,
-  BiUser,
 } from "react-icons/bi"
 import Link from "~/components/Link"
-import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { PagePaths } from "~/utils/enums"
 import { cls } from "~/utils/func"
+import ProfileIcon from "../ProfileIcon"
 import styles from "./styles.module.scss"
 
 const Sidebar: React.FC = () => {
@@ -32,15 +28,14 @@ const Sidebar: React.FC = () => {
     <aside className={styles.aside}>
       <nav className={styles.nav}>
         <div className={cls([styles.navGroup, styles.header])}>
-          <Link href="#" className={styles.navLink}>
-            <BiUser />
-          </Link>
+          <ProfileIcon />
         </div>
         <div className={cls([styles.navGroup, styles.main])}>
           <Link
             href={PagePaths.HomePage}
             activeClassName={styles.activeNavLink}
             className={styles.navLink}
+            asIcon
           >
             {(isActive) => (isActive ? <BiSolidHome /> : <BiHome />)}
           </Link>
@@ -48,6 +43,7 @@ const Sidebar: React.FC = () => {
             href={PagePaths.NotificationsPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) => (isActive ? <BiSolidBell /> : <BiBell />)}
           </Link>
@@ -55,6 +51,7 @@ const Sidebar: React.FC = () => {
             href={PagePaths.ChatPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) =>
               isActive ? (
@@ -68,6 +65,7 @@ const Sidebar: React.FC = () => {
             href={PagePaths.CoursesPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) => (isActive ? <BiSolidFolder /> : <BiFolder />)}
           </Link>
@@ -75,22 +73,23 @@ const Sidebar: React.FC = () => {
             href={PagePaths.UsersPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) => (isActive ? <BiSolidGroup /> : <BiGroup />)}
           </Link>
           <Link
-            href={PagePaths.StatisticsPage}
+            href={PagePaths.SchedulerPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
-            {(isActive) =>
-              isActive ? <BiSolidBarChartSquare /> : <BiBarChartSquare />
-            }
+            {(isActive) => (isActive ? <BiSolidCalendar /> : <BiCalendar />)}
           </Link>
           <Link
             href={PagePaths.SupportPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) =>
               isActive ? <BiSolidHelpCircle /> : <BiHelpCircle />
@@ -102,10 +101,11 @@ const Sidebar: React.FC = () => {
             href={PagePaths.SettingsPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            asIcon
           >
             {(isActive) => (isActive ? <BiSolidCog /> : <BiCog />)}
           </Link>
-          <Link href="#" className={styles.navLink}>
+          <Link href="#" className={styles.navLink} asIcon>
             <BiLogOut />
           </Link>
         </div>

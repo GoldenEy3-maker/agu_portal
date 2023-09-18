@@ -1,4 +1,41 @@
 .link {
+  --_outline-clr: var(--primary-hsl);
+
   position: relative;
   overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  padding: 0.7rem 1.5rem;
+
+  border-radius: var(--full-shape);
+  color: hsl(var(--primary-hsl));
+
+  &._asIcon {
+    padding: 1rem;
+  }
+
+  &._filled {
+    --ripple-hsl: var(--surface-hsl);
+
+    background-color: hsl(var(--primary-hsl));
+    color: hsl(var(--on-primary-hsl));
+  }
+
+  &:focus-visible {
+    outline: 2px solid hsl(var(--_outline-clr));
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: hsl(var(--primary-container-hsl));
+
+      &._filled {
+        background-color: hsl(var(--primary-low-hsl));
+      }
+    }
+  }
 }

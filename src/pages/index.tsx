@@ -1,14 +1,14 @@
-import Button from "~/components/Button"
+import Welcome from "~/components/#pages/home/Welcome"
 import MainLayout from "~/layouts/main"
-import { api } from "~/utils/api"
 import { NextPageWithLayout } from "./_app"
+import styles from "./styles.module.scss"
 
 const HomePage: NextPageWithLayout = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" })
-
   return (
     <>
-      <main>Главная страница</main>
+      <main className={styles.main}>
+        <Welcome />
+      </main>
     </>
   )
 }

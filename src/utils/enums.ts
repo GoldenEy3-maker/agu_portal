@@ -6,7 +6,7 @@ export const PagePaths = {
   ChatPage: "/chat",
   CoursesPage: "/courses",
   UsersPage: "/users",
-  StatisticsPage: "/statistics",
+  SchedulerPage: "/scheduler",
   SupportPage: "/support",
   SettingsPage: "/settings",
 } as const

@@ -14,8 +14,13 @@ const MainLayout: React.FC<React.PropsWithChildren> = (props) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <div className={cls(["wrapper", inter.className])}>
-        <Sidebar />
-        {props.children}
+        <div className="horizontal-wrapper">
+          <Sidebar />
+          <div className="container">{props.children}</div>
+        </div>
+        <footer>
+          <h3 style={{ fontSize: "var(--title-l-fs)" }}>Контактные данные</h3>
+        </footer>
       </div>
     </>
   )
