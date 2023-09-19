@@ -1,4 +1,8 @@
 .main {
   display: grid;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.videoFrame {
+  border-radius: var(--medium-shape);
 }

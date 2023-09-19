@@ -8,7 +8,7 @@
 .wrapper {
   position: relative;
 
-  width: 90%;
+  width: 100%;
   height: 420px;
 
   margin-inline: auto;
@@ -17,7 +17,7 @@
 
   overflow: hidden;
 
-  box-shadow: 0 0 1rem hsla(var(--surface-bxs));
+  box-shadow: 0 0 0.5rem hsla(var(--surface-bxs));
 
   &:after {
     content: "";
@@ -25,7 +25,7 @@
     position: absolute;
     inset: 0;
 
-    background-color: hsla(0, 0%, 0%, 0.6);
+    background-color: hsla(0, 0%, 0%, 0.7);
   }
 }
 

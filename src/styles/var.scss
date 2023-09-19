@@ -1,8 +1,8 @@
 :root {
   /* HSL BASE */
   --surface-base-hsl: 0, 0%;
-  --primary-base-hsl: 260, 65%;
-  --primary-container-base-hsl: 260, 70%;
+  --primary-base-hsl: 260, 55%;
+  --primary-container-base-hsl: 260, 60%;
   --danger-base-hsl: 0, 100%;
   --danger-container-base-hsl: 0, 16%;
   --success-base-hsl: 118, 49%;
@@ -14,7 +14,7 @@
   --surface-hsl: var(--surface-base-hsl), 90%;
   --surface-container-lowest-hsl: var(--surface-base-hsl), 4%;
   --surface-container-low-hsl: var(--surface-base-hsl), 95%;
-  --surface-container-hsl: var(--surface-base-hsl), 94%;
+  --surface-container-hsl: var(--surface-base-hsl), 95%;
   --surface-container-high-hsl: var(--surface-base-hsl), 17%;
   --surface-container-highest-hsl: var(--surface-base-hsl), 22%;
   --on-surface-hsl: var(--surface-base-hsl), 0%;
@@ -69,7 +69,7 @@
 
   /* UTILS */
   --primary-bxs: var(--primary-hsl), 0.25;
-  --surface-bxs: 0, 0%, 0%, 0.5;
+  --surface-bxs: 0, 0%, 0%, 0.2;
 
   --small-shape: 8px;
   --medium-shape: 14px;
