@@ -1,4 +1,5 @@
 import Welcome from "~/components/#pages/home/Welcome"
+import Calendar from "~/components/Calendar"
 import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
 import { NextPageWithLayout } from "./_app"
@@ -38,10 +39,7 @@ const HomePage: NextPageWithLayout = () => {
                 <Section.Title>Календарь</Section.Title>
               </Section.Header>
               <Section.Content>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Quibusdam rem labore, necessitatibus sequi delectus a asperiores
-                iste, est adipisci quisquam culpa saepe, officia tempore eos
-                veniam dignissimos. Facilis, aspernatur maiores?
+                <Calendar />
               </Section.Content>
             </Section.Root>
             <Section.Root>

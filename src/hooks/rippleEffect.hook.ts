@@ -3,7 +3,6 @@ export const useRippleEffect = () => {
   const minAnimationDuration = 200
 
   const rippleEffectEvent: React.PointerEventHandler<HTMLElement> = (event) => {
-    console.log(event)
     const target = event.currentTarget
     const nestedInteractionNodes = target.querySelectorAll("button, input, a")
 

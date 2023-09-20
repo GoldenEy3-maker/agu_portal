@@ -15,6 +15,10 @@ export const cls = (
   return filteredCls.join(" ")
 }
 
+export const toUpperInitialLetter = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 export const getProdUrl = () => {
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
 }

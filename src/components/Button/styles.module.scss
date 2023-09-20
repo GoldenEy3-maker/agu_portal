@@ -7,11 +7,19 @@
   position: relative;
   overflow: hidden;
 
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
   color: hsl(var(--primary-hsl));
 
   padding: 0.7rem 1.5rem;
 
   border-radius: var(--full-shape);
+
+  &._asIcon {
+    padding: 0.7rem;
+  }
 
   &._filled {
     --ripple-hsl: var(--surface-hsl);
