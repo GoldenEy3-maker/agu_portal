@@ -1,6 +1,6 @@
 import dayjs from "dayjs"
 import { useRouter } from "next/router"
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi"
 import { cls, toUpperInitialLetter } from "~/utils/func"
 import { ValueOf } from "~/utils/types"
@@ -10,7 +10,6 @@ import styles from "./styles.module.scss"
 const Modes = {
   Days: "days",
   Months: "months",
-  Years: "years",
 } as const
 
 type Modes = ValueOf<typeof Modes>
@@ -20,8 +19,12 @@ type CalendarProps = {
 }
 
 const Calendar: React.FC<CalendarProps> = (props) => {
-  const [currentDate, setCurrentDate] = useState(dayjs(props.date) || dayjs())
+  const [currentDate, setCurrentDate] = useState(dayjs(props.date))
   const [selectionMode, setSelectionMode] = useState<Modes>("days")
+  const [selectedDate, setSelectedDate] = useState(dayjs(props.date))
+
+  const daysMainRef = useRef<HTMLDivElement>(null)
+  const monthsGridHeightRef = useRef(0)
 
   const router = useRouter()
 
@@ -34,6 +37,18 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   const startNextMonth = nextMonth.startOf("month")
   const prevMonth = currentDate.subtract(1, "month")
   const endPrevMonth = prevMonth.endOf("month")
+
+  const setMonthsGridHeight = () => {
+    if (daysMainRef.current)
+      monthsGridHeightRef.current =
+        daysMainRef.current.getBoundingClientRect().height
+  }
+
+  const toggleSelectionMode = () => {
+    if (selectionMode === "days") setMonthsGridHeight()
+
+    setSelectionMode((prev) => (prev === "days" ? "months" : "days"))
+  }
 
   const days = useMemo(() => {
     const res: dayjs.Dayjs[] = []
@@ -82,23 +97,27 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     return res
   }, [currentDate])
 
+  const months = useMemo(() => {
+    const res: dayjs.Dayjs[] = []
+
+    for (let i = 0; i < 12; i++) {
+      res.push(currentDate.startOf("year").add(i, "month"))
+    }
+
+    return res
+  }, [currentDate])
+
   return (
     <div>
       <header className={styles.header}>
         <Button
           type="button"
           className={styles.headerCurr}
-          onClick={() =>
-            selectionMode === "days"
-              ? setSelectionMode("months")
-              : setSelectionMode("years")
-          }
+          onClick={toggleSelectionMode}
         >
           <p>
             {(() => {
               if (selectionMode === "months") return currentDate.year()
-
-              if (selectionMode === "years") return "2020-2024"
 
               return toUpperInitialLetter(
                 new Intl.DateTimeFormat(router.locale, {
@@ -138,24 +157,40 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         {(() => {
           if (selectionMode === "months")
             return (
-              <div className={styles.monthsGrid}>
-                <Button>Январь</Button>
-                <Button>Февраль</Button>
-                <Button>Март</Button>
-                <Button>Апрель</Button>
-                <Button>Май</Button>
-                <Button>Июнь</Button>
-                <Button>Июль</Button>
-                <Button>Август</Button>
-                <Button>Сентябрь</Button>
-                <Button>Октябрь</Button>
-                <Button>Ноябрь</Button>
-                <Button>Декабрь</Button>
+              <div
+                className={styles.monthsGrid}
+                style={
+                  {
+                    "--height": monthsGridHeightRef.current + "px",
+                  } as React.CSSProperties
+                }
+              >
+                {months.map((date) => (
+                  <Button
+                    key={date.unix()}
+                    type="button"
+                    variant={
+                      date.isSame(dayjs(props.date), "month")
+                        ? "filled"
+                        : undefined
+                    }
+                    onClick={() => {
+                      setSelectionMode("days")
+                      setCurrentDate((prev) => prev.set("month", date.month()))
+                    }}
+                  >
+                    {toUpperInitialLetter(
+                      new Intl.DateTimeFormat(router.locale, {
+                        month: "long",
+                      }).format(date.toDate())
+                    )}
+                  </Button>
+                ))}
               </div>
             )
 
           return (
-            <>
+            <div ref={daysMainRef}>
               <div className={styles.weeks}>
                 <span>Пн</span>
                 <span>Вт</span>
@@ -171,17 +206,37 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                     key={date.unix()}
                     asIcon
                     type="button"
+                    variant={(() => {
+                      if (
+                        date.isSame(selectedDate, "date") &&
+                        date.month() === currentDate.month()
+                      )
+                        return "filled"
+
+                      if (date.isSame(dayjs(props.date), "date"))
+                        return "outliend"
+
+                      return undefined
+                    })()}
+                    color={
+                      date.day() === 0 && date.month() === currentDate.month()
+                        ? "danger"
+                        : undefined
+                    }
                     className={cls([], {
                       [styles._notCurrentMonth ?? ""]:
                         date.month() !== currentDate.month(),
-                      [styles._currentDay ?? ""]: date.isSame(dayjs(), "date"),
                     })}
+                    onClick={() => {
+                      setSelectedDate(date)
+                      setCurrentDate((prev) => prev.set("month", date.month()))
+                    }}
                   >
                     {date.date()}
                   </Button>
                 ))}
               </div>
-            </>
+            </div>
           )
         })()}
       </div>

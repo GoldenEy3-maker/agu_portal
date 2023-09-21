@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { BiRightArrowAlt } from "react-icons/bi"
 import WelcomeAguPic from "~/assets/preview_alt.jpg"
+import Button from "~/components/Button"
 import Link from "~/components/Link"
 import styles from "./styles.module.scss"
 

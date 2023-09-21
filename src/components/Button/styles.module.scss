@@ -21,11 +21,23 @@
     padding: 0.7rem;
   }
 
+  &._danger {
+    --ripple-hsl: var(--danger-hsl);
+
+    color: hsl(var(--danger-hsl));
+  }
+
   &._filled {
     --ripple-hsl: var(--surface-hsl);
 
     background-color: hsl(var(--primary-hsl));
     color: hsl(var(--on-primary-hsl));
+
+    &._danger {
+      --ripple-hsl: 0, 0%, 0%;
+      background-color: hsl(var(--danger-hsl));
+      color: hsl(var(--on-danger-hsl));
+    }
   }
 
   &._elevated {
@@ -34,50 +46,42 @@
   }
 
   &._outlined {
-    border: 1px solid hsl(var(--outline-hsl));
+    outline: 1px solid hsl(var(--primary-hsl));
+    outline-offset: -1px;
+
+    &._danger {
+      outline-color: hsl(var(--danger-hsl));
+    }
   }
 
   &:focus-visible {
     outline: 2px solid hsl(var(--primary-hsl));
     outline-offset: 2px;
+
+    &._danger {
+      outline-color: hsl(var(--danger-hsl));
+    }
   }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: hsl(var(--primary-container-hsl));
+      background-color: hsl(var(--primary-container-low-hsl));
+
+      &._danger {
+        background-color: hsl(var(--danger-container-low-hsl));
+      }
 
       &._filled {
         background-color: hsl(var(--primary-low-hsl));
+
+        &._danger {
+          background-color: hsl(var(--danger-low-hsl));
+        }
       }
 
       &._elevated {
         background-color: hsl(var(--primary-container-high-hsl));
       }
     }
-  }
-}
-
-.tooltip {
-  position: absolute;
-  top: 120%;
-  left: 50%;
-  z-index: 10;
-
-  user-select: none;
-  pointer-events: none;
-
-  background-color: hsl(var(--surface-container-hsl));
-  border-radius: var(--medium-shape);
-
-  padding: 0.3rem 1rem;
-
-  translate: -50% 0;
-
-  display: none;
-
-  font-size: var(--body-m-fs);
-
-  &._show {
-    display: block;
   }
 }

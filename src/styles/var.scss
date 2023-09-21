@@ -3,8 +3,8 @@
   --surface-base-hsl: 0, 0%;
   --primary-base-hsl: 260, 55%;
   --primary-container-base-hsl: 260, 60%;
-  --danger-base-hsl: 0, 100%;
-  --danger-container-base-hsl: 0, 16%;
+  --danger-base-hsl: 0, 75%;
+  --danger-container-base-hsl: 6, 100%;
   --success-base-hsl: 118, 49%;
   --success-container-base-hsl: 118, 16%;
   --warning-base-hsl: 54, 73%;
@@ -23,8 +23,8 @@
   --primary-hsl: var(--primary-base-hsl), 55%;
   --primary-low-hsl: var(--primary-base-hsl), 60%;
   --primary-lowest-hsl: var(--primary-base-hsl), 70%;
-  --primary-container-low-hsl: var(--primary-base-hsl), 95%;
-  --primary-container-hsl: var(--primary-container-base-hsl), 92%;
+  --primary-container-low-hsl: var(--primary-base-hsl), 93%;
+  --primary-container-hsl: var(--primary-container-base-hsl), 91%;
   --primary-container-high-hsl: var(--primary-container-base-hsl), 88%;
   --primary-container-highest-hsl: var(--primary-container-base-hsl), 33%;
   --on-primary-hsl: var(--primary-base-hsl), 95%;
@@ -35,13 +35,15 @@
   --selection-bg-hsl: var(--primary-hsl);
   --selection-clr-hsl: var(--on-primary-hsl);
 
-  --danger-hsl: var(--danger-base-hsl), 70%;
-  --danger-low-hsl: var(--danger-base-hsl), 65%;
-  --danger-lowest-hsl: var(--danger-base-hsl), 60%;
-  --danger-container-hsl: var(--danger-container-base-hsl), 20%;
+  --danger-hsl: var(--danger-base-hsl), 45%;
+  --danger-low-hsl: var(--danger-base-hsl), 50%;
+  --danger-lowest-hsl: var(--danger-base-hsl), 80%;
+  --danger-container-hsl: var(--danger-container-base-hsl), 92%;
+  --danger-container-low-hsl: var(--danger-container-base-hsl), 93%;
   --danger-container-high-hsl: var(--danger-container-base-hsl), 30%;
   --danger-container-highest-hsl: var(--danger-container-base-hsl), 33%;
-  --on-danger-hsl: var(--danger-base-hsl), 20%;
+  --on-danger-hsl: var(--danger-base-hsl), 100%;
+  --on-danger-container-hsl: 358, 100%, 13%;
 
   --success-hsl: var(--success-base-hsl), 50%;
   --success-low-hsl: var(--success-base-hsl), 45%;

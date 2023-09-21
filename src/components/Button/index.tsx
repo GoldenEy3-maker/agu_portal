@@ -5,9 +5,15 @@ import styles from "./styles.module.scss"
 type ButtonProps = {
   variant?: "elevated" | "filled" | "outliend"
   asIcon?: boolean
+  color?: "danger" | "primary" | "success"
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
-const Button: React.FC<ButtonProps> = ({ variant, asIcon, ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  asIcon,
+  color,
+  ...props
+}) => {
   const rippleEffectEvent = useRippleEffect()
 
   return (
@@ -18,6 +24,8 @@ const Button: React.FC<ButtonProps> = ({ variant, asIcon, ...props }) => {
         [styles._elevated ?? ""]: variant === "elevated",
         [styles._outlined ?? ""]: variant === "outliend",
         [styles._asIcon ?? ""]: asIcon!!,
+        [styles._danger ?? ""]: color === "danger",
+        [styles._success ?? ""]: color === "success",
       })}
       onPointerDown={rippleEffectEvent}
     >
