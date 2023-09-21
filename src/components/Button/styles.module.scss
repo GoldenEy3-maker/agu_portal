@@ -65,10 +65,10 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: hsl(var(--primary-container-low-hsl));
+      background-color: hsl(var(--primary-container-hsl));
 
       &._danger {
-        background-color: hsl(var(--danger-container-low-hsl));
+        background-color: hsl(var(--danger-container-hsl));
       }
 
       &._filled {

@@ -1,8 +1,8 @@
-import NextLink, { type LinkProps as NextLinkProps } from "next/link"
-import { useRouter } from "next/router"
-import { forwardRef } from "react"
-import { useRippleEffect } from "~/hooks/rippleEffect.hook"
-import { cls } from "~/utils/func"
+import NextLink, {type LinkProps as NextLinkProps} from "next/link"
+import {useRouter} from "next/router"
+import {forwardRef} from "react"
+import {useRippleEffect} from "~/hooks/rippleEffect.hook"
+import {cls} from "~/utils/func"
 import styles from "./styles.module.scss"
 
 type LinkProps = {

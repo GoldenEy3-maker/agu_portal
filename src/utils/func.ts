@@ -15,7 +15,7 @@ export const cls = (
   return filteredCls.join(" ")
 }
 
-export const toUpperInitialLetter = (str: string) => {
+export const toUpperCaseInitialLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 

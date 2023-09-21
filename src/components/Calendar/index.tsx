@@ -1,16 +1,16 @@
-import dayjs from "dayjs"
-import { useRouter } from "next/router"
-import { useMemo, useRef, useState } from "react"
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi"
-import { cls, toUpperInitialLetter } from "~/utils/func"
-import { ValueOf } from "~/utils/types"
-import Button from "../Button"
-import styles from "./styles.module.scss"
+import dayjs from "dayjs";
+import { useRouter } from "next/router";
+import { useMemo, useRef, useState } from "react";
+import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { cls, toUpperCaseInitialLetter } from "~/utils/func";
+import { ValueOf } from "~/utils/types";
+import Button from "../Button";
+import styles from "./styles.module.scss";
 
 const Modes = {
   Days: "days",
-  Months: "months",
-} as const
+  Months: "months"
+} as const;
 
 type Modes = ValueOf<typeof Modes>
 
@@ -19,93 +19,116 @@ type CalendarProps = {
 }
 
 const Calendar: React.FC<CalendarProps> = (props) => {
-  const [currentDate, setCurrentDate] = useState(dayjs(props.date))
-  const [selectionMode, setSelectionMode] = useState<Modes>("days")
-  const [selectedDate, setSelectedDate] = useState(dayjs(props.date))
+  const [currentDate, setCurrentDate] = useState(dayjs(props.date));
+  const [selectionMode, setSelectionMode] = useState<Modes>("days");
+  const [selectedDate, setSelectedDate] = useState(dayjs(props.date));
 
-  const daysMainRef = useRef<HTMLDivElement>(null)
-  const monthsGridHeightRef = useRef(0)
+  const daysMainRef = useRef<HTMLDivElement>(null);
+  const monthsGridHeightRef = useRef(0);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const startCurrentMonth = currentDate.startOf("month")
-  const endCurrentMonth = currentDate.endOf("month")
-  const diffDaysCurrentMonth =
-    endCurrentMonth.diff(startCurrentMonth, "day") + 1
+  const startCurrentMonth = currentDate.startOf("month");
+  const endCurrentMonth = currentDate.endOf("month");
+  const daysCurrentMonth = endCurrentMonth.diff(startCurrentMonth, "day") + 1;
 
-  const nextMonth = currentDate.add(1, "month")
-  const startNextMonth = nextMonth.startOf("month")
-  const prevMonth = currentDate.subtract(1, "month")
-  const endPrevMonth = prevMonth.endOf("month")
+  const nextMonth = currentDate.add(1, "month");
+  const startNextMonth = nextMonth.startOf("month");
+  const prevMonth = currentDate.subtract(1, "month");
+  const endPrevMonth = prevMonth.endOf("month");
 
   const setMonthsGridHeight = () => {
     if (daysMainRef.current)
       monthsGridHeightRef.current =
-        daysMainRef.current.getBoundingClientRect().height
-  }
+        daysMainRef.current.getBoundingClientRect().height;
+  };
 
   const toggleSelectionMode = () => {
-    if (selectionMode === "days") setMonthsGridHeight()
-
-    setSelectionMode((prev) => (prev === "days" ? "months" : "days"))
-  }
+    if (selectionMode === "days") setMonthsGridHeight();
+    setSelectionMode((prev) => (prev === "days" ? "months" : "days"));
+  };
 
   const days = useMemo(() => {
-    const res: dayjs.Dayjs[] = []
-    let weekDayStartCurrentMonth = startCurrentMonth.day() - 1
-    let weekDayEndCurrentMonth = 7 - endCurrentMonth.day()
-    let isNotFull = true
-    let suffixCount = 0
+    let weekDayStartCurrentMonth = startCurrentMonth.day() - 1;
 
-    if (weekDayStartCurrentMonth === 0) weekDayStartCurrentMonth = 0
-    if (weekDayStartCurrentMonth < 0) weekDayStartCurrentMonth = 6
+    if (weekDayStartCurrentMonth < 0) weekDayStartCurrentMonth = 6;
 
-    let prefixCount =
-      endPrevMonth.date() - (endPrevMonth.date() - weekDayStartCurrentMonth + 1)
+    const res: dayjs.Dayjs[] = [];
+    const weekDayEndCurrentMonth = 7 - endCurrentMonth.day();
+    const startPrefixDate = endPrevMonth.date() - (weekDayStartCurrentMonth - 1);
+    let prefixCount = endPrevMonth.date() - startPrefixDate;
+    let suffixCount = 0;
+    let isNotFilled = true;
 
-    if (startCurrentMonth.day() === 6 && diffDaysCurrentMonth >= 30)
-      isNotFull = false
+    if (
+      ((startCurrentMonth.day() === 6 || startCurrentMonth.day() === 0) &&
+        daysCurrentMonth >= 30) ||
+      (startCurrentMonth.day() === 5 && daysCurrentMonth === 31)
+    )
+      isNotFilled = false;
 
-    if (startCurrentMonth.day() === 0 && diffDaysCurrentMonth >= 30)
-      isNotFull = false
-
-    if (startCurrentMonth.day() === 5 && diffDaysCurrentMonth === 31)
-      isNotFull = false
-
-    for (
-      let i = endPrevMonth.date() - weekDayStartCurrentMonth + 1;
-      i <= endPrevMonth.date();
-      i++
-    ) {
-      res.push(endPrevMonth.subtract(prefixCount, "day"))
-      prefixCount--
+    for (let i = startPrefixDate; i <= endPrevMonth.date(); i++) {
+      res.push(endPrevMonth.subtract(prefixCount, "day"));
+      prefixCount--;
     }
 
     for (let i = startCurrentMonth.date(); i <= endCurrentMonth.date(); i++) {
-      res.push(startCurrentMonth.add(i - 1, "day"))
+      res.push(startCurrentMonth.add(i - 1, "day"));
     }
 
     for (
       let i = startNextMonth.date();
-      i < startNextMonth.date() + weekDayEndCurrentMonth + (isNotFull ? 7 : 0);
+      i <
+      startNextMonth.date() + weekDayEndCurrentMonth + (isNotFilled ? 7 : 0);
       i++
     ) {
-      res.push(startNextMonth.add(suffixCount, "day"))
-      suffixCount++
+      res.push(startNextMonth.add(suffixCount, "day"));
+      suffixCount++;
     }
 
-    return res
-  }, [currentDate])
+    return res;
+  }, [currentDate]);
 
   const months = useMemo(() => {
-    const res: dayjs.Dayjs[] = []
+    const res: dayjs.Dayjs[] = [];
 
     for (let i = 0; i < 12; i++) {
-      res.push(currentDate.startOf("year").add(i, "month"))
+      res.push(currentDate.startOf("year").add(i, "month"));
     }
 
-    return res
-  }, [currentDate])
+    return res;
+  }, [currentDate]);
+
+  const goToPrevDate = () => {
+    if (selectionMode === "months")
+      return setCurrentDate((prev) => prev.subtract(1, "year"));
+    setCurrentDate((prev) => prev.subtract(1, "month"));
+  };
+
+  const goToNextDate = () => {
+    if (selectionMode === "months")
+      return setCurrentDate((prev) => prev.add(1, "year"));
+    setCurrentDate((prev) => prev.add(1, "month"));
+  };
+
+  const setMonth = (monthIndex: number) => {
+    setSelectionMode("days");
+    setCurrentDate((prev) => prev.set("month", monthIndex));
+  };
+
+  const getDayButtonsVariant = (day: dayjs.Dayjs) => {
+    if (day.isSame(selectedDate, "date") && day.month() === currentDate.month())
+      return "filled";
+
+    if (day.isSame(dayjs(props.date), "date")) return "outlined";
+
+    return undefined;
+  };
+
+  const selectDay = (day: dayjs.Dayjs) => {
+    setSelectedDate(day);
+    setCurrentDate((prev) => prev.set("month", day.month()));
+  };
 
   return (
     <div>
@@ -117,39 +140,23 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         >
           <p>
             {(() => {
-              if (selectionMode === "months") return currentDate.year()
+              if (selectionMode === "months") return currentDate.year();
 
-              return toUpperInitialLetter(
+              return toUpperCaseInitialLetter(
                 new Intl.DateTimeFormat(router.locale, {
                   month: "long",
-                  year: "numeric",
+                  year: "numeric"
                 }).format(currentDate.toDate())
-              )
+              );
             })()}
           </p>
         </Button>
         <div className={styles.headerActions}>
-          <Button
-            asIcon
-            type="button"
-            onClick={() => {
-              if (selectionMode === "months")
-                return setCurrentDate((prev) => prev.subtract(1, "year"))
-              setCurrentDate((prev) => prev.subtract(1, "month"))
-            }}
-          >
-            <BiLeftArrowAlt />
+          <Button asIcon type="button" onClick={goToPrevDate}>
+            <BiLeftArrowAlt/>
           </Button>
-          <Button
-            asIcon
-            type="button"
-            onClick={() => {
-              if (selectionMode === "months")
-                return setCurrentDate((prev) => prev.add(1, "year"))
-              setCurrentDate((prev) => prev.add(1, "month"))
-            }}
-          >
-            <BiRightArrowAlt />
+          <Button asIcon type="button" onClick={goToNextDate}>
+            <BiRightArrowAlt/>
           </Button>
         </div>
       </header>
@@ -161,33 +168,30 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                 className={styles.monthsGrid}
                 style={
                   {
-                    "--height": monthsGridHeightRef.current + "px",
+                    "--height": monthsGridHeightRef.current + "px"
                   } as React.CSSProperties
                 }
               >
-                {months.map((date) => (
+                {months.map((month) => (
                   <Button
-                    key={date.unix()}
+                    key={month.unix()}
                     type="button"
                     variant={
-                      date.isSame(dayjs(props.date), "month")
-                        ? "filled"
+                      month.isSame(dayjs(props.date), "month")
+                        ? "outlined"
                         : undefined
                     }
-                    onClick={() => {
-                      setSelectionMode("days")
-                      setCurrentDate((prev) => prev.set("month", date.month()))
-                    }}
+                    onClick={() => setMonth(month.month())}
                   >
-                    {toUpperInitialLetter(
+                    {toUpperCaseInitialLetter(
                       new Intl.DateTimeFormat(router.locale, {
-                        month: "long",
-                      }).format(date.toDate())
+                        month: "long"
+                      }).format(month.toDate())
                     )}
                   </Button>
                 ))}
               </div>
-            )
+            );
 
           return (
             <div ref={daysMainRef}>
@@ -201,47 +205,33 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                 <span>Вс</span>
               </div>
               <div className={styles.daysGrid}>
-                {days.map((date) => (
+                {days.map((day) => (
                   <Button
-                    key={date.unix()}
+                    key={day.unix()}
                     asIcon
                     type="button"
-                    variant={(() => {
-                      if (
-                        date.isSame(selectedDate, "date") &&
-                        date.month() === currentDate.month()
-                      )
-                        return "filled"
-
-                      if (date.isSame(dayjs(props.date), "date"))
-                        return "outliend"
-
-                      return undefined
-                    })()}
+                    variant={getDayButtonsVariant(day)}
                     color={
-                      date.day() === 0 && date.month() === currentDate.month()
+                      day.day() === 0 && day.month() === currentDate.month()
                         ? "danger"
                         : undefined
                     }
                     className={cls([], {
                       [styles._notCurrentMonth ?? ""]:
-                        date.month() !== currentDate.month(),
+                      day.month() !== currentDate.month()
                     })}
-                    onClick={() => {
-                      setSelectedDate(date)
-                      setCurrentDate((prev) => prev.set("month", date.month()))
-                    }}
+                    onClick={() => selectDay(day)}
                   >
-                    {date.date()}
+                    {day.date()}
                   </Button>
                 ))}
               </div>
             </div>
-          )
+          );
         })()}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Calendar
+export default Calendar;
