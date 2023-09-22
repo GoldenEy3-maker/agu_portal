@@ -13,6 +13,10 @@
   border-radius: var(--full-shape);
   color: hsl(var(--primary-hsl));
 
+  &._onPrimary {
+    color: hsl(var(--on-primary-hsl));
+  }
+
   &._sm {
     font-size: var(--body-m-fs);
     padding: 0.5rem 1rem;
@@ -37,6 +41,11 @@
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: hsl(var(--primary-container-hsl));
+
+      &._onPrimary {
+        background-color: hsl(var(--surface-hsl));
+        color: hsl(var(--primary-hsl));
+      }
 
       &._filled {
         background-color: hsl(var(--primary-low-hsl));

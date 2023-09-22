@@ -15,7 +15,7 @@
   --surface-container-lowest-hsl: var(--surface-base-hsl), 4%;
   --surface-container-low-hsl: var(--surface-base-hsl), 95%;
   --surface-container-hsl: var(--surface-base-hsl), 95%;
-  --surface-container-high-hsl: var(--surface-base-hsl), 17%;
+  --surface-container-high-hsl: var(--surface-base-hsl), 92%;
   --surface-container-highest-hsl: var(--surface-base-hsl), 22%;
   --on-surface-hsl: var(--surface-base-hsl), 0%;
   --on-surface-variant-hsl: var(--surface-base-hsl), 30%;
@@ -29,6 +29,7 @@
   --primary-container-high-hsl: var(--primary-container-base-hsl), 88%;
   --primary-container-highest-hsl: var(--primary-container-base-hsl), 33%;
   --on-primary-hsl: var(--primary-base-hsl), 95%;
+  --on-primary-variant-hsl: var(--primary-base-hsl), 85%;
 
   --outline-hsl: var(--surface-base-hsl), 60%;
   --outline-variant-hsl: var(--surface-base-hsl), 80%;

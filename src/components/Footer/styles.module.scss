@@ -5,9 +5,81 @@
   background-color: hsl(var(--primary-hsl));
   color: hsl(var(--on-primary-hsl));
 
-  padding: 2rem;
+  padding-block: 3rem ;
+
+  a {
+    color: hsl(var(--on-primary-hsl));
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  position: relative;
+  z-index: 3;
+
 }
 
 .title {
-  font-size: var(--title-l-fs);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  font-size: var(--headline-m-fs);
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  font-size: var(--headline-m-fs);
+}
+
+
+.contacts {
+  font-size: var(--body-m-fs);
+
+  margin-top: 2rem;
+
+  color: hsl(var(--on-primary-variant-hsl));
+}
+
+.nav {
+  flex: 1;
+
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+
+  margin-top: 1rem;
+
+  &Group {
+    h5 {
+      font-weight: 500;
+      font-size: var(--body-extra-fs);
+      margin-bottom: 1rem;
+    }
+  }
+
+  &Links {
+    display: grid;
+
+    a {
+      padding-block: 0.2rem;
+    }
+  }
+
 }

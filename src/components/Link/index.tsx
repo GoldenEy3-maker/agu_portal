@@ -11,6 +11,7 @@ type LinkProps = {
   activeClassName?: string
   size?: "sm" | "lg"
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
+  onPrimary?: boolean
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> &
   Omit<NextLinkProps, "as" | "passHref" | "children">
 
@@ -27,6 +28,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       activeClassName,
       asIcon,
       size,
+      onPrimary,
       ...props
     },
     ref
@@ -57,7 +59,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             [styles._outlined ?? ""]: variant === "outlined",
             [activeClassName ?? ""]: isActive,
             [styles._asIcon ?? ""]: asIcon!!,
-            [styles._sm ?? ""]: size === "sm"
+            [styles._sm ?? ""]: size === "sm",
+            [styles._onPrimary ?? ""]: onPrimary!!
           })}
           onPointerDown={rippleEffectEvent}
           ref={ref}
