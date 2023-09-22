@@ -1,14 +1,15 @@
-import NextLink, {type LinkProps as NextLinkProps} from "next/link"
-import {useRouter} from "next/router"
-import {forwardRef} from "react"
-import {useRippleEffect} from "~/hooks/rippleEffect.hook"
-import {cls} from "~/utils/func"
+import NextLink, { type LinkProps as NextLinkProps } from "next/link"
+import { useRouter } from "next/router"
+import { forwardRef } from "react"
+import { useRippleEffect } from "~/hooks/rippleEffect.hook"
+import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
 type LinkProps = {
   variant?: "elevated" | "filled" | "outlined"
   asIcon?: boolean
   activeClassName?: string
+  size?: "sm" | "lg"
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> &
   Omit<NextLinkProps, "as" | "passHref" | "children">
@@ -25,6 +26,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       variant,
       activeClassName,
       asIcon,
+      size,
       ...props
     },
     ref
@@ -55,6 +57,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             [styles._outlined ?? ""]: variant === "outlined",
             [activeClassName ?? ""]: isActive,
             [styles._asIcon ?? ""]: asIcon!!,
+            [styles._sm ?? ""]: size === "sm"
           })}
           onPointerDown={rippleEffectEvent}
           ref={ref}

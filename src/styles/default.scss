@@ -53,6 +53,13 @@ a:hover {
 ::-webkit-scrollbar-thumb {
   background-color: hsl(var(--primary-lowest-hsl));
   border-radius: var(--full-shape);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: hsl(var(--primary-high-hsl));
+    }
+
+  }
 }
 
 ::-moz-selection {

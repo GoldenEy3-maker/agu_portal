@@ -1,0 +1,13 @@
+.footer {
+  --selection-bg-hsl: var(--surface-hsl);
+  --selection-clr-hsl: var(--on-surface-hsl);
+
+  background-color: hsl(var(--primary-hsl));
+  color: hsl(var(--on-primary-hsl));
+
+  padding: 2rem;
+}
+
+.title {
+  font-size: var(--title-l-fs);
+}

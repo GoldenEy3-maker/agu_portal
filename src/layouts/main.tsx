@@ -2,6 +2,7 @@ import { Inter } from "next/font/google"
 import Head from "next/head"
 import Sidebar from "~/components/Sidebar"
 import { cls } from "~/utils/func"
+import Footer from "~/components/Footer"
 
 const inter = Inter({ subsets: ["cyrillic", "latin"] })
 
@@ -18,9 +19,7 @@ const MainLayout: React.FC<React.PropsWithChildren> = (props) => {
           <Sidebar />
           <div className="container">{props.children}</div>
         </div>
-        <footer>
-          <h3 style={{ fontSize: "var(--title-l-fs)" }}>Контактные данные</h3>
-        </footer>
+        <Footer />
       </div>
     </>
   )

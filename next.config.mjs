@@ -7,6 +7,10 @@ await import("./src/env.mjs")
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  images: {
+    domains: ["placehold.co"],
+    dangerouslyAllowSVG: true
+  },
 
   /**
    * If you are using `appDir` then you must comment the below `i18n` config out.
@@ -15,8 +19,8 @@ const config = {
    */
   i18n: {
     locales: ["ru"],
-    defaultLocale: "ru",
-  },
+    defaultLocale: "ru"
+  }
 }
 
 export default config

@@ -4,12 +4,15 @@ import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
 import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.scss"
+import NewsFeed from "~/components/#pages/home/NewsFeed"
+import Link from "~/components/Link"
+import { BiRadar, BiRightArrowAlt } from "react-icons/bi"
 
 const HomePage: NextPageWithLayout = () => {
   return (
     <>
       <main className={styles.main}>
-        <Welcome />
+        <Welcome/>
         <Section.Group>
           <Section.Root>
             <Section.Header>
@@ -25,12 +28,13 @@ const HomePage: NextPageWithLayout = () => {
           <Section.Root>
             <Section.Header>
               <Section.Title>Новости</Section.Title>
+              <Link size="sm" href="https://www.asu.ru/news/" target="_blank">
+                Посмотреть все
+                <BiRightArrowAlt/>
+              </Link>
             </Section.Header>
             <Section.Content>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Quibusdam rem labore, necessitatibus sequi delectus a asperiores
-              iste, est adipisci quisquam culpa saepe, officia tempore eos
-              veniam dignissimos. Facilis, aspernatur maiores?
+              <NewsFeed/>
             </Section.Content>
           </Section.Root>
           <Section.Group directions="vertical">
@@ -39,7 +43,7 @@ const HomePage: NextPageWithLayout = () => {
                 <Section.Title>Календарь</Section.Title>
               </Section.Header>
               <Section.Content>
-                <Calendar />
+                <Calendar/>
               </Section.Content>
             </Section.Root>
             <Section.Root>
