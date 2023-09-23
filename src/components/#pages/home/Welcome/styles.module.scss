@@ -1,8 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+}
 .title {
   font-weight: 500;
   font-size: var(--headline-m-fs);
 
-  margin-bottom: 1rem;
 }
 
 .wrapper {

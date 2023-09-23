@@ -2,10 +2,10 @@
   --selection-bg-hsl: var(--surface-hsl);
   --selection-clr-hsl: var(--on-surface-hsl);
 
-  background-color: hsl(var(--primary-hsl));
+  background-color: hsl(var(--primary-high-hsl));
   color: hsl(var(--on-primary-hsl));
 
-  padding-block: 3rem ;
+  padding-block: 3rem;
 
   a {
     color: hsl(var(--on-primary-hsl));
@@ -25,18 +25,21 @@
   gap: 1rem;
 }
 
-.logo {
-  position: relative;
-  z-index: 3;
-
-}
-
-.title {
+.symbols {
   display: flex;
   align-items: center;
   gap: 1rem;
 
-  font-size: var(--headline-m-fs);
+}
+
+.title {
+  font-size: var(--title-l-fs);
+  font-weight: 500;
+}
+
+.address {
+  color: hsl(var(--on-primary-variant-hsl));
+  font-size: var(--body-m-fs);
 }
 
 .social {
@@ -54,6 +57,8 @@
   margin-top: 2rem;
 
   color: hsl(var(--on-primary-variant-hsl));
+
+  text-align: center;
 }
 
 .nav {

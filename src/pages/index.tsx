@@ -6,7 +6,8 @@ import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.scss"
 import NewsFeed from "~/components/#pages/home/NewsFeed"
 import Link from "~/components/Link"
-import { BiRadar, BiRightArrowAlt } from "react-icons/bi"
+import { BiCalendar, BiChevronRight, BiFolder, BiNews, BiRadar, BiRightArrowAlt } from "react-icons/bi"
+import { PagePaths } from "~/utils/enums"
 
 const HomePage: NextPageWithLayout = () => {
   return (
@@ -16,7 +17,8 @@ const HomePage: NextPageWithLayout = () => {
         <Section.Group>
           <Section.Root>
             <Section.Header>
-              <Section.Title>Курсы</Section.Title>
+              <Section.Title><BiFolder/> Курсы</Section.Title>
+              <Link href={PagePaths.CoursesPage} variant="elevated" size="sm">Посмотреть все <BiRightArrowAlt/></Link>
             </Section.Header>
             <Section.Content>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -27,8 +29,8 @@ const HomePage: NextPageWithLayout = () => {
           </Section.Root>
           <Section.Root>
             <Section.Header>
-              <Section.Title>Новости</Section.Title>
-              <Link size="sm" href="https://www.asu.ru/news/" target="_blank">
+              <Section.Title><BiNews/> Новости</Section.Title>
+              <Link variant="elevated" size="sm" href="https://www.asu.ru/news/" target="_blank">
                 Посмотреть все
                 <BiRightArrowAlt/>
               </Link>
@@ -40,7 +42,7 @@ const HomePage: NextPageWithLayout = () => {
           <Section.Group directions="vertical">
             <Section.Root>
               <Section.Header>
-                <Section.Title>Календарь</Section.Title>
+                <Section.Title><BiCalendar/> Календарь</Section.Title>
               </Section.Header>
               <Section.Content>
                 <Calendar/>

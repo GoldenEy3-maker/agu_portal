@@ -1,21 +1,25 @@
 import Image from "next/image"
 import { BiRightArrowAlt } from "react-icons/bi"
-import WelcomeAguPic from "~/assets/preview_alt.jpg"
-import Button from "~/components/Button"
+import WelcomeAguJpg from "~/assets/preview_alt.jpg"
+import HashtagPng from "~/assets/hashtag.png"
 import Link from "~/components/Link"
 import styles from "./styles.module.scss"
 
 const Welcome: React.FC = () => {
   return (
     <section className={styles.welcome}>
-      <h3 className={styles.title}>
-        Добро пожаловать на образовательный портал!
-      </h3>
+      <header className={styles.header}>
+        <Image src={HashtagPng} alt="" width={HashtagPng.width}
+               height={HashtagPng.height}/>
+        <h3 className={styles.title}>
+          Добро пожаловать на образовательный портал!
+        </h3>
+      </header>
       <div className={styles.wrapper}>
         <Image
-          src={WelcomeAguPic}
+          src={WelcomeAguJpg}
           alt=""
-          blurDataURL={WelcomeAguPic.blurDataURL}
+          blurDataURL={WelcomeAguJpg.blurDataURL}
           fill
           objectFit="cover"
         />
@@ -33,7 +37,7 @@ const Welcome: React.FC = () => {
           </p>
           <Link variant="filled" href="https://www.asu.ru/" target="_blank">
             Перейти на сайт
-            <BiRightArrowAlt />
+            <BiRightArrowAlt/>
           </Link>
         </div>
       </div>

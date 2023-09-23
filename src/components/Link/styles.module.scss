@@ -26,6 +26,11 @@
     padding: 0.7rem;
   }
 
+  &._elevated {
+    background-color: hsl(var(--primary-container-low-hsl));
+    box-shadow: 0 0.1rem 0.1rem hsla(var(--primary-bxs));
+  }
+
   &._filled {
     --ripple-hsl: var(--surface-hsl);
 
@@ -45,6 +50,10 @@
       &._onPrimary {
         background-color: hsl(var(--surface-hsl));
         color: hsl(var(--primary-hsl));
+      }
+
+      &._elevated {
+        background-color: hsl(var(--primary-container-hsl));
       }
 
       &._filled {
