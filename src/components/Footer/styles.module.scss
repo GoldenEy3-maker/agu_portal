@@ -9,12 +9,6 @@
 
   a {
     color: hsl(var(--on-primary-hsl));
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
   }
 }
 
@@ -23,13 +17,17 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding-inline: 2rem;
 }
 
 .symbols {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
 
+.logo {
+  flex-shrink: 0;
 }
 
 .title {
@@ -45,11 +43,15 @@
 .social {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 
   font-size: var(--headline-m-fs);
-}
 
+  > a {
+    flex-shrink: 0;
+  }
+}
 
 .contacts {
   font-size: var(--body-m-fs);
@@ -86,5 +88,4 @@
       padding-block: 0.2rem;
     }
   }
-
 }

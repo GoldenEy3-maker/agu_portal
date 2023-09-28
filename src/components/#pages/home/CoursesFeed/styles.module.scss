@@ -1,0 +1,55 @@
+.wrapper {
+  display: grid;
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.title {
+  display: block;
+  // font-size: var(--body-extra-fs);
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  overflow: hidden;
+}
+
+.image {
+  flex-shrink: 0;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--full-shape);
+  overflow: hidden;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-top: auto;
+
+  font-size: var(--body-m-fs);
+  color: hsl(var(--on-surface-variant-hsl));
+}

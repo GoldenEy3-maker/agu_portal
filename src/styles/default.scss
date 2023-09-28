@@ -12,7 +12,7 @@
 }
 
 html {
-  color-scheme: light;
+  color-scheme: dark;
   scrollbar-gutter: stable;
 }
 
@@ -51,14 +51,13 @@ a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: hsl(var(--primary-lowest-hsl));
+  background-color: hsl(var(--primary-hsl));
   border-radius: var(--full-shape);
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: hsl(var(--primary-high-hsl));
     }
-
   }
 }
 
@@ -74,6 +73,12 @@ a:hover {
 
 a {
   color: hsl(var(--primary-hsl));
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 aside,

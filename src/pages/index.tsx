@@ -1,51 +1,69 @@
+import {
+  BiCalendar,
+  BiChevronRight,
+  BiFolder,
+  BiNews,
+  BiRadar,
+  BiRightArrowAlt,
+} from "react-icons/bi"
+import CoursesFeed from "~/components/#pages/home/CoursesFeed"
+import NewsFeed from "~/components/#pages/home/NewsFeed"
 import Welcome from "~/components/#pages/home/Welcome"
 import Calendar from "~/components/Calendar"
+import Link from "~/components/Link"
 import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
+import { PagePaths } from "~/utils/enums"
 import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.scss"
-import NewsFeed from "~/components/#pages/home/NewsFeed"
-import Link from "~/components/Link"
-import { BiCalendar, BiChevronRight, BiFolder, BiNews, BiRadar, BiRightArrowAlt } from "react-icons/bi"
-import { PagePaths } from "~/utils/enums"
 
 const HomePage: NextPageWithLayout = () => {
   return (
     <>
       <main className={styles.main}>
-        <Welcome/>
+        <Welcome />
         <Section.Group>
           <Section.Root>
             <Section.Header>
-              <Section.Title><BiFolder/> Курсы</Section.Title>
-              <Link href={PagePaths.CoursesPage} variant="elevated" size="sm">Посмотреть все <BiRightArrowAlt/></Link>
+              <Section.Title>
+                <BiFolder /> Курсы
+              </Section.Title>
+              <Link href={PagePaths.CoursesPage} variant="elevated" size="sm">
+                Посмотреть все <BiRightArrowAlt />
+              </Link>
             </Section.Header>
             <Section.Content>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Quibusdam rem labore, necessitatibus sequi delectus a asperiores
-              iste, est adipisci quisquam culpa saepe, officia tempore eos
-              veniam dignissimos. Facilis, aspernatur maiores?
+              <CoursesFeed />
             </Section.Content>
           </Section.Root>
           <Section.Root>
             <Section.Header>
-              <Section.Title><BiNews/> Новости</Section.Title>
-              <Link variant="elevated" size="sm" href="https://www.asu.ru/news/" target="_blank">
+              <Section.Title>
+                <BiNews /> Новости
+              </Section.Title>
+              <Link
+                variant="elevated"
+                size="sm"
+                href="https://www.asu.ru/news/"
+                target="_blank"
+              >
                 Посмотреть все
-                <BiRightArrowAlt/>
+                <BiRightArrowAlt />
               </Link>
             </Section.Header>
             <Section.Content>
-              <NewsFeed/>
+              <NewsFeed />
             </Section.Content>
           </Section.Root>
-          <Section.Group directions="vertical">
+          <Section.Group directions="vertical" className={styles.insideGroup}>
             <Section.Root>
               <Section.Header>
-                <Section.Title><BiCalendar/> Календарь</Section.Title>
+                <Section.Title>
+                  <BiCalendar /> Календарь
+                </Section.Title>
               </Section.Header>
               <Section.Content>
-                <Calendar/>
+                <Calendar />
               </Section.Content>
             </Section.Root>
             <Section.Root>

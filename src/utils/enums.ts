@@ -11,4 +11,11 @@ export const PagePaths = {
   SettingsPage: "/settings",
 } as const
 
+export const ModalKeys = {
+  SignIn: "sign-in",
+  SingOut: "sing-out",
+  Test: "test",
+} as const
+
 export type PagePaths = ValueOf<typeof PagePaths>
+export type ModalKeys = ValueOf<typeof ModalKeys>

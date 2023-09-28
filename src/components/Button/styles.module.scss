@@ -1,8 +1,3 @@
-.wrapper {
-  position: relative;
-  display: inline-block;
-}
-
 .btn {
   position: relative;
   overflow: hidden;
@@ -17,6 +12,14 @@
 
   border-radius: var(--full-shape);
 
+  &._textAlignCenter {
+    justify-content: center;
+  }
+
+  &._textAlignRight {
+    justify-content: flex-end;
+  }
+
   &._asIcon {
     padding: 0.7rem;
   }
@@ -25,6 +28,10 @@
     --ripple-hsl: var(--danger-hsl);
 
     color: hsl(var(--danger-hsl));
+  }
+
+  &._default {
+    color: hsl(var(--on-surface-hsl));
   }
 
   &._filled {
@@ -41,7 +48,7 @@
   }
 
   &._elevated {
-    background-color: hsl(var(--primary-container-hsl));
+    background-color: hsl(var(--primary-container-low-hsl));
     box-shadow: 0 0.1rem 0.1rem hsla(var(--primary-bxs));
   }
 
@@ -54,7 +61,7 @@
     }
   }
 
-  &:focus-visible {
+  &:focus {
     outline: 2px solid hsl(var(--primary-hsl));
     outline-offset: 2px;
 
@@ -80,7 +87,7 @@
       }
 
       &._elevated {
-        background-color: hsl(var(--primary-container-high-hsl));
+        background-color: hsl(var(--primary-container-hsl));
       }
     }
   }

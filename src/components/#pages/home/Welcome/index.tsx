@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { BiRightArrowAlt } from "react-icons/bi"
+import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import WelcomeAguJpg from "~/assets/preview_alt.jpg"
-import HashtagPng from "~/assets/hashtag.png"
 import Link from "~/components/Link"
 import styles from "./styles.module.scss"
 
@@ -9,8 +9,12 @@ const Welcome: React.FC = () => {
   return (
     <section className={styles.welcome}>
       <header className={styles.header}>
-        <Image src={HashtagPng} alt="" width={HashtagPng.width}
-               height={HashtagPng.height}/>
+        <Image
+          src={HeaderLogoPng}
+          alt=""
+          width={HeaderLogoPng.width}
+          height={HeaderLogoPng.height}
+        />
         <h3 className={styles.title}>
           Добро пожаловать на образовательный портал!
         </h3>
@@ -21,7 +25,7 @@ const Welcome: React.FC = () => {
           alt=""
           blurDataURL={WelcomeAguJpg.blurDataURL}
           fill
-          objectFit="cover"
+          style={{ objectFit: "cover" }}
         />
         <div className={styles.overlay}>
           <h2>Алтайский государственный университет (АлтГУ)</h2>
@@ -37,7 +41,7 @@ const Welcome: React.FC = () => {
           </p>
           <Link variant="filled" href="https://www.asu.ru/" target="_blank">
             Перейти на сайт
-            <BiRightArrowAlt/>
+            <BiRightArrowAlt />
           </Link>
         </div>
       </div>

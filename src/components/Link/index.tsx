@@ -60,7 +60,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             [activeClassName ?? ""]: isActive,
             [styles._asIcon ?? ""]: asIcon!!,
             [styles._sm ?? ""]: size === "sm",
-            [styles._onPrimary ?? ""]: onPrimary!!
+            [styles._onPrimary ?? ""]: onPrimary!!,
           })}
           onPointerDown={rippleEffectEvent}
           ref={ref}

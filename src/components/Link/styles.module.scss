@@ -45,6 +45,8 @@
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
+      text-decoration: none;
+
       background-color: hsl(var(--primary-container-hsl));
 
       &._onPrimary {
