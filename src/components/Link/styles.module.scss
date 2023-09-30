@@ -38,7 +38,7 @@
     color: hsl(var(--on-primary-hsl));
   }
 
-  &:focus-visible {
+  &:focus {
     outline: 2px solid hsl(var(--_outline-clr));
     outline-offset: 2px;
   }

@@ -1,0 +1,16 @@
+.root {
+  display: grid;
+  gap: 1rem;
+}
+
+.inputs {
+  display: grid;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}

@@ -10,6 +10,17 @@
   flex-shrink: 0;
 }
 
+.signIn {
+  display: grid;
+  place-items: center;
+  gap: 0.2rem;
+
+  span {
+    font-size: var(--body-l-fs);
+    color: hsl(var(--on-surface-variant-hsl));
+  }
+}
+
 .nav {
   display: flex;
   flex-direction: column;

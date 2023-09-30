@@ -6,6 +6,7 @@ import * as dayjs from "dayjs"
 import "dayjs/locale/ru"
 import { NextPage } from "next"
 import { ReactElement, ReactNode } from "react"
+import { Toaster } from "react-hot-toast"
 import "~/styles/globals.scss"
 
 dayjs.locale("ru")
@@ -21,7 +22,12 @@ type AppPropsWithLayout = AppProps & {
 const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || ((page) => page)
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(
+    <>
+      <Component {...pageProps} />
+      <Toaster position="top-right" />
+    </>
+  )
 }
 
 export default api.withTRPC(MyApp)

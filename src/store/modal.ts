@@ -50,7 +50,7 @@ export const useModalStore = create<ModalStore>((set, get) => ({
   close(key) {
     const newQueue = get().queue.filter((qKey) => qKey !== key)
 
-    if (newQueue.length === 0) document.body.style.overflow = "auto"
+    if (newQueue.length === 0) document.body.style.removeProperty("overflow")
 
     set(() => ({ queue: newQueue }))
   },

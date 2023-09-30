@@ -37,13 +37,16 @@ const Sidebar: React.FC = () => {
       <aside className={styles.aside}>
         <nav className={styles.nav}>
           <div className={cls([styles.navGroup, styles.header])}>
-            <Button
-              asIcon
-              variant="filled"
-              onClick={() => modalStore.open(ModalKeys.SignIn)}
-            >
-              <BiUser />
-            </Button>
+            <div className={styles.signIn}>
+              <Button
+                asIcon
+                variant="filled"
+                onClick={() => modalStore.open(ModalKeys.SignIn)}
+              >
+                <BiUser />
+              </Button>
+              <span>Вход</span>
+            </div>
           </div>
           <div className={cls([styles.navGroup, styles.main])}>
             <Link

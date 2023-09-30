@@ -1,0 +1,17 @@
+.wrapper {
+  display: grid;
+  gap: 0.3rem;
+
+  input {
+    min-width: clamp(16.25rem, 20vw + 12rem, 18.5rem);
+    padding: 0.7rem 1.2rem;
+
+    border-radius: var(--small-shape);
+    // box-shadow: 0 0 0.3rem hsla(var(--surface-bxs));
+    border: 1px solid hsl(var(--outline-hsl));
+
+    &:focus {
+      outline: 2px solid hsl(var(--primary-hsl));
+    }
+  }
+}

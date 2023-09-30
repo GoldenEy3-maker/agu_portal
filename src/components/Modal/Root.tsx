@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 
 type RootProps = {
   state: boolean
-  closeHandler?: () => void
+  closeHandler: () => void
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "aria-hidden">
 
 export const Root: React.FC<RootProps> = ({
@@ -26,6 +26,19 @@ export const Root: React.FC<RootProps> = ({
     if (props.onPointerDown) props.onPointerDown(event)
   }
 
+  const blurOutsideHandler: React.FocusEventHandler<HTMLDivElement> = (
+    event
+  ) => {
+    if (
+      event.relatedTarget !== null &&
+      !event.relatedTarget.closest("[data-wrapper]") &&
+      !rootRef.current?.contains(event.relatedTarget as HTMLElement)
+    )
+      closeHandler && closeHandler()
+
+    if (props.onBlur) props.onBlur(event)
+  }
+
   return (
     <div
       {...props}
@@ -33,6 +46,7 @@ export const Root: React.FC<RootProps> = ({
       aria-hidden={!state}
       ref={rootRef}
       onPointerDown={clickOutsideHandler}
+      onBlur={blurOutsideHandler}
     >
       {props.children}
     </div>
