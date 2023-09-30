@@ -19,7 +19,7 @@ import {
   BiUser,
 } from "react-icons/bi"
 import Link from "~/components/Link"
-import SignInModal from "~/modals/SignIn"
+import SingInModal from "~/modals/SingIn"
 import SingOutModal from "~/modals/SingOut"
 import { useModalStore } from "~/store/modal"
 import { ModalKeys, PagePaths } from "~/utils/enums"
@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      <SignInModal />
+      <SingInModal />
       <SingOutModal />
       <aside className={styles.aside}>
         <nav className={styles.nav}>

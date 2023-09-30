@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
+import { BiCog, BiLock, BiLockAlt, BiUser } from "react-icons/bi"
 import Button from "~/components/Button"
 import * as Form from "~/components/Form"
 import Input from "~/components/Input"
@@ -21,7 +22,7 @@ type HookForm = {
   [K in InputKeys]: string
 }
 
-const SignInModal: React.FC = () => {
+const SingInModal: React.FC = () => {
   const modalStore = useModalStore()
   const loginInputRef = useRef<HTMLInputElement>(null)
 
@@ -76,6 +77,7 @@ const SignInModal: React.FC = () => {
                     onBlur={field.onBlur}
                     value={field.value}
                     ref={loginInputRef}
+                    leadingIcon={<BiUser />}
                   />
                 )}
               />
@@ -87,11 +89,12 @@ const SignInModal: React.FC = () => {
                     type="password"
                     label="Пароль"
                     id={InputKeys.Password}
-                    placeholder="***"
+                    placeholder="******"
                     name={field.name}
                     onChange={field.onChange}
                     onBlur={field.onBlur}
                     value={field.value}
+                    leadingIcon={<BiLockAlt />}
                   />
                 )}
               />
@@ -111,4 +114,4 @@ const SignInModal: React.FC = () => {
   )
 }
 
-export default SignInModal
+export default SingInModal

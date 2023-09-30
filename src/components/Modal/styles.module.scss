@@ -70,22 +70,3 @@
 
   padding-inline: 1.5rem;
 }
-
-@media (width < 430px) {
-  .root {
-    place-items: end center;
-  }
-
-  .wrapper {
-    max-width: none;
-    width: 100%;
-
-    transform: translateY(10rem);
-
-    transition: transform 200ms ease;
-
-    [aria-hidden="false"] & {
-      transform: translateY(0);
-    }
-  }
-}
