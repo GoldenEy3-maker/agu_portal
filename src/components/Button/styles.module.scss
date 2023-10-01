@@ -61,7 +61,8 @@
     }
   }
 
-  &:focus {
+  &:focus-visible,
+  &[data-programm-focus] {
     outline: 2px solid hsl(var(--primary-hsl));
     outline-offset: 2px;
 

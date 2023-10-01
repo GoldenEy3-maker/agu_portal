@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
               >
                 <BiUser />
               </Button>
-              <span>Вход</span>
+              <span>Гость</span>
             </div>
           </div>
           <div className={cls([styles.navGroup, styles.main])}>

@@ -8,6 +8,18 @@
   gap: 1rem;
 }
 
+.fieldset {
+  display: grid;
+  gap: 1rem;
+
+  legend {
+    font-size: var(--body-m-fs);
+    color: hsl(var(--on-surface-variant-hsl));
+
+    margin-bottom: 0.2rem;
+  }
+}
+
 .actions {
   display: flex;
   align-items: center;

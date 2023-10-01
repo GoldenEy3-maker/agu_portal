@@ -17,10 +17,10 @@
 
   input {
     width: 100%;
-    padding: 0.7rem 1rem 0.7rem 1rem;
+    padding: 0.8rem 1rem;
 
     ._withLeadingIcon & {
-      padding: 0.7rem 1rem 0.7rem calc(1.2rem + var(--title-l-fs));
+      padding-left: calc(1.2rem + var(--title-l-fs));
     }
   }
 }

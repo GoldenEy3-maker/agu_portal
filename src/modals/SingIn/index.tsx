@@ -3,6 +3,7 @@ import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { BiCog, BiLock, BiLockAlt, BiUser } from "react-icons/bi"
 import Button from "~/components/Button"
+import Checkbox, { CheckboxType } from "~/components/Checkbox"
 import * as Form from "~/components/Form"
 import Input from "~/components/Input"
 import * as Modal from "~/components/Modal"
@@ -11,15 +12,22 @@ import { useModalStore } from "~/store/modal"
 import { ModalKeys } from "~/utils/enums"
 import { ValueOf } from "~/utils/types"
 
-const InputKeys = {
+const InputNames = {
   Login: "login",
   Password: "password",
 } as const
 
-type InputKeys = ValueOf<typeof InputKeys>
+const CheckboxNames = {
+  RemeberMe: "remember-me",
+} as const
+
+type InputNames = ValueOf<typeof InputNames>
+type CheckboxNames = ValueOf<typeof CheckboxNames>
 
 type HookForm = {
-  [K in InputKeys]: string
+  [K in InputNames]: string
+} & {
+  [K in CheckboxNames]: CheckboxType
 }
 
 const SingInModal: React.FC = () => {
@@ -36,6 +44,10 @@ const SingInModal: React.FC = () => {
     defaultValues: {
       login: "",
       password: "",
+      "remember-me": {
+        checked: false,
+        value: undefined,
+      },
     },
   })
 
@@ -62,15 +74,15 @@ const SingInModal: React.FC = () => {
               (data) => toast.error(`Ваши данные: ${JSON.stringify(data)}`)
             )}
           >
-            <Form.Inputs>
+            <Form.Fieldset>
               <Controller
                 control={hookForm.control}
-                name={InputKeys.Login}
+                name={InputNames.Login}
                 render={({ field }) => (
                   <Input
                     type="text"
                     label="Логин"
-                    id={InputKeys.Login}
+                    id={InputNames.Login}
                     placeholder="ivanov.202s2"
                     name={field.name}
                     onChange={field.onChange}
@@ -83,12 +95,12 @@ const SingInModal: React.FC = () => {
               />
               <Controller
                 control={hookForm.control}
-                name={InputKeys.Password}
+                name={InputNames.Password}
                 render={({ field }) => (
                   <Input
                     type="password"
                     label="Пароль"
-                    id={InputKeys.Password}
+                    id={InputNames.Password}
                     placeholder="******"
                     name={field.name}
                     onChange={field.onChange}
@@ -98,7 +110,26 @@ const SingInModal: React.FC = () => {
                   />
                 )}
               />
-            </Form.Inputs>
+            </Form.Fieldset>
+            <Form.Fieldset type="checkbox">
+              <Controller
+                control={hookForm.control}
+                name="remember-me"
+                render={({ field }) => (
+                  <Checkbox
+                    id={CheckboxNames.RemeberMe}
+                    label="Запомнить меня"
+                    name={field.name}
+                    value={field.value.value}
+                    checked={field.value.checked}
+                    onChange={(value, checked) =>
+                      field.onChange({ value, checked })
+                    }
+                    onBlur={field.onBlur}
+                  />
+                )}
+              />
+            </Form.Fieldset>
             <Form.Actions>
               <Button type="button" onClick={closeModalHandler}>
                 Отменить

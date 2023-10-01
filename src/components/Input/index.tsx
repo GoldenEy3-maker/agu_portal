@@ -1,5 +1,4 @@
 import { forwardRef } from "react"
-import { BiUser } from "react-icons/bi"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 

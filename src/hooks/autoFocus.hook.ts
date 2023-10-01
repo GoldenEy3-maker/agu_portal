@@ -7,7 +7,12 @@ export const useAutoFocus = (
   useEffect(() => {
     if (!target.current || !state) return
 
-    setTimeout(() => target.current?.focus(), 30)
-    // target.current.focus()
+    setTimeout(() => {
+      target.current!.focus()
+      target.current!.dataset.programmFocus = "true"
+      target.current!.addEventListener("blur", () =>
+        target.current!.removeAttribute("data-programm-focus")
+      )
+    }, 30)
   }, [state])
 }
