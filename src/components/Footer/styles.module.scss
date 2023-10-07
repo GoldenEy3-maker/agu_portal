@@ -1,6 +1,7 @@
 .footer {
   --selection-bg-hsl: var(--surface-hsl);
   --selection-clr-hsl: var(--on-surface-hsl);
+  --focus-outline-clr-hsl: var(--surface-hsl);
 
   background-color: hsl(var(--primary-high-hsl));
   color: hsl(var(--on-primary-hsl));

@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { useModalStore } from "~/store/modal"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
@@ -12,14 +13,16 @@ export const Root: React.FC<RootProps> = ({
   closeHandler,
   ...props
 }) => {
-  const rootRef = useRef<HTMLDivElement>(null)
+  const modalStore = useModalStore()
+
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const clickOutsideHandler: React.PointerEventHandler<HTMLDivElement> = (
     event
   ) => {
     if (
-      !(event.target as HTMLElement).closest("[data-wrapper]") ||
-      !rootRef.current?.contains(event.target as HTMLElement)
+      !(event.target as HTMLElement).closest("[data-modal-root]") ||
+      !containerRef.current?.contains(event.target as HTMLElement)
     )
       closeHandler && closeHandler()
 
@@ -31,8 +34,8 @@ export const Root: React.FC<RootProps> = ({
   ) => {
     if (
       event.relatedTarget !== null &&
-      !event.relatedTarget.closest("[data-wrapper]") &&
-      !rootRef.current?.contains(event.relatedTarget as HTMLElement)
+      !event.relatedTarget.closest("[data-modal-root]") &&
+      !containerRef.current?.contains(event.relatedTarget as HTMLElement)
     )
       closeHandler && closeHandler()
 
@@ -44,7 +47,7 @@ export const Root: React.FC<RootProps> = ({
       {...props}
       className={cls([styles.root, props.className])}
       aria-hidden={!state}
-      ref={rootRef}
+      ref={containerRef}
       onPointerDown={clickOutsideHandler}
       onBlur={blurOutsideHandler}
     >

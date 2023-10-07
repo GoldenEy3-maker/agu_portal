@@ -1,13 +1,15 @@
 .aside {
   position: sticky;
-  top: var(--safe-area-pd);
-  height: calc(100svh - var(--safe-area-pd) * 2);
+  top: 0;
+  height: 100svh;
   background-color: hsl(var(--surface-container-hsl));
 
-  border-radius: var(--medium-shape);
-  padding: 0.7rem 0.5rem;
+  // border-radius: var(--medium-shape);
+  padding: 1rem 0.7rem;
 
   flex-shrink: 0;
+
+  border-right: 1px solid hsl(var(--outline-variant-hsl));
 }
 
 .signIn {

@@ -1,6 +1,4 @@
 .link {
-  --_outline-clr: var(--primary-hsl);
-
   position: relative;
   overflow: hidden;
 
@@ -40,7 +38,7 @@
 
   &:focus-visible,
   &[data-programm-focus] {
-    outline: 2px solid hsl(var(--_outline-clr));
+    outline: 2px solid hsl(var(--focus-outline-clr-hsl));
     outline-offset: 2px;
   }
 

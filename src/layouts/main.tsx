@@ -1,8 +1,12 @@
 import { Inter } from "next/font/google"
 import Head from "next/head"
 import { PropsWithChildren } from "react"
+import ModalContainer from "~/components/#layouts/main/ModalContaier"
 import Footer from "~/components/Footer"
+import Header from "~/components/Header"
 import Sidebar from "~/components/Sidebar"
+import SingInModal from "~/modals/SingIn"
+import SingOutModal from "~/modals/SingOut"
 import { cls } from "~/utils/func"
 
 const inter = Inter({ subsets: ["cyrillic", "latin"] })
@@ -22,8 +26,12 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
       </Head>
       <div className={cls(["wrapper", inter.className])}>
         <div className="horizontal-wrapper">
+          <ModalContainer />
           <Sidebar />
-          <div className="container">{props.children}</div>
+          <div className="main">
+            <Header />
+            <div className="main__wrapper container">{props.children}</div>
+          </div>
         </div>
         <Footer />
       </div>

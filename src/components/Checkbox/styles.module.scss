@@ -14,7 +14,7 @@
 
     padding: 0.7rem;
 
-    border-radius: var(--small-shape);
+    border-radius: inherit;
 
     .icon {
       display: flex;
@@ -30,6 +30,12 @@
       border-radius: var(--extra-small-shape);
 
       color: hsl(var(--surface-hsl));
+
+      transition: background-color 300ms ease, border-color 300ms ease;
+
+      svg {
+        animation: scaled 300ms ease forwards;
+      }
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -44,11 +50,48 @@
     width: 0;
     height: 0;
 
-    &:checked + label {
+    &:focus-visible + .labelWrapper,
+    &[data-programm-focus] + .labelWrapper {
+      outline: 2px solid hsl(var(--focus-outline-clr-hsl));
+      outline-offset: 2px;
+    }
+
+    &:checked + .labelWrapper label {
       .icon {
         background-color: hsl(var(--primary-hsl));
         border-color: hsl(var(--primary-hsl));
+
+        animation: jumping 300ms ease forwards;
       }
     }
+  }
+}
+
+.labelWrapper {
+  width: 100%;
+  border-radius: var(--small-shape);
+}
+
+@keyframes jumping {
+  from {
+    scale: 1;
+  }
+
+  50% {
+    scale: 0.9;
+  }
+
+  from {
+    scale: 1;
+  }
+}
+
+@keyframes scaled {
+  from {
+    scale: 0;
+  }
+
+  to {
+    scale: 1;
   }
 }

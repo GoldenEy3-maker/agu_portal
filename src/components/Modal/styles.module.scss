@@ -26,6 +26,8 @@
 }
 
 .wrapper {
+  position: absolute;
+
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -35,6 +37,22 @@
   border-radius: var(--medium-shape);
 
   max-width: 32rem;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(20px) scale(0.95);
+
+  transition: opacity 200ms ease, visibility 200ms ease, transform 200ms ease;
+
+  &[aria-hidden="false"] {
+    position: static;
+
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0) scale(1);
+  }
 }
 
 .header {

@@ -4,6 +4,9 @@
 }
 
 .inputWrapper {
+  --_padding-block: 0.8rem;
+  --_padding-inline: 1rem;
+
   position: relative;
   min-width: clamp(16.25rem, 20vw + 12rem, 18.5rem);
 
@@ -17,10 +20,10 @@
 
   input {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: var(--_padding-block) var(--_padding-inline);
 
     ._withLeadingIcon & {
-      padding-left: calc(1.2rem + var(--title-l-fs));
+      padding-left: calc(var(--_padding-inline) + 0.2rem + var(--title-l-fs));
     }
   }
 }

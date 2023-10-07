@@ -1,0 +1,35 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  width: 100%;
+
+  padding: 0.7rem 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  background-color: hsl(var(--surface-container-hsl));
+
+  border-bottom: 1px solid hsl(var(--outline-variant-hsl));
+}
+
+.title {
+  font-size: var(--title-l-fs);
+  font-weight: 500;
+}
+
+.actions {
+  font-size: var(--headline-s-fs);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  button {
+    color: hsl(var(--on-surface-hsl));
+  }
+}

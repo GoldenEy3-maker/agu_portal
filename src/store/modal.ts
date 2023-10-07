@@ -18,7 +18,7 @@ type ModalStore = {
     key: T,
     props?: T extends keyof ModalProps ? ModalProps[T] : never
   ) => void
-  close: (key: ModalKeys) => void
+  close: (key?: ModalKeys) => void
   setProps: <T extends keyof ModalProps>(key: T, props: ModalProps[T]) => void
 }
 
@@ -30,7 +30,12 @@ export const useModalStore = create<ModalStore>((set, get) => ({
 
     if (storedQueue.at(-1) === key) return
 
-    document.body.style.overflow = "hidden"
+    if (storedQueue.length === 0)
+      document.body.style.setProperty(
+        "--scrollbar-offset",
+        window.innerWidth - document.body.offsetWidth + "px"
+      )
+    document.body.dataset.lock = "true"
 
     if (storedQueue.includes(key)) {
       set((store) => ({
@@ -48,9 +53,12 @@ export const useModalStore = create<ModalStore>((set, get) => ({
     }
   },
   close(key) {
-    const newQueue = get().queue.filter((qKey) => qKey !== key)
+    const newQueue = get().queue.filter((qKey, _, self) =>
+      key ? qKey !== key : qKey !== self.at(-1)
+    )
 
-    if (newQueue.length === 0) document.body.style.removeProperty("overflow")
+    if (newQueue.length === 0)
+      setTimeout(() => document.body.removeAttribute("data-lock"), 200)
 
     set(() => ({ queue: newQueue }))
   },

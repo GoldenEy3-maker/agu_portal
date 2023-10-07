@@ -8,7 +8,7 @@ import styles from "./styles.module.scss"
 const Welcome: React.FC = () => {
   return (
     <section className={styles.welcome}>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <Image
           src={HeaderLogoPng}
           alt=""
@@ -18,7 +18,7 @@ const Welcome: React.FC = () => {
         <h3 className={styles.title}>
           Добро пожаловать на образовательный портал!
         </h3>
-      </header>
+      </header> */}
       <div className={styles.wrapper}>
         <Image
           src={WelcomeAguJpg}

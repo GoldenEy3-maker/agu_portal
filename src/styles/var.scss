@@ -1,8 +1,8 @@
 :root {
   /* HSL BASE */
   --surface-base-hsl: 0, 0%;
-  --primary-base-hsl: 260, 55%;
-  --primary-container-base-hsl: 260, 60%;
+  --primary-base-hsl: 216, 65%;
+  --primary-container-base-hsl: 216, 75%;
   --danger-base-hsl: 0, 75%;
   --danger-container-base-hsl: 6, 100%;
   --success-base-hsl: 118, 49%;
@@ -20,8 +20,8 @@
   --on-surface-hsl: var(--surface-base-hsl), 0%;
   --on-surface-variant-hsl: var(--surface-base-hsl), 50%;
 
-  --primary-hsl: var(--primary-base-hsl), 55%;
-  --primary-high-hsl: var(--primary-base-hsl), 45%;
+  --primary-hsl: var(--primary-base-hsl), 50%;
+  --primary-high-hsl: var(--primary-base-hsl), 40%;
   --primary-low-hsl: var(--primary-base-hsl), 60%;
   --primary-lowest-hsl: var(--primary-base-hsl), 70%;
   --primary-container-low-hsl: var(--primary-base-hsl), 93%;
@@ -32,10 +32,12 @@
   --on-primary-variant-hsl: var(--primary-base-hsl), 85%;
 
   --outline-hsl: var(--surface-base-hsl), 60%;
-  --outline-variant-hsl: var(--surface-base-hsl), 80%;
+  --outline-variant-hsl: var(--surface-base-hsl), 85%;
 
   --selection-bg-hsl: var(--primary-hsl);
   --selection-clr-hsl: var(--on-primary-hsl);
+
+  --focus-outline-clr-hsl: var(--primary-hsl);
 
   --danger-hsl: var(--danger-base-hsl), 45%;
   --danger-low-hsl: var(--danger-base-hsl), 50%;
@@ -87,6 +89,7 @@
   --display-s-fs: 36px;
   --headline-l-fs: 32px;
   --headline-m-fs: 28px;
+  --headline-s-fs: 26px;
   --title-l-fs: 22px;
   --body-extra-fs: 18px;
   --body-l-fs: 16px;

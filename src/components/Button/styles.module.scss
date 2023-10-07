@@ -63,11 +63,11 @@
 
   &:focus-visible,
   &[data-programm-focus] {
-    outline: 2px solid hsl(var(--primary-hsl));
+    outline: 2px solid hsl(var(--focus-outline-clr-hsl));
     outline-offset: 2px;
 
     &._danger {
-      outline-color: hsl(var(--danger-hsl));
+      --focus-outline-clr-hsl: var(--danger-hsl);
     }
   }
 

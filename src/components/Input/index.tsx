@@ -5,14 +5,16 @@ import styles from "./styles.module.scss"
 type InputProps = {
   label?: string
   leadingIcon?: React.ReactNode
-} & React.InputHTMLAttributes<HTMLInputElement>
+  size?: "sm"
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, className, leadingIcon, ...props }, ref) => {
+  ({ label, className, size, leadingIcon, ...props }, ref) => {
     return (
       <div
         className={cls([styles.wrapper, className], {
           [styles._withLeadingIcon ?? ""]: !!leadingIcon,
+          [styles._sm ?? ""]: size === "sm",
         })}
       >
         {label ? <label htmlFor={props.id}>{label}</label> : null}

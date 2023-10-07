@@ -13,7 +13,6 @@
 
 html {
   color-scheme: dark;
-  scrollbar-gutter: stable;
 }
 
 html,
@@ -34,6 +33,7 @@ body {
 
   &[data-lock="true"] {
     overflow: hidden;
+    padding-right: var(--scrollbar-offset);
   }
 }
 
@@ -42,6 +42,11 @@ a:link,
 a:visited,
 a:hover {
   text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 2px solid hsl(var(--focus-outline-clr-hsl));
+  outline-offset: 2px;
 }
 
 ::-webkit-scrollbar {
