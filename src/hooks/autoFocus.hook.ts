@@ -8,7 +8,7 @@ export const useAutoFocus = (
     if (!target.current || !state) return
 
     setTimeout(() => {
-      target.current!.focus()
+      target.current!.focus({ preventScroll: true })
       target.current!.dataset.programmFocus = "true"
       target.current!.addEventListener("blur", () =>
         target.current!.removeAttribute("data-programm-focus")

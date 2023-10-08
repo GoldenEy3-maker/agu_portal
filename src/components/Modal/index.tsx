@@ -1,7 +1,7 @@
 export { Close } from "./Close"
+export { Container } from "./Container"
 export { Content } from "./Content"
 export { Footer } from "./Footer"
 export { Header } from "./Header"
 export { Root } from "./Root"
 export { Title } from "./Title"
-export { Wrapper } from "./Wrapper"

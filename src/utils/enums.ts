@@ -14,7 +14,6 @@ export const PagePaths = {
 export const ModalKeys = {
   SignIn: "sign-in",
   SingOut: "sing-out",
-  Test: "test",
 } as const
 
 export type PagePaths = ValueOf<typeof PagePaths>

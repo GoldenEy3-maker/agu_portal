@@ -42,26 +42,6 @@ const Sidebar: React.FC = () => {
           >
             {(isActive) => (isActive ? <BiSolidHome /> : <BiHome />)}
           </Link>
-          {/* <Link
-              href={PagePaths.NotificationsPage}
-              className={styles.navLink}
-              activeClassName={styles.activeNavLink}
-            >
-              {(isActive) => (isActive ? <BiSolidBell /> : <BiBell />)}
-            </Link> */}
-          {/* <Link
-              href={PagePaths.ChatPage}
-              className={styles.navLink}
-              activeClassName={styles.activeNavLink}
-            >
-              {(isActive) =>
-                isActive ? (
-                  <BiSolidMessageSquareDetail />
-                ) : (
-                  <BiMessageSquareDetail />
-                )
-              }
-            </Link> */}
           <Link
             href={PagePaths.CoursesPage}
             className={styles.navLink}
@@ -94,17 +74,15 @@ const Sidebar: React.FC = () => {
           </Link>
         </div>
         <div className={cls([styles.navGroup, styles.footer])}>
-          {/* <Link
-              href={PagePaths.SettingsPage}
-              className={styles.navLink}
-              activeClassName={styles.activeNavLink}
-            >
-              {(isActive) => (isActive ? <BiSolidCog /> : <BiCog />)}
-            </Link> */}
           <Button
             className={styles.navLink}
             type="button"
-            onClick={() => modalStore.open(ModalKeys.SingOut)}
+            onClick={(event) =>
+              modalStore.open({
+                key: ModalKeys.SingOut,
+                target: event.currentTarget,
+              })
+            }
           >
             <BiLogOut />
           </Button>

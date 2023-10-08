@@ -7,13 +7,13 @@ const ModalContainer: React.FC = () => {
   const modalStore = useModalStore()
 
   return (
-    <Modal.Root
+    <Modal.Container
       state={modalStore.queue.length !== 0}
       closeHandler={() => modalStore.close()}
     >
       <SingInModal />
       <SingOutModal />
-    </Modal.Root>
+    </Modal.Container>
   )
 }
 

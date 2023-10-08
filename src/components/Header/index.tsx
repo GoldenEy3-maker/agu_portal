@@ -1,10 +1,5 @@
-import {
-  BiBell,
-  BiCog,
-  BiMessageSquareDetail,
-  BiSearch,
-  BiUser,
-} from "react-icons/bi"
+import { useRef } from "react"
+import { BiBell, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import { useModalStore } from "~/store/modal"
 import { ModalKeys } from "~/utils/enums"
 import Button from "../Button"
@@ -26,7 +21,12 @@ const Header: React.FC = () => {
         <Button
           variant="filled"
           asIcon
-          onClick={() => modalStore.open(ModalKeys.SignIn)}
+          onClick={(event) =>
+            modalStore.open({
+              key: ModalKeys.SignIn,
+              target: event.currentTarget,
+            })
+          }
         >
           <BiUser />
         </Button>

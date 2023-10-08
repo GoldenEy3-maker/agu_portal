@@ -1,23 +1,17 @@
 import { create } from "zustand"
 import { ModalKeys } from "~/utils/enums"
 
-type ModalProps = {
-  [ModalKeys.SignIn]: {
-    id: string
-  }
-  [ModalKeys.SingOut]: {
-    id: string
-    name: string
-  }
-}
+type ModalProps = {}
+
+type OpenModalStoreActionArgs<T extends ModalKeys> = T extends keyof ModalProps
+  ? { key: T; target?: HTMLElement; props?: ModalProps[T] }
+  : { key: T; target?: HTMLElement }
 
 type ModalStore = {
   queue: ModalKeys[]
   props: ModalProps | null
-  open: <T extends ModalKeys>(
-    key: T,
-    props?: T extends keyof ModalProps ? ModalProps[T] : never
-  ) => void
+  target: HTMLElement | null
+  open: <T extends ModalKeys>(args: OpenModalStoreActionArgs<T>) => void
   close: (key?: ModalKeys) => void
   setProps: <T extends keyof ModalProps>(key: T, props: ModalProps[T]) => void
 }
@@ -25,10 +19,11 @@ type ModalStore = {
 export const useModalStore = create<ModalStore>((set, get) => ({
   queue: [],
   props: null,
-  open(key, props) {
+  target: null,
+  open(args) {
     const storedQueue = get().queue
 
-    if (storedQueue.at(-1) === key) return
+    if (storedQueue.at(-1) === args.key) return
 
     if (storedQueue.length === 0)
       document.body.style.setProperty(
@@ -37,28 +32,39 @@ export const useModalStore = create<ModalStore>((set, get) => ({
       )
     document.body.dataset.lock = "true"
 
-    if (storedQueue.includes(key)) {
-      set((store) => ({
-        queue: [...store.queue.filter((qKey) => qKey !== key), key],
+    if (args.target) set(() => ({ target: args.target }))
+
+    if (storedQueue.includes(args.key)) {
+      set((state) => ({
+        queue: [...state.queue.filter((q) => q !== args.key), args.key],
       }))
     } else {
       set((store) => ({
-        queue: [...store.queue, key],
+        queue: [...store.queue, args.key],
       }))
     }
 
-    if (props) {
+    // @ts-ignore
+    if (args.props) {
       // @ts-ignore
-      set((store) => ({ props: { ...store.props, [key]: props } }))
+      set((store) => ({ props: { ...store.props, [args.key]: args.props } }))
     }
   },
   close(key) {
-    const newQueue = get().queue.filter((qKey, _, self) =>
-      key ? qKey !== key : qKey !== self.at(-1)
+    const newQueue = get().queue.filter((q, _, self) =>
+      key ? q !== key : q !== self.at(-1)
     )
 
-    if (newQueue.length === 0)
+    if (newQueue.length === 0) {
       setTimeout(() => document.body.removeAttribute("data-lock"), 200)
+
+      const target = get().target
+
+      if (target) {
+        target.focus()
+        set(() => ({ target: null }))
+      }
+    }
 
     set(() => ({ queue: newQueue }))
   },

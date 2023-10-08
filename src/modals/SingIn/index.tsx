@@ -50,7 +50,7 @@ const SingInModal: React.FC = () => {
   useAutoFocus(loginInputRef, isModalOpen)
 
   return (
-    <Modal.Wrapper state={isModalOpen}>
+    <Modal.Root state={isModalOpen}>
       <Modal.Header>
         <Modal.Title>Войти</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
@@ -124,7 +124,7 @@ const SingInModal: React.FC = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault()
-              modalStore.open(ModalKeys.SingOut)
+              modalStore.open({ key: ModalKeys.SingOut })
             }}
           >
             Забыли логин или пароль?
@@ -139,7 +139,7 @@ const SingInModal: React.FC = () => {
           </Form.Actions>
         </Form.Root>
       </Modal.Content>
-    </Modal.Wrapper>
+    </Modal.Root>
   )
 }
 

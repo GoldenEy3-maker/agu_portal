@@ -16,14 +16,14 @@ const SingOutModal: React.FC = () => {
   useAutoFocus(cancelButtonRef, isModalOpen)
 
   return (
-    <Modal.Wrapper state={isModalOpen}>
+    <Modal.Root state={isModalOpen} asDrawer>
       <Modal.Header>
         <Modal.Title>Вы действительно хотите выйти?</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
       </Modal.Header>
       <Modal.Content>
         Вы можете покинуть этот аккаунт. После чего попадете в режим гостя, в
-        котором ограничен доступ к многим элементам портала.
+        котором ограничен доступ ко многим элементам портала.
       </Modal.Content>
       <Modal.Footer>
         <Button
@@ -44,7 +44,7 @@ const SingOutModal: React.FC = () => {
           Выйти
         </Button>
       </Modal.Footer>
-    </Modal.Wrapper>
+    </Modal.Root>
   )
 }
 
