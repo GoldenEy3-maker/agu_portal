@@ -1,10 +1,10 @@
 .aside {
   position: sticky;
-  top: 72px;
+  top: var(--header-h);
   height: calc(100svh - 72px);
   background-color: hsl(var(--surface-container-hsl));
 
-  padding: 1.5rem 0.7rem;
+  padding: 1.5rem 0.3rem;
 
   flex-shrink: 0;
 
@@ -30,13 +30,18 @@
 
   height: 100%;
 
-  font-size: var(--headline-s-fs);
+  font-size: var(--title-l-fs);
 
   &Link {
     color: hsl(var(--on-surface-hsl));
+    flex-direction: column;
 
-    padding: 1rem;
-    border-radius: var(--large-shape);
+    padding: 0.8rem 0.5rem;
+    border-radius: var(--small-shape);
+
+    span {
+      font-size: var(--label-s-fs);
+    }
   }
 
   &Group {

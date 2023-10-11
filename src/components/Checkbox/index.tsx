@@ -12,7 +12,7 @@ export type SwtichType = {
 }
 
 type CheckboxHTMLAttributes = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
+  React.ComponentProps<"input">,
   "type" | "value" | "onChange"
 >
 

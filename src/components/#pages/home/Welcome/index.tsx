@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { BiRightArrowAlt } from "react-icons/bi"
-import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import WelcomeAguJpg from "~/assets/preview_alt.jpg"
 import Link from "~/components/Link"
 import styles from "./styles.module.scss"
@@ -8,17 +7,6 @@ import styles from "./styles.module.scss"
 const Welcome: React.FC = () => {
   return (
     <section className={styles.welcome}>
-      {/* <header className={styles.header}>
-        <Image
-          src={HeaderLogoPng}
-          alt=""
-          width={HeaderLogoPng.width}
-          height={HeaderLogoPng.height}
-        />
-        <h3 className={styles.title}>
-          Добро пожаловать на образовательный портал!
-        </h3>
-      </header> */}
       <div className={styles.wrapper}>
         <Image
           src={WelcomeAguJpg}

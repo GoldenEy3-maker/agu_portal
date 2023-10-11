@@ -1,11 +1,12 @@
 import { useRef } from "react"
+import { useDocEventListener } from "~/hooks/docEvent.hook"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
 type ContainerProps = {
   state: boolean
   closeHandler: () => void
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "aria-hidden">
+} & Omit<React.ComponentProps<"div">, "aria-hidden">
 
 export const Container: React.FC<ContainerProps> = ({
   state,
@@ -38,6 +39,14 @@ export const Container: React.FC<ContainerProps> = ({
 
     if (props.onBlur) props.onBlur(event)
   }
+
+  const closeOnKeyPressHandler = (event: KeyboardEvent) => {
+    if (!state) return
+
+    if (event.code === "Escape") closeHandler()
+  }
+
+  useDocEventListener("keyup", closeOnKeyPressHandler)
 
   return (
     <div

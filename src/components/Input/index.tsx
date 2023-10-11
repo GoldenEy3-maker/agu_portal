@@ -6,7 +6,7 @@ type InputProps = {
   label?: string
   leadingIcon?: React.ReactNode
   size?: "sm"
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">
+} & Omit<React.ComponentProps<"input">, "size">
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, className, size, leadingIcon, ...props }, ref) => {

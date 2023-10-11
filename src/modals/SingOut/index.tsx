@@ -3,7 +3,7 @@ import Button from "~/components/Button"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
-import { ModalKeys } from "~/utils/enums"
+import { ModalKeyMap } from "~/utils/enums"
 
 const SingOutModal: React.FC = () => {
   const modalStore = useModalStore()
@@ -11,7 +11,7 @@ const SingOutModal: React.FC = () => {
 
   const closeModalHandler = () => modalStore.close()
 
-  const isModalOpen = modalStore.queue.at(-1) === ModalKeys.SingOut
+  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SingOut
 
   useAutoFocus(cancelButtonRef, isModalOpen)
 

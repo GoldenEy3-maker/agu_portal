@@ -92,14 +92,14 @@ const CoursesFeed: React.FC = () => {
     <div className={styles.wrapper}>
       {COURSES_FEED_DATA.map((data) => (
         <div key={data.id} className={styles.item}>
-          <div className={styles.image}>
+          {/* <div className={styles.image}>
             <Image
               src="https://placehold.co/50x50"
               alt=""
               fill
               style={{ objectFit: "cover" }}
             />
-          </div>
+          </div> */}
           <div className={styles.main}>
             <NextLink href="#" className={styles.title}>
               {data.title}

@@ -2,7 +2,7 @@ import Image from "next/image"
 import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useModalStore } from "~/store/modal"
-import { ModalKeys } from "~/utils/enums"
+import { ModalKeyMap } from "~/utils/enums"
 import Button from "../Button"
 import styles from "./styles.module.scss"
 
@@ -37,7 +37,7 @@ const Header: React.FC = () => {
           asIcon
           onClick={(event) =>
             modalStore.open({
-              key: ModalKeys.SignIn,
+              key: ModalKeyMap.SignIn,
               target: event.currentTarget,
             })
           }

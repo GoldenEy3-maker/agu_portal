@@ -8,7 +8,7 @@ export type ButtonProps = {
   asIcon?: boolean
   color?: "danger" | "primary" | "success" | "default"
   textAlign?: "center" | "left" | "right"
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+} & React.ComponentProps<"button">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant, asIcon, color = "primary", textAlign, ...props }, ref) => {

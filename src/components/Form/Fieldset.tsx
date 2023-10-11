@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 type FieldsetProps = {
   legend?: string
   type?: "input" | "checkbox"
-} & React.FieldsetHTMLAttributes<HTMLFieldSetElement>
+} & React.ComponentProps<"fieldset">
 
 export const Fieldset: React.FC<FieldsetProps> = ({
   legend,

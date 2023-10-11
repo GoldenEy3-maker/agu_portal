@@ -69,9 +69,12 @@
   --placeholder-hsl: var(--surface-base-hsl), 50%;
 
   /* Sizes */
-  --container-mw: calc(1500px + var(--container-pdi) * 2);
+  --container-mw: calc(1600px + var(--container-pdi) * 2);
   --container-pdi: 1rem;
   --safe-area-pd: 1.5rem;
+
+  // Components
+  --header-h: 66px;
 
   /* UTILS */
   --primary-bxs: var(--primary-hsl), 0.25;
@@ -95,6 +98,7 @@
   --body-l-fs: 16px;
   --body-m-fs: 14px;
   --body-s-fs: 12px;
+  --label-s-fs: 10px;
 
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

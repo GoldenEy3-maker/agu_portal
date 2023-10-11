@@ -5,8 +5,6 @@ import {
   BiGroup,
   BiHelpCircle,
   BiHome,
-  BiLogOut,
-  BiMenu,
   BiSolidCalendar,
   BiSolidFolder,
   BiSolidGroup,
@@ -14,15 +12,11 @@ import {
   BiSolidHome,
 } from "react-icons/bi"
 import Link from "~/components/Link"
-import { useModalStore } from "~/store/modal"
-import { ModalKeys, PagePaths } from "~/utils/enums"
+import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
-import Button from "../Button"
 import styles from "./styles.module.scss"
 
 const Sidebar: React.FC = () => {
-  const modalStore = useModalStore()
-
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -30,66 +24,65 @@ const Sidebar: React.FC = () => {
       <nav className={styles.nav}>
         <div className={cls([styles.navGroup, styles.main])}>
           <Link
-            href={PagePaths.HomePage}
+            href={PagePathMap.HomePage}
             activeClassName={styles.activeNavLink}
             className={styles.navLink}
           >
             {(isActive) => (
               <>
                 {isActive ? <BiSolidHome /> : <BiHome />}
-                {isExpanded ? <span>Главная</span> : null}
+                <span>Главная</span>
               </>
             )}
           </Link>
           <Link
-            href={PagePaths.CoursesPage}
+            href={PagePathMap.CoursesPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
           >
             {(isActive) => (
               <>
                 {isActive ? <BiSolidFolder /> : <BiFolder />}
-                {isExpanded ? <span>Курсы</span> : null}
+                <span>Курсы</span>
               </>
             )}
           </Link>
           <Link
-            href={PagePaths.UsersPage}
+            href={PagePathMap.UsersPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
           >
-            {(isActive) => (isActive ? <BiSolidGroup /> : <BiGroup />)}
+            {(isActive) => (
+              <>
+                {isActive ? <BiSolidGroup /> : <BiGroup />}
+                <span>Люди</span>
+              </>
+            )}
           </Link>
           <Link
-            href={PagePaths.SchedulerPage}
+            href={PagePathMap.SchedulerPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
           >
-            {(isActive) => (isActive ? <BiSolidCalendar /> : <BiCalendar />)}
+            {(isActive) => (
+              <>
+                {isActive ? <BiSolidCalendar /> : <BiCalendar />}
+                <span>Календарь</span>
+              </>
+            )}
           </Link>
           <Link
-            href={PagePaths.SupportPage}
+            href={PagePathMap.SupportPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
           >
-            {(isActive) =>
-              isActive ? <BiSolidHelpCircle /> : <BiHelpCircle />
-            }
+            {(isActive) => (
+              <>
+                {isActive ? <BiSolidHelpCircle /> : <BiHelpCircle />}
+                <span>Поддержка</span>
+              </>
+            )}
           </Link>
-        </div>
-        <div className={cls([styles.navGroup, styles.footer])}>
-          <Button
-            className={styles.navLink}
-            type="button"
-            onClick={(event) =>
-              modalStore.open({
-                key: ModalKeys.SingOut,
-                target: event.currentTarget,
-              })
-            }
-          >
-            <BiLogOut />
-          </Button>
         </div>
       </nav>
     </aside>

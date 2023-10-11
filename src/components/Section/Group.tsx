@@ -3,7 +3,7 @@ import styles from "./styles.module.scss"
 
 type GroupProps = {
   directions?: "horizontal" | "vertical"
-} & React.HTMLAttributes<HTMLDivElement>
+} & React.ComponentProps<"div">
 
 export const Group: React.FC<GroupProps> = ({ directions, ...props }) => {
   return (

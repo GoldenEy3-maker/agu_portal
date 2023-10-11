@@ -1,9 +1,7 @@
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
-export const Title: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = (
-  props
-) => {
+export const Title: React.FC<React.ComponentProps<"h3">> = (props) => {
   return (
     <h3 {...props} className={cls([styles.title, props.className])}>
       {props.children}

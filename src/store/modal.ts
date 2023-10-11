@@ -1,18 +1,19 @@
 import { create } from "zustand"
-import { ModalKeys } from "~/utils/enums"
+import { ModalKeyMap } from "~/utils/enums"
 
 type ModalProps = {}
 
-type OpenModalStoreActionArgs<T extends ModalKeys> = T extends keyof ModalProps
-  ? { key: T; target?: HTMLElement; props?: ModalProps[T] }
-  : { key: T; target?: HTMLElement }
+type OpenModalStoreActionArgs<T extends ModalKeyMap> =
+  T extends keyof ModalProps
+    ? { key: T; target?: HTMLElement; props?: ModalProps[T] }
+    : { key: T; target?: HTMLElement }
 
 type ModalStore = {
-  queue: ModalKeys[]
+  queue: ModalKeyMap[]
   props: ModalProps | null
   target: HTMLElement | null
-  open: <T extends ModalKeys>(args: OpenModalStoreActionArgs<T>) => void
-  close: (key?: ModalKeys) => void
+  open: <T extends ModalKeyMap>(args: OpenModalStoreActionArgs<T>) => void
+  close: (key?: ModalKeyMap) => void
   setProps: <T extends keyof ModalProps>(key: T, props: ModalProps[T]) => void
 }
 

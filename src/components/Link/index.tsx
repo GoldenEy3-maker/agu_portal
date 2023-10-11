@@ -12,7 +12,7 @@ type LinkProps = {
   size?: "sm" | "lg"
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
   onPrimary?: boolean
-} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> &
+} & Omit<React.ComponentProps<"a">, "href" | "children"> &
   Omit<NextLinkProps, "as" | "passHref" | "children">
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(

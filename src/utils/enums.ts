@@ -1,6 +1,6 @@
 import { ValueOf } from "./types"
 
-export const PagePaths = {
+export const PagePathMap = {
   HomePage: "/",
   NotificationsPage: "/notifications",
   ChatPage: "/chat",
@@ -11,10 +11,10 @@ export const PagePaths = {
   SettingsPage: "/settings",
 } as const
 
-export const ModalKeys = {
+export const ModalKeyMap = {
   SignIn: "sign-in",
   SingOut: "sing-out",
 } as const
 
-export type PagePaths = ValueOf<typeof PagePaths>
-export type ModalKeys = ValueOf<typeof ModalKeys>
+export type PagePathMap = ValueOf<typeof PagePathMap>
+export type ModalKeyMap = ValueOf<typeof ModalKeyMap>

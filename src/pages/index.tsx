@@ -13,7 +13,7 @@ import Calendar from "~/components/Calendar"
 import Link from "~/components/Link"
 import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
-import { PagePaths } from "~/utils/enums"
+import { PagePathMap } from "~/utils/enums"
 import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.scss"
 
@@ -28,7 +28,7 @@ const HomePage: NextPageWithLayout = () => {
               <Section.Title>
                 <BiFolder /> Курсы
               </Section.Title>
-              <Link href={PagePaths.CoursesPage} variant="elevated" size="sm">
+              <Link href={PagePathMap.CoursesPage} variant="elevated" size="sm">
                 Посмотреть все <BiRightArrowAlt />
               </Link>
             </Section.Header>

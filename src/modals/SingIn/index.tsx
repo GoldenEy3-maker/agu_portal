@@ -10,7 +10,7 @@ import Input from "~/components/Input"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
-import { ModalKeys } from "~/utils/enums"
+import { ModalKeyMap } from "~/utils/enums"
 import { ValueOf } from "~/utils/types"
 
 const InputNames = {
@@ -35,7 +35,7 @@ const SingInModal: React.FC = () => {
   const modalStore = useModalStore()
   const loginInputRef = useRef<HTMLInputElement>(null)
 
-  const isModalOpen = modalStore.queue.at(-1) === ModalKeys.SignIn
+  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignIn
 
   const closeModalHandler = () => modalStore.close()
 
@@ -124,7 +124,7 @@ const SingInModal: React.FC = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault()
-              modalStore.open({ key: ModalKeys.SingOut })
+              modalStore.open({ key: ModalKeyMap.SingOut })
             }}
           >
             Забыли логин или пароль?

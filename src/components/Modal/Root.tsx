@@ -4,7 +4,7 @@ import styles from "./styles.module.scss"
 type RootProps = {
   state: boolean
   asDrawer?: boolean
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "aria-hidden">
+} & Omit<React.ComponentProps<"div">, "aria-hidden">
 
 export const Root: React.FC<RootProps> = ({ state, asDrawer, ...props }) => {
   return (
