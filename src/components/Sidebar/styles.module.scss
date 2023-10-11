@@ -1,11 +1,10 @@
 .aside {
   position: sticky;
-  top: 0;
-  height: 100svh;
+  top: 72px;
+  height: calc(100svh - 72px);
   background-color: hsl(var(--surface-container-hsl));
 
-  // border-radius: var(--medium-shape);
-  padding: 1rem 0.7rem;
+  padding: 1.5rem 0.7rem;
 
   flex-shrink: 0;
 
@@ -31,7 +30,7 @@
 
   height: 100%;
 
-  font-size: var(--headline-m-fs);
+  font-size: var(--headline-s-fs);
 
   &Link {
     color: hsl(var(--on-surface-hsl));
@@ -45,6 +44,14 @@
     flex-direction: column;
     gap: 0.3rem;
   }
+
+  [aria-expanded="true"] & {
+    &Link {
+      span {
+        font-size: var(--title-l-fs);
+      }
+    }
+  }
 }
 
 .activeNavLink {
@@ -53,6 +60,15 @@
 
 .header {
   flex: 0 1 5rem;
+
+  width: 100%;
+
+  display: grid;
+  place-content: start center;
+
+  [aria-expanded="true"] & {
+    place-content: start;
+  }
 }
 
 .main {

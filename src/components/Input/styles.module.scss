@@ -25,6 +25,10 @@
     ._withLeadingIcon & {
       padding-left: calc(var(--_padding-inline) + 0.2rem + var(--title-l-fs));
     }
+
+    &:focus {
+      outline: none;
+    }
   }
 }
 

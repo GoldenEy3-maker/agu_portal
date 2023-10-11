@@ -25,15 +25,15 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
       <div className={cls(["wrapper", inter.className])}>
+        <Header />
         <div className="horizontal-wrapper">
-          <ModalContainer />
           <Sidebar />
           <div className="main">
-            <Header />
             <div className="main__wrapper container">{props.children}</div>
           </div>
         </div>
         <Footer />
+        <ModalContainer />
       </div>
     </>
   )

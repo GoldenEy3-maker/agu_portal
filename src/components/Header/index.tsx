@@ -1,5 +1,6 @@
-import { useRef } from "react"
-import { BiBell, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import Image from "next/image"
+import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useModalStore } from "~/store/modal"
 import { ModalKeys } from "~/utils/enums"
 import Button from "../Button"
@@ -10,7 +11,20 @@ const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <h3 className={styles.title}>Цифровой университет АлтГУ</h3>
+      <div className={styles.leftSide}>
+        <Button className={styles.menu} asIcon type="button">
+          <BiMenu />
+        </Button>
+        <div className={styles.title}>
+          <Image
+            src={HeaderLogoPng}
+            alt=""
+            width={HeaderLogoPng.width}
+            height={HeaderLogoPng.height}
+          />
+          <h3 className={styles.title}>Цифровой университет АлтГУ</h3>
+        </div>
+      </div>
       <div className={styles.actions}>
         <Button type="button" asIcon>
           <BiBell />

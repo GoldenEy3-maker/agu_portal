@@ -12,7 +12,7 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -51,7 +51,7 @@ a:focus-visible {
 
 ::-webkit-scrollbar {
   width: 0.625rem;
-  background-color: hsl(var(--primary-container-hsl));
+  background-color: hsl(var(--surface-container-hsl));
   border-radius: var(--full-shape);
 }
 

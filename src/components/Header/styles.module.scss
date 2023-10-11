@@ -5,8 +5,9 @@
   z-index: 5;
 
   width: 100%;
+  height: 72px;
 
-  padding: 0.7rem 2rem;
+  padding: 0.7rem 1rem;
 
   display: flex;
   align-items: center;
@@ -16,15 +17,26 @@
   background-color: hsl(var(--surface-container-hsl));
 
   border-bottom: 1px solid hsl(var(--outline-variant-hsl));
+
+  font-size: var(--headline-s-fs);
+}
+
+.leftSide {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   font-size: var(--title-l-fs);
   font-weight: 500;
 }
 
 .actions {
-  font-size: var(--headline-s-fs);
   display: flex;
   align-items: center;
   gap: 0.7rem;

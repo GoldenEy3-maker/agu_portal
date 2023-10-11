@@ -17,7 +17,7 @@
   --surface-container-hsl: var(--surface-base-hsl), 95%;
   --surface-container-high-hsl: var(--surface-base-hsl), 90%;
   --surface-container-highest-hsl: var(--surface-base-hsl), 22%;
-  --on-surface-hsl: var(--surface-base-hsl), 0%;
+  --on-surface-hsl: var(--surface-base-hsl), 10%;
   --on-surface-variant-hsl: var(--surface-base-hsl), 50%;
 
   --primary-hsl: var(--primary-base-hsl), 50%;
@@ -28,7 +28,7 @@
   --primary-container-hsl: var(--primary-container-base-hsl), 91%;
   --primary-container-high-hsl: var(--primary-container-base-hsl), 88%;
   --primary-container-highest-hsl: var(--primary-container-base-hsl), 33%;
-  --on-primary-hsl: var(--primary-base-hsl), 95%;
+  --on-primary-hsl: var(--primary-base-hsl), 90%;
   --on-primary-variant-hsl: var(--primary-base-hsl), 85%;
 
   --outline-hsl: var(--surface-base-hsl), 60%;
@@ -69,7 +69,7 @@
   --placeholder-hsl: var(--surface-base-hsl), 50%;
 
   /* Sizes */
-  --container-mw: calc(1600px + var(--container-pdi) * 2);
+  --container-mw: calc(1500px + var(--container-pdi) * 2);
   --container-pdi: 1rem;
   --safe-area-pd: 1.5rem;
 
