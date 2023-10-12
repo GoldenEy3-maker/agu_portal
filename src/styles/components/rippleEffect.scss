@@ -1,5 +1,6 @@
 .ripple-element {
   position: absolute;
+  z-index: 2;
 
   user-select: none;
   pointer-events: none;

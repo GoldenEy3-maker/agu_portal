@@ -1,6 +1,7 @@
 import Image from "next/image"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
+import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import styles from "./styles.module.scss"
 
 const NEWS_FEED = [
@@ -40,19 +41,22 @@ const NEWS_FEED = [
 
 const NewsFeed: React.FC = () => {
   const router = useRouter()
+  const rippleEffectEvent = useRippleEffect()
+
   return (
     <div className={styles.wrapper}>
       {NEWS_FEED.map((item) => (
-        <div className={styles.item} key={item.id}>
+        <NextLink
+          href="https://www.asu.ru/"
+          className={styles.item}
+          key={item.id}
+          target="_blank"
+          onPointerDown={rippleEffectEvent}
+        >
           <header className={styles.header}>
-            <NextLink
-              href="https://www.asu.ru/"
-              className={styles.title}
-              title={item.title}
-              target="_blank"
-            >
+            <p className={styles.title} title={item.title}>
               {item.title}
-            </NextLink>
+            </p>
           </header>
           <div className={styles.main}>
             <div className={styles.image}>
@@ -64,7 +68,9 @@ const NewsFeed: React.FC = () => {
               />
             </div>
             <div className={styles.text}>
-              <p className={styles.description}>{item.description}</p>
+              <p className={styles.description} title={item.description}>
+                {item.description}
+              </p>
               <footer className={styles.footer}>
                 <time dateTime={item.createdAt.toISOString()}>
                   {new Intl.DateTimeFormat(router.locales, {
@@ -76,7 +82,7 @@ const NewsFeed: React.FC = () => {
               </footer>
             </div>
           </div>
-        </div>
+        </NextLink>
       ))}
     </div>
   )

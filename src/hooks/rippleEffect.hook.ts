@@ -49,9 +49,9 @@ export const useRippleEffect = () => {
       ripple.style.opacity = "0"
       ripple.style.transition = `opacity ${remainingTime}ms linear`
 
-      // setTimeout(() => {
-      //   ripple.remove()
-      // }, remainingTime)
+      setTimeout(() => {
+        ripple.remove()
+      }, remainingTime)
 
       target.removeEventListener("pointerup", handleFadeOutRipple)
       target.removeEventListener("pointercancel", handleFadeOutRipple)

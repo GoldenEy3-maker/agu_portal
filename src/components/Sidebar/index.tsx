@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   BiCalendar,
   BiFolder,
@@ -12,15 +11,16 @@ import {
   BiSolidHome,
 } from "react-icons/bi"
 import Link from "~/components/Link"
+import { useSidebarStore } from "~/store/sidebar"
 import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
 const Sidebar: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const sidebarStore = useSidebarStore()
 
   return (
-    <aside className={styles.aside} aria-expanded={isExpanded}>
+    <aside className={styles.aside} aria-expanded={sidebarStore.isExpanded}>
       <nav className={styles.nav}>
         <div className={cls([styles.navGroup, styles.main])}>
           <Link

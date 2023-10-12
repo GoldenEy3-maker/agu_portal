@@ -8,17 +8,25 @@ import {
 } from "react-icons/bi"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useModalStore } from "~/store/modal"
+import { useSidebarStore } from "~/store/sidebar"
 import { ModalKeyMap } from "~/utils/enums"
 import Button from "../Button"
 import styles from "./styles.module.scss"
 
 const Header: React.FC = () => {
   const modalStore = useModalStore()
+  const sidebarStore = useSidebarStore()
 
   return (
     <header className={styles.header}>
       <div className={styles.leftSide}>
-        <Button className={styles.menu} asIcon type="button" color="default">
+        <Button
+          className={styles.menu}
+          asIcon
+          type="button"
+          color="default"
+          onClick={sidebarStore.toggle}
+        >
           <BiMenu />
         </Button>
         <div className={styles.title}>

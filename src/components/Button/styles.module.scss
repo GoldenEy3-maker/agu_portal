@@ -57,7 +57,7 @@
   }
 
   &._outlined {
-    outline: 1px solid hsl(var(--primary-hsl));
+    outline: 1px solid hsl(var(--outline-hsl));
     outline-offset: -1px;
 
     &._danger {
