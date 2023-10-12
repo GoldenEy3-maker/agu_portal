@@ -1,7 +1,7 @@
 .aside {
   position: sticky;
   top: var(--header-h);
-  height: calc(100svh - 72px);
+  height: calc(100svh - var(--header-h));
   background-color: hsl(var(--surface-container-hsl));
 
   padding: 1.5rem 0.3rem;
@@ -30,7 +30,7 @@
 
   height: 100%;
 
-  font-size: var(--title-l-fs);
+  font-size: var(--headline-s-fs);
 
   &Link {
     color: hsl(var(--on-surface-hsl));

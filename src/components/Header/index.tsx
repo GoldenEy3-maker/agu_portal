@@ -1,5 +1,11 @@
 import Image from "next/image"
-import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import {
+  BiBell,
+  BiMenu,
+  BiMessageSquareDetail,
+  BiUser,
+  BiUserCircle,
+} from "react-icons/bi"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useModalStore } from "~/store/modal"
 import { ModalKeyMap } from "~/utils/enums"
@@ -12,7 +18,7 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.leftSide}>
-        <Button className={styles.menu} asIcon type="button">
+        <Button className={styles.menu} asIcon type="button" color="default">
           <BiMenu />
         </Button>
         <div className={styles.title}>
@@ -26,15 +32,9 @@ const Header: React.FC = () => {
         </div>
       </div>
       <div className={styles.actions}>
-        <Button type="button" asIcon>
-          <BiBell />
-        </Button>
-        <Button type="button" asIcon>
-          <BiMessageSquareDetail />
-        </Button>
         <Button
-          variant="filled"
-          asIcon
+          className={styles.singinButton}
+          variant="outlined"
           onClick={(event) =>
             modalStore.open({
               key: ModalKeyMap.SignIn,
@@ -43,7 +43,17 @@ const Header: React.FC = () => {
           }
         >
           <BiUser />
+          Войти
         </Button>
+        {/* <Button type="button" asIcon color="default">
+          <BiBell />
+        </Button>
+        <Button type="button" asIcon color="default">
+          <BiMessageSquareDetail />
+        </Button>
+        <Button variant="filled" asIcon color="default">
+          <BiUser />
+        </Button> */}
       </div>
     </header>
   )

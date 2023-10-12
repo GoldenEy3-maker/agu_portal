@@ -30,11 +30,11 @@ body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeSpeed;
+}
 
-  &[data-lock="true"] {
-    overflow: hidden;
-    padding-right: var(--scrollbar-offset);
-  }
+body[data-lock="true"] {
+  overflow: hidden;
+  padding-right: var(--scrollbar-offset);
 }
 
 a,
@@ -50,20 +50,15 @@ a:focus-visible {
 }
 
 ::-webkit-scrollbar {
-  width: 0.625rem;
+  width: 0.7rem;
   background-color: hsl(var(--surface-container-hsl));
-  border-radius: var(--full-shape);
 }
 
 ::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
   background-color: hsl(var(--primary-hsl));
   border-radius: var(--full-shape);
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: hsl(var(--primary-high-hsl));
-    }
-  }
 }
 
 ::-moz-selection {
@@ -78,12 +73,6 @@ a:focus-visible {
 
 a {
   color: hsl(var(--primary-hsl));
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 aside,
@@ -186,6 +175,16 @@ address {
 #root,
 #__next {
   isolation: isolate;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    border-width: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

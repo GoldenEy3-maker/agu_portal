@@ -8,10 +8,11 @@ export type ButtonProps = {
   asIcon?: boolean
   color?: "danger" | "primary" | "success" | "default"
   textAlign?: "center" | "left" | "right"
+  size?: "sm"
 } & React.ComponentProps<"button">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, asIcon, color = "primary", textAlign, ...props }, ref) => {
+  ({ variant, asIcon, color = "primary", textAlign, size, ...props }, ref) => {
     const rippleEffectEvent = useRippleEffect()
 
     return (
@@ -27,6 +28,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [styles._default ?? ""]: color === "default",
           [styles._textAlignCenter ?? ""]: textAlign === "center",
           [styles._textAlignRight ?? ""]: textAlign === "right",
+          [styles._sm ?? ""]: size === "sm",
         })}
         onPointerDown={rippleEffectEvent}
         ref={ref}

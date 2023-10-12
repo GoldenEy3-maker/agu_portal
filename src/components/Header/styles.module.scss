@@ -40,8 +40,8 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
+}
 
-  button {
-    color: hsl(var(--on-surface-hsl));
-  }
+.singinButton {
+  font-size: var(--body-l-fs);
 }
