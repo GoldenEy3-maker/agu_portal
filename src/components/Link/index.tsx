@@ -5,7 +5,7 @@ import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.scss"
 
-type LinkProps = {
+export type LinkProps = {
   variant?: "elevated" | "filled" | "outlined"
   asIcon?: boolean
   activeClassName?: string

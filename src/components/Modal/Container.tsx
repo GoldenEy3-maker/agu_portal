@@ -57,7 +57,7 @@ export const Container: React.FC<ContainerProps> = ({
       onPointerDown={clickOutsideHandler}
       onBlur={blurOutsideHandler}
     >
-      {props.children}
+      <div className={styles.containerWrapper}>{props.children}</div>
     </div>
   )
 }

@@ -1,0 +1,29 @@
+.root {
+  &[aria-expanded="true"] {
+    .content {
+      grid-template-rows: 1fr;
+
+      &Wrapper {
+        padding: 0.3rem;
+      }
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-rows: 0fr;
+
+  padding-left: 0.5rem;
+
+  transition: grid-template-rows 200ms ease;
+}
+
+.contentWrapper {
+  display: grid;
+  gap: 0.2rem;
+
+  overflow: hidden;
+
+  transition: padding 200ms ease;
+}

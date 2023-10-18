@@ -14,6 +14,7 @@ export const PagePathMap = {
 export const ModalKeyMap = {
   SignIn: "sign-in",
   SingOut: "sing-out",
+  Sidebar: "sidebar",
 } as const
 
 export type PagePathMap = ValueOf<typeof PagePathMap>

@@ -45,3 +45,17 @@
 .singinButton {
   font-size: var(--body-l-fs);
 }
+
+.sidebarControl {
+  &._modal {
+    display: none;
+  }
+
+  @media (max-width: 1300px) {
+    display: none;
+
+    &._modal {
+      display: flex;
+    }
+  }
+}

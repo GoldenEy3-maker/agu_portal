@@ -57,6 +57,7 @@ const SingInModal: React.FC = () => {
       </Modal.Header>
       <Modal.Content>
         <Form.Root
+          id="sing-in-form"
           onSubmit={hookForm.handleSubmit(
             (data) => {
               toast.success(`Ваши данные: ${JSON.stringify(data)}`)
@@ -129,16 +130,16 @@ const SingInModal: React.FC = () => {
           >
             Забыли логин или пароль?
           </Link>
-          <Form.Actions>
-            <Button type="button" onClick={closeModalHandler}>
-              Отменить
-            </Button>
-            <Button type="submit" variant="filled">
-              Войти
-            </Button>
-          </Form.Actions>
         </Form.Root>
       </Modal.Content>
+      <Modal.Footer>
+        <Button type="button" onClick={closeModalHandler}>
+          Отменить
+        </Button>
+        <Button type="submit" form="sing-in-form" variant="filled">
+          Войти
+        </Button>
+      </Modal.Footer>
     </Modal.Root>
   )
 }

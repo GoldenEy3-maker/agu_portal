@@ -16,7 +16,7 @@ const SingOutModal: React.FC = () => {
   useAutoFocus(cancelButtonRef, isModalOpen)
 
   return (
-    <Modal.Root state={isModalOpen} asDrawer>
+    <Modal.Root state={isModalOpen}>
       <Modal.Header>
         <Modal.Title>Вы действительно хотите выйти?</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
