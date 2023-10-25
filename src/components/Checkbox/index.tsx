@@ -2,7 +2,7 @@ import { forwardRef } from "react"
 import { BiCheck, BiMinus } from "react-icons/bi"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export type SwitchValue = "on" | "off" | undefined
 
@@ -89,7 +89,5 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     )
   }
 )
-
-export const changeCheckboxHandler = () => {}
 
 export default Checkbox

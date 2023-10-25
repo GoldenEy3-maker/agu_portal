@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { forwardRef } from "react"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export type LinkProps = {
   variant?: "elevated" | "filled" | "outlined"

@@ -1,7 +1,7 @@
 import * as Modal from "~/components/Modal"
 import SidebarModal from "~/modals/Sidebar"
-import SingInModal from "~/modals/SingIn"
-import SingOutModal from "~/modals/SingOut"
+import SignInModal from "~/modals/SignIn"
+import SignOutModal from "~/modals/SignOut"
 import { useModalStore } from "~/store/modal"
 
 const ModalContainer: React.FC = () => {
@@ -13,8 +13,8 @@ const ModalContainer: React.FC = () => {
       closeHandler={() => modalStore.close()}
     >
       <SidebarModal />
-      <SingInModal />
-      <SingOutModal />
+      <SignInModal />
+      <SignOutModal />
     </Modal.Container>
   )
 }

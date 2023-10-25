@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { useDocEventListener } from "~/hooks/docEvent.hook"
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 type ContainerProps = {
   state: boolean

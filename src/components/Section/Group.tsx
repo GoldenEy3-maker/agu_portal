@@ -1,18 +1,9 @@
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
-type GroupProps = {
-  directions?: "horizontal" | "vertical"
-} & React.ComponentProps<"div">
-
-export const Group: React.FC<GroupProps> = ({ directions, ...props }) => {
+export const Group: React.FC<React.ComponentProps<"div">> = (props) => {
   return (
-    <div
-      {...props}
-      className={cls([styles.group, props.className], {
-        [styles._vertical ?? ""]: directions === "vertical",
-      })}
-    >
+    <div {...props} className={cls([styles.group, props.className])}>
       {props.children}
     </div>
   )

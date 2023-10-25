@@ -2,12 +2,14 @@ import { AppProps, type AppType } from "next/app"
 
 import { api } from "~/utils/api"
 
-import * as dayjs from "dayjs"
+import dayjs from "dayjs"
 import "dayjs/locale/ru"
 import { NextPage } from "next"
 import { ReactElement, ReactNode } from "react"
 import { Toaster } from "react-hot-toast"
-import "~/styles/globals.scss"
+import { SkeletonTheme } from "react-loading-skeleton"
+import "react-loading-skeleton/dist/skeleton.css"
+import "~/styles/globals.sass"
 
 dayjs.locale("ru")
 
@@ -22,11 +24,11 @@ type AppPropsWithLayout = AppProps & {
 const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || ((page) => page)
 
-  return getLayout(
-    <>
-      <Component {...pageProps} />
-      <Toaster position="top-right" />
-    </>
+  return (
+    <SkeletonTheme baseColor="hsl(var(--placeholder-hsl))">
+      {getLayout(<Component {...pageProps} />)}
+      <Toaster position="top-center" />
+    </SkeletonTheme>
   )
 }
 

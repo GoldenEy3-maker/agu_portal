@@ -1,9 +1,18 @@
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
-export const Root: React.FC<React.ComponentProps<"section">> = (props) => {
+type RootProps = {
+  isSpanGridArea?: boolean
+} & React.ComponentProps<"section">
+
+export const Root: React.FC<RootProps> = ({ isSpanGridArea, ...props }) => {
   return (
-    <section {...props} className={cls([styles.root, props.className])}>
+    <section
+      {...props}
+      className={cls([styles.root, props.className], {
+        [styles._spanGridArea ?? ""]: !!isSpanGridArea,
+      })}
+    >
       {props.children}
     </section>
   )

@@ -1,5 +1,5 @@
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 type HeaderProps = {
   isJustifyContentStart?: boolean

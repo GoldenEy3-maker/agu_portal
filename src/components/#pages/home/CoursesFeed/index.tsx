@@ -1,7 +1,6 @@
 import NextLink from "next/link"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
-import { useModalStore } from "~/store/modal"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 const COURSES_FEED_DATA = [
   {

@@ -6,7 +6,7 @@ import {
   BiLogoYoutube,
 } from "react-icons/bi"
 import Link from "~/components/Link"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 const Footer: React.FC = () => {
   return (

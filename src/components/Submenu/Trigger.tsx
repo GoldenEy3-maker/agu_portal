@@ -2,7 +2,7 @@ import { cls } from "~/utils/func"
 import Button, { ButtonProps } from "../Button"
 import Link, { LinkProps } from "../Link"
 import { useSubmenuContext } from "./context"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 type TriggerProps =
   | ({

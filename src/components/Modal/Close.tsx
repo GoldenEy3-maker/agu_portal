@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import { BiX } from "react-icons/bi"
 import Button, { ButtonProps } from "../Button"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export const Close = forwardRef<
   HTMLButtonElement,

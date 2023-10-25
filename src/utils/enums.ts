@@ -13,9 +13,14 @@ export const PagePathMap = {
 
 export const ModalKeyMap = {
   SignIn: "sign-in",
-  SingOut: "sing-out",
+  SignOut: "sign-out",
   Sidebar: "sidebar",
 } as const
 
+export const CookieKeyMap = {
+  RefreshToken: "_v",
+}
+
 export type PagePathMap = ValueOf<typeof PagePathMap>
 export type ModalKeyMap = ValueOf<typeof ModalKeyMap>
+export type CookieKeyMap = ValueOf<typeof CookieKeyMap>

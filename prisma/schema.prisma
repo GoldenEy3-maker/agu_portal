@@ -1,20 +1,72 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        Int      @id @default(autoincrement())
-    name      String
+model User {
+    id String @id @default(uuid())
+
+    class   Class?  @relation(fields: [classId], references: [id])
+    classId String? @unique
+
+    login        String @unique
+    password     String
+    tokenVersion Int    @default(0)
+
+    email      String?
+    name       String
+    surname    String
+    patronymic String?
+
+    role Role
+
+    courses Course[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
 
-    @@index([name])
+model Class {
+    id       String     @id
+    users    User[]
+    sheduler Sheduler[]
+}
+
+model Course {
+    id String @id @default(uuid())
+
+    title       String
+    description String
+
+    password String?
+
+    users User[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Sheduler {
+    id String @id @default(uuid())
+
+    class   Class  @relation(fields: [classId], references: [id])
+    classId String
+
+    subject  String
+    teacher  String
+    address  String
+    audience Int
+
+    start DateTime
+    end   DateTime
+}
+
+enum Role {
+    Admin
+    Student
+    Teacher
 }

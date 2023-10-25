@@ -18,7 +18,7 @@ import { useSidebarStore } from "~/store/sidebar"
 import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import Button from "../Button"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 type SidebarProps = {
   isModal?: boolean

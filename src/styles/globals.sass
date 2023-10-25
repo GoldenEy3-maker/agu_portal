@@ -1,0 +1,22 @@
+@import "./var"
+@import "./default"
+@import "./components/rippleEffect"
+
+.horizontal-wrapper
+  display: flex
+
+.main
+  width: 100%
+
+  &__wrapper
+    padding-block: var(--safe-area-pd)
+
+.container
+  display: flex
+  flex-direction: column
+
+  flex: 1
+
+  max-width: var(--container-mw)
+  padding-inline: var(--container-pdi)
+  margin-inline: auto

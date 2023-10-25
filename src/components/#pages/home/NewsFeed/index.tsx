@@ -2,7 +2,7 @@ import Image from "next/image"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 const NEWS_FEED = [
   {

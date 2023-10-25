@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export type ButtonProps = {
   variant?: "elevated" | "filled" | "outlined"

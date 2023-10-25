@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { cls } from "~/utils/func"
 import { SubmenuContext } from "./context"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export const Root: React.FC<React.ComponentProps<"div">> = (props) => {
   const [isExpanded, setIsExpanded] = useState(false)

@@ -1,5 +1,5 @@
 import { cls } from "~/utils/func"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 export const Actions: React.FC<React.ComponentProps<"div">> = (props) => {
   return (

@@ -1,24 +1,23 @@
 import Image from "next/image"
-import { useState } from "react"
-import {
-  BiBell,
-  BiMenu,
-  BiMessageSquareDetail,
-  BiUser,
-  BiUserCircle,
-} from "react-icons/bi"
+import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useWinEventListener } from "~/hooks/winEvent.hook"
 import { useModalStore } from "~/store/modal"
 import { useSidebarStore } from "~/store/sidebar"
+import { useUserStore } from "~/store/user"
+import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import Button from "../Button"
-import styles from "./styles.module.scss"
+import styles from "./styles.module.sass"
 
 const Header: React.FC = () => {
   const modalStore = useModalStore()
   const sidebarStore = useSidebarStore()
+  const userStore = useUserStore()
+
+  const getSessionQuery = api.user.getSession.useQuery()
 
   const changeTypeSidebarHandler = () => {
     if (
@@ -42,7 +41,6 @@ const Header: React.FC = () => {
         >
           <BiMenu />
         </Button>
-
         <Button
           className={cls([styles.sidebarControl, styles._modal])}
           asIcon
@@ -63,28 +61,41 @@ const Header: React.FC = () => {
         </div>
       </div>
       <div className={styles.actions}>
-        <Button
-          className={styles.singinButton}
-          variant="outlined"
-          onClick={(event) =>
-            modalStore.open({
-              key: ModalKeyMap.SignIn,
-              target: event.currentTarget,
-            })
-          }
-        >
-          <BiUser />
-          Войти
-        </Button>
-        {/* <Button type="button" asIcon color="default">
-          <BiBell />
-        </Button>
-        <Button type="button" asIcon color="default">
-          <BiMessageSquareDetail />
-        </Button>
-        <Button variant="filled" asIcon color="default">
-          <BiUser />
-        </Button> */}
+        {!getSessionQuery.isLoading ? (
+          userStore.token ? (
+            <>
+              <Button type="button" asIcon color="default">
+                <BiBell />
+              </Button>
+              <Button type="button" asIcon color="default">
+                <BiMessageSquareDetail />
+              </Button>
+              <Button variant="filled" asIcon color="default">
+                <BiUser />
+              </Button>
+            </>
+          ) : (
+            <Button
+              className={styles.singinButton}
+              variant="outlined"
+              onClick={(event) =>
+                modalStore.open({
+                  key: ModalKeyMap.SignIn,
+                  target: event.currentTarget,
+                })
+              }
+            >
+              <BiUser />
+              Войти
+            </Button>
+          )
+        ) : (
+          <>
+            <Skeleton width={45} height={45} circle />
+            <Skeleton width={45} height={45} circle />
+            <Skeleton width={45} height={45} circle />
+          </>
+        )}
       </div>
     </header>
   )
