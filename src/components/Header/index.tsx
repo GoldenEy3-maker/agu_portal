@@ -1,7 +1,9 @@
 import Image from "next/image"
+import Link from "next/link"
 import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
+import * as Popover from "~/components/Popover"
 import { useWinEventListener } from "~/hooks/winEvent.hook"
 import { useModalStore } from "~/store/modal"
 import { useSidebarStore } from "~/store/sidebar"
@@ -70,9 +72,16 @@ const Header: React.FC = () => {
               <Button type="button" asIcon color="default">
                 <BiMessageSquareDetail />
               </Button>
-              <Button variant="filled" asIcon color="default">
-                <BiUser />
-              </Button>
+              <Popover.Root>
+                <Popover.Trigger variant="filled" asIcon color="default">
+                  <BiUser />
+                </Popover.Trigger>
+                <Popover.Content>
+                  <Link href="#">Профиль</Link>
+                  <Link href="#">Настройки</Link>
+                  <Link href="#">Выйти</Link>
+                </Popover.Content>
+              </Popover.Root>
             </>
           ) : (
             <Button

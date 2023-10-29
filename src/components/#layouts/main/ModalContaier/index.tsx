@@ -10,7 +10,7 @@ const ModalContainer: React.FC = () => {
   return (
     <Modal.Container
       state={modalStore.queue.length !== 0}
-      closeHandler={() => modalStore.close()}
+      closeHandler={modalStore.close}
     >
       <SidebarModal />
       <SignInModal />
