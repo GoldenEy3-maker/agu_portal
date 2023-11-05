@@ -3,8 +3,8 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next"
 import superjson from "superjson"
 import { ZodError } from "zod"
 
-import tokenService from "services/token.service"
 import { db } from "~/server/db"
+import tokenService from "~/services/token.service"
 import ApiError from "../exeptions"
 
 type CreateContextOptions = Record<string, never>

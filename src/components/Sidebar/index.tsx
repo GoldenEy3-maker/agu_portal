@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
   return (
     <aside
-      className={cls([styles.aside], {
+      className={cls(styles.aside, {
         [styles._modal ?? ""]: !!props.isModal,
       })}
       aria-expanded={isExpanded}
@@ -42,6 +42,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.HomePage}
             activeClassName={styles.activeNavLink}
             className={styles.navLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -54,6 +55,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.UsersPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -66,6 +68,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.SchedulerPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -82,6 +85,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -89,6 +93,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -96,6 +101,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -103,6 +109,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -110,6 +117,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -117,6 +125,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
@@ -124,11 +133,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
               href={PagePathMap.CoursesPage + "/1"}
               className={styles.navLink}
               activeClassName={styles.activeNavLink}
+              color="default"
             >
               <span>Иностранный язык в профессиональной деятельности</span>
             </Link>
 
-            <Button className={styles.navLink}>
+            <Button className={styles.navLink} color="default">
               <BiChevronDown />
               <span>Раскрыть</span>
             </Button>
@@ -139,6 +149,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.SettingsPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -151,6 +162,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.SupportPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -161,12 +173,13 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           </Link>
         </div>
       </nav>
-      <nav className={cls([styles.nav, styles._shrinked])}>
+      <nav className={cls(styles.nav, styles._shrinked)}>
         <div className={styles.navGroup}>
           <Link
             href={PagePathMap.HomePage}
             activeClassName={styles.activeNavLink}
             className={styles.navLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -179,6 +192,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.CoursesPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -191,6 +205,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.UsersPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -203,6 +218,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.SchedulerPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>
@@ -215,6 +231,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             href={PagePathMap.SupportPage}
             className={styles.navLink}
             activeClassName={styles.activeNavLink}
+            color="default"
           >
             {(isActive) => (
               <>

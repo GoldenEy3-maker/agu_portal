@@ -4,10 +4,10 @@ import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.sass"
 
-export type SwitchValue = "on" | "off" | undefined
+export type ExtendedCheckboxValue = "on" | "off" | undefined
 
-export type SwtichType = {
-  value: SwitchValue
+export type ExtendedCheckboxType = {
+  value: ExtendedCheckboxValue
   checked: boolean
 }
 
@@ -18,13 +18,18 @@ type CheckboxHTMLAttributes = Omit<
 
 type CheckboxProps =
   | ({
-      type: "switch"
+      type: "check"
       label: string
-      value: SwitchValue
-      onChange: (value: SwitchValue, checked: boolean) => void
+      onChange: (checked: boolean) => void
     } & CheckboxHTMLAttributes)
   | ({
-      type: "check"
+      type: "extended-check"
+      label: string
+      value: ExtendedCheckboxValue
+      onChange: (value: ExtendedCheckboxValue, checked: boolean) => void
+    } & CheckboxHTMLAttributes)
+  | ({
+      type: "switch"
       label: string
       onChange: (checked: boolean) => void
     } & CheckboxHTMLAttributes)
@@ -33,12 +38,12 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, ...props }, ref) => {
     const rippleEffectEvent = useRippleEffect()
 
-    const renderIcon = () => {
+    const renderCheckboxIcon = () => {
       if (props.type === "check") {
         return props.checked ? <BiCheck /> : null
       }
 
-      if (props.type !== "switch") return null
+      if (props.type !== "extended-check") return null
 
       if (props.value === "on") return <BiCheck />
       if (props.value === "off") return <BiMinus />
@@ -47,16 +52,16 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     const changeHandler = () => {
-      if (props.type === "check") {
+      if (props.type === "check" || props.type === "switch") {
         props.onChange(!props.checked)
         return
       }
 
-      if (props.type !== "switch") return
+      if (props.type !== "extended-check") return
 
-      const prevValue: SwitchValue = props.value
-      let value: SwitchValue = undefined
-      let checked = false
+      const prevValue: ExtendedCheckboxValue = props.value
+      let value: ExtendedCheckboxValue = undefined
+      let checked = !!props.checked
 
       if (prevValue === undefined) {
         value = "on"
@@ -77,11 +82,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     return (
-      <div className={cls([styles.wrapper, props.className])}>
+      <div className={cls(styles.wrapper, props.className)}>
         <input {...props} type="checkbox" onChange={changeHandler} ref={ref} />
         <div className={styles.labelWrapper}>
           <label htmlFor={props.id} onPointerDown={rippleEffectEvent}>
-            <span className={styles.icon}>{renderIcon()}</span>
+            <span className={styles.icon}>{renderCheckboxIcon()}</span>
             {label}
           </label>
         </div>

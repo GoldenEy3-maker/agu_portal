@@ -16,7 +16,7 @@ export const Root: React.FC<RootProps> = ({
   return (
     <div
       {...props}
-      className={cls([styles.root, props.className], {
+      className={cls(styles.root, props.className, {
         [styles._drawer ?? ""]: !!asDrawer,
         [styles._leftPos ?? ""]: !!asDrawer && position === "left",
       })}

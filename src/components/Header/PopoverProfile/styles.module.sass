@@ -1,0 +1,56 @@
+.popover
+  font-size: var(--body-l-fs)
+
+.profile
+  display: grid
+  grid-template-columns: 4rem 1fr
+  grid-template-rows: auto auto
+
+  &Email
+    grid-column: 2
+    grid-row: 2
+
+    color: hsl(var(--on-surface-variant-hsl))
+
+  &Img
+    grid-row: span 2
+
+    display: grid
+    place-items: start
+
+    span
+      position: relative
+      font-size: 1.3rem
+
+      width: 50px
+      height: 50px
+
+      display: grid
+      place-items: center
+
+      overflow: hidden
+      border-radius: var(--full-shape)
+      background-color: hsl(var(--placeholder-hsl))
+
+.credentials
+  white-space: nowrap
+
+  &Role
+    color: hsl(var(--on-surface-variant-hsl))
+
+.nav
+  margin-top: 0.5rem
+
+  hr
+    background-color: hsl(var(--outline-variant-hsl))
+    height: 1px
+    margin-block: 0.3rem
+
+  a, button
+    width: 100%
+    gap: 1rem
+    border-radius: var(--small-shape)
+    padding-inline: 0.8rem
+
+    svg
+      font-size: 1.3rem

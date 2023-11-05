@@ -282,7 +282,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                 type="button"
                 variant={getDayButtonsVariant(day)}
                 color={getDayButtonsColor(day)}
-                className={cls([], {
+                className={cls({
                   [styles._notCurrentMonth ?? ""]:
                     day.month() !== currentDate.month(),
                 })}

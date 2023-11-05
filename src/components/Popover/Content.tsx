@@ -2,16 +2,22 @@ import { cls } from "~/utils/func"
 import { usePopoverContext } from "./context"
 import styles from "./styles.module.sass"
 
-export const Content: React.FC<React.ComponentProps<"div">> = (props) => {
+type ContentProps = {
+  children: React.ReactNode | ((close: () => void) => React.ReactNode)
+} & Omit<React.ComponentProps<"div">, "children">
+
+export const Content: React.FC<ContentProps> = (props) => {
   const ctx = usePopoverContext()
 
   return (
     <div
       {...props}
-      className={cls([styles.content, props.className])}
+      className={cls(styles.content, props.className)}
       aria-hidden={!ctx.isOpen}
     >
-      {props.children}
+      {typeof props.children === "function"
+        ? props.children(ctx.close)
+        : props.children}
     </div>
   )
 }

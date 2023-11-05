@@ -12,7 +12,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header
       {...props}
-      className={cls([styles.header, props.className], {
+      className={cls(styles.header, props.className, {
         [styles._headerJustifyContentStart ?? ""]: !!isJustifyContentStart,
       })}
     >

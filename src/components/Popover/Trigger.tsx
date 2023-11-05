@@ -20,7 +20,7 @@ export const Trigger = forwardRef<HTMLButtonElement, ButtonProps>(
       <Button
         {...props}
         ref={ref}
-        className={cls([styles.trigger, props.className])}
+        className={cls(styles.trigger, props.className)}
         onClick={clickHandler}
       >
         {props.children}

@@ -51,7 +51,7 @@ export const Container: React.FC<ContainerProps> = ({
   return (
     <div
       {...props}
-      className={cls([styles.container, props.className])}
+      className={cls(styles.container, props.className)}
       aria-hidden={!state}
       ref={containerRef}
       onPointerDown={clickOutsideHandler}

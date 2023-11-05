@@ -1,9 +1,8 @@
 import Image from "next/image"
-import Link from "next/link"
+import { useEffect } from "react"
 import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
-import * as Popover from "~/components/Popover"
 import { useWinEventListener } from "~/hooks/winEvent.hook"
 import { useModalStore } from "~/store/modal"
 import { useSidebarStore } from "~/store/sidebar"
@@ -12,6 +11,7 @@ import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import Button from "../Button"
+import PopoverProfile from "./PopoverProfile"
 import styles from "./styles.module.sass"
 
 const Header: React.FC = () => {
@@ -19,7 +19,10 @@ const Header: React.FC = () => {
   const sidebarStore = useSidebarStore()
   const userStore = useUserStore()
 
-  const getSessionQuery = api.user.getSession.useQuery()
+  const getSessionQuery = api.user.getSession.useQuery(undefined, {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  })
 
   const changeTypeSidebarHandler = () => {
     if (
@@ -44,7 +47,7 @@ const Header: React.FC = () => {
           <BiMenu />
         </Button>
         <Button
-          className={cls([styles.sidebarControl, styles._modal])}
+          className={cls(styles.sidebarControl, styles._modal)}
           asIcon
           type="button"
           color="default"
@@ -72,16 +75,7 @@ const Header: React.FC = () => {
               <Button type="button" asIcon color="default">
                 <BiMessageSquareDetail />
               </Button>
-              <Popover.Root>
-                <Popover.Trigger variant="filled" asIcon color="default">
-                  <BiUser />
-                </Popover.Trigger>
-                <Popover.Content>
-                  <Link href="#">Профиль</Link>
-                  <Link href="#">Настройки</Link>
-                  <Link href="#">Выйти</Link>
-                </Popover.Content>
-              </Popover.Root>
+              <PopoverProfile />
             </>
           ) : (
             <Button

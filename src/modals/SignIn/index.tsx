@@ -4,7 +4,6 @@ import { useRef } from "react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { BiLockAlt, BiUser } from "react-icons/bi"
-import tokenService from "services/token.service"
 import { z } from "zod"
 import Button from "~/components/Button"
 import Checkbox from "~/components/Checkbox"
@@ -27,15 +26,18 @@ type FormDataSchema = z.TypeOf<typeof formDataSchema>
 
 const SignInModal: React.FC = () => {
   const modalStore = useModalStore()
+  const userStore = useUserStore()
+
   const loginInputRef = useRef<HTMLInputElement>(null)
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignIn
 
   const closeModalHandler = () => modalStore.close()
 
-  const signInMut = api.user.signIn.useMutation({
+  const signIn = api.user.signIn.useMutation({
     onSuccess(data) {
       toast.success("Вы успешно авторизировались!")
-      useUserStore.setState({ token: data.accessToken })
+      userStore.setToken(data.accessToken)
+      userStore.setUser(data.user)
       closeModalHandler()
       form.reset()
     },
@@ -56,7 +58,7 @@ const SignInModal: React.FC = () => {
   })
 
   const submitFormHandler = form.handleSubmit((data) => {
-    signInMut.mutate(data)
+    signIn.mutate(data)
   })
 
   useAutoFocus(loginInputRef, isModalOpen)

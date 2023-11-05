@@ -1,17 +1,32 @@
 import { useRef } from "react"
+import toast from "react-hot-toast"
 import Button from "~/components/Button"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
+import { useUserStore } from "~/store/user"
+import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
 
 const SignOutModal: React.FC = () => {
   const modalStore = useModalStore()
+  const userStore = useUserStore()
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
 
   const closeModalHandler = () => modalStore.close()
 
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignOut
+
+  const signOut = api.user.signOut.useMutation({
+    onSuccess() {
+      userStore.clear()
+      modalStore.close(ModalKeyMap.SignOut)
+    },
+    onError(error) {
+      console.log("🚀 ~ file: index.tsx:24 ~ onError ~ error:", error)
+      toast.error(error.message)
+    },
+  })
 
   useAutoFocus(cancelButtonRef, isModalOpen)
 
@@ -40,6 +55,7 @@ const SignOutModal: React.FC = () => {
           color="danger"
           type="button"
           textAlign="center"
+          onClick={() => signOut.mutate()}
         >
           Выйти
         </Button>

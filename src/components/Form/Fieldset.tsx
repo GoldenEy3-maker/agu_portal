@@ -12,7 +12,7 @@ export const Fieldset: React.FC<FieldsetProps> = ({
   ...props
 }) => {
   return (
-    <fieldset {...props} className={cls([styles.fieldset, props.className])}>
+    <fieldset {...props} className={cls(styles.fieldset, props.className)}>
       {legend ? <legend>{legend}</legend> : null}
       {props.children}
     </fieldset>

@@ -1,7 +1,7 @@
 import { NextApiHandler } from "next"
-import tokenService from "services/token.service"
 import { db } from "~/server/db"
 import ApiError from "~/server/exeptions"
+import tokenService from "~/services/token.service"
 import { CookieKeyMap } from "~/utils/enums"
 
 const handler: NextApiHandler = async (req, res) => {
@@ -30,7 +30,7 @@ const handler: NextApiHandler = async (req, res) => {
 
     tokenService.setRefreshToken(newRefreshToken, req, res)
 
-    return res.json({ accessToken })
+    return res.json({ accessToken, user })
   } catch (error: unknown) {
     if (error instanceof ApiError)
       return res.status(401).json({ message: error.message })

@@ -57,4 +57,12 @@ export default new (class TokenService {
       maxAge: 60 * 60 * 24 * 7,
     })
   }
+
+  removeRefreshToken(req: NextApiRequest, res: NextApiResponse) {
+    setCookie(CookieKeyMap.RefreshToken, 1, {
+      req,
+      res,
+      maxAge: -1,
+    })
+  }
 })()

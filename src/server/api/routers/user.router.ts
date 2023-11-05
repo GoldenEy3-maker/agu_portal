@@ -7,5 +7,5 @@ export const userRouter = createTRPCRouter({
   signIn: publicProcedure
     .input(userSchema.signInInput)
     .mutation(userController.signIn),
-  signOut: publicProcedure.query(userController.signOut),
+  signOut: publicProcedure.mutation(userController.signOut),
 })

@@ -1,18 +1,19 @@
 export const cls = (
-  cls: (string | undefined)[],
-  conditionCls?: Record<string, boolean>
+  ...classes: (string | undefined | Record<string, boolean>)[]
 ) => {
-  const filteredCls = cls.filter((c) => c !== undefined)
+  const result: string[] = []
+  const filteredCls = classes.filter((c) => c !== undefined)
 
-  if (conditionCls) {
-    Object.keys(conditionCls).forEach((key) => {
-      if (conditionCls[key]) {
-        filteredCls.push(key)
+  for (const item of filteredCls) {
+    if (typeof item === "string") result.push(item)
+    else if (typeof item === "object") {
+      for (const keyCls of Object.keys(item)) {
+        if (item[keyCls]) result.push(keyCls)
       }
-    })
+    }
   }
 
-  return filteredCls.join(" ")
+  return result.join(" ")
 }
 
 export const toUpperCaseInitialLetter = (str: string) => {

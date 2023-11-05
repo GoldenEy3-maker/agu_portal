@@ -14,7 +14,8 @@ export const Root: React.FC<React.ComponentProps<"div">> = (props) => {
   const close = () => setIsOpen(false)
 
   const blurHandler: React.FocusEventHandler<HTMLDivElement> = (event) => {
-    if (!rootRef.current?.contains(event.relatedTarget)) close()
+    if (event.relatedTarget && !rootRef.current?.contains(event.relatedTarget))
+      close()
 
     if (props.onBlur) props.onBlur(event)
   }
@@ -31,7 +32,7 @@ export const Root: React.FC<React.ComponentProps<"div">> = (props) => {
         {...props}
         ref={rootRef}
         onBlur={blurHandler}
-        className={cls([styles.root, props.className])}
+        className={cls(styles.root, props.className)}
       >
         {props.children}
       </div>

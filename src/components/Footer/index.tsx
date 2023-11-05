@@ -45,16 +45,16 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div className={styles.social}>
-            <Link asIcon onPrimary href={"#"} target="_blank">
+            <Link asIcon color="on-primary" href={"#"} target="_blank">
               <BiLogoTelegram />
             </Link>
-            <Link asIcon onPrimary href={"#"} target="_blank">
+            <Link asIcon color="on-primary" href={"#"} target="_blank">
               <BiLogoVk />
             </Link>
-            <Link asIcon onPrimary href={"#"} target="_blank">
+            <Link asIcon color="on-primary" href={"#"} target="_blank">
               <BiLogoYoutube />
             </Link>
-            <Link asIcon onPrimary href={"#"} target="_blank">
+            <Link asIcon color="on-primary" href={"#"} target="_blank">
               <BiLogoOkRu />
             </Link>
           </div>

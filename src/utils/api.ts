@@ -3,6 +3,7 @@ import { createTRPCNext } from "@trpc/next"
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server"
 import superjson from "superjson"
 
+import { User } from "@prisma/client"
 import { type AppRouter } from "~/server/api/root"
 import { useUserStore } from "~/store/user"
 import { getBaseUrl } from "./func"
@@ -20,6 +21,8 @@ export const api = createTRPCNext<AppRouter>({
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
           async fetch(url, options) {
+            const userStore = useUserStore.getState()
+
             const response = await fetch(url, {
               ...options,
               credentials: "include",
@@ -37,9 +40,11 @@ export const api = createTRPCNext<AppRouter>({
 
               const refreshData = (await refreshResponse.json()) as {
                 accessToken: string
+                user: User
               }
 
-              useUserStore.setState({ token: refreshData.accessToken })
+              userStore.setToken(refreshData.accessToken)
+              userStore.setUser(refreshData.user)
 
               return await fetch(url, {
                 ...options,

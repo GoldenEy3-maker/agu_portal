@@ -9,7 +9,7 @@ export const Root: React.FC<RootProps> = ({ isSpanGridArea, ...props }) => {
   return (
     <section
       {...props}
-      className={cls([styles.root, props.className], {
+      className={cls(styles.root, props.className, {
         [styles._spanGridArea ?? ""]: !!isSpanGridArea,
       })}
     >

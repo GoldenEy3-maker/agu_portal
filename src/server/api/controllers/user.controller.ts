@@ -1,9 +1,7 @@
 import { User } from "@prisma/client"
 import bcrypt from "bcrypt"
-import { deleteCookie } from "cookies-next"
-import tokenService from "services/token.service"
 import ApiError from "~/server/exeptions"
-import { CookieKeyMap } from "~/utils/enums"
+import tokenService from "~/services/token.service"
 import { UserSignInInput } from "../schemas/user.schema"
 import { Context } from "../trpc"
 
@@ -33,10 +31,10 @@ export default new (class UserController {
 
     tokenService.setRefreshToken(refreshToken, opts.ctx.req, opts.ctx.res)
 
-    return { accessToken }
+    return { accessToken, user }
   }
 
-  signOut() {
-    deleteCookie(CookieKeyMap.RefreshToken)
+  signOut(opts: { ctx: Context }) {
+    tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)
   }
 })()

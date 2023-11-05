@@ -11,7 +11,7 @@ export type LinkProps = {
   activeClassName?: string
   size?: "sm" | "lg"
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
-  onPrimary?: boolean
+  color?: "primary" | "on-primary" | "danger" | "success" | "default"
 } & Omit<React.ComponentProps<"a">, "href" | "children"> &
   Omit<NextLinkProps, "as" | "passHref" | "children">
 
@@ -28,7 +28,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       activeClassName,
       asIcon,
       size,
-      onPrimary,
+      color,
       ...props
     },
     ref
@@ -53,14 +53,17 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       >
         <a
           {...props}
-          className={cls([styles.link, props.className], {
+          className={cls(styles.link, props.className, {
             [styles._elevated ?? ""]: variant === "elevated",
             [styles._filled ?? ""]: variant === "filled",
             [styles._outlined ?? ""]: variant === "outlined",
-            [activeClassName ?? ""]: isActive,
             [styles._asIcon ?? ""]: asIcon!!,
             [styles._sm ?? ""]: size === "sm",
-            [styles._onPrimary ?? ""]: onPrimary!!,
+            [styles._defaultClr ?? ""]: color === "default",
+            [styles._dangerClr ?? ""]: color === "danger",
+            [styles._onPrimaryClr ?? ""]: color === "on-primary",
+            [styles._successClr ?? ""]: color === "success",
+            [activeClassName ?? ""]: isActive,
           })}
           onPointerDown={rippleEffectEvent}
           ref={ref}

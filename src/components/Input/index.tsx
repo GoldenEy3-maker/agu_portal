@@ -13,7 +13,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, className, size, leadingIcon, errorMessage, ...props }, ref) => {
     return (
       <div
-        className={cls([styles.wrapper, className], {
+        className={cls(styles.wrapper, className, {
           [styles._withLeadingIcon ?? ""]: !!leadingIcon,
           [styles._sm ?? ""]: size === "sm",
           [styles._error ?? ""]: !!errorMessage,

@@ -18,7 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         {...props}
-        className={cls([styles.btn, props.className], {
+        className={cls(styles.btn, props.className, {
           [styles._filled ?? ""]: variant === "filled",
           [styles._elevated ?? ""]: variant === "elevated",
           [styles._outlined ?? ""]: variant === "outlined",
