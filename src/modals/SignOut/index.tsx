@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useRef } from "react"
 import toast from "react-hot-toast"
 import Button from "~/components/Button"
@@ -6,9 +7,10 @@ import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
 import { useUserStore } from "~/store/user"
 import { api } from "~/utils/api"
-import { ModalKeyMap } from "~/utils/enums"
+import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 
 const SignOutModal: React.FC = () => {
+  const router = useRouter()
   const modalStore = useModalStore()
   const userStore = useUserStore()
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
@@ -19,6 +21,7 @@ const SignOutModal: React.FC = () => {
 
   const signOut = api.user.signOut.useMutation({
     onSuccess() {
+      router.push(PagePathMap.HomePage)
       userStore.clear()
       modalStore.close(ModalKeyMap.SignOut)
     },

@@ -6,11 +6,12 @@ import {
   BiLogoYoutube,
 } from "react-icons/bi"
 import Link from "~/components/Link"
+import { cls } from "~/utils/func"
 import styles from "./styles.module.sass"
 
 const Footer: React.FC = () => {
   return (
-    <footer className={styles.footer}>
+    <footer className={cls(styles.footer, "content-grid")}>
       <div className="container">
         <header className={styles.header}>
           <div className={styles.symbols}>

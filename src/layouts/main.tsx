@@ -22,13 +22,11 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
         <meta name="description" content="Цифровой универстите АлтГУ" />
         <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
-      <div className={cls("wrapper", inter.className)}>
-        <Header />
-        <div className="horizontal-wrapper">
+      <div className={inter.className}>
+        <div className="wrapper">
+          <Header />
           <Sidebar />
-          <div className="main">
-            <div className="main__wrapper container">{props.children}</div>
-          </div>
+          {props.children}
         </div>
         <Footer />
         <ModalContainer />

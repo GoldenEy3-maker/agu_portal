@@ -1,17 +1,25 @@
-import toast from "react-hot-toast"
-import { BiCalendar, BiCog, BiFolder, BiLogOut, BiUser } from "react-icons/bi"
+import { useState } from "react"
+import {
+  BiCalendar,
+  BiCog,
+  BiFolder,
+  BiLogOut,
+  BiSun,
+  BiUser,
+} from "react-icons/bi"
 import Button from "~/components/Button"
+import Checkbox from "~/components/Checkbox"
 import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import { useModalStore } from "~/store/modal"
 import { useUserStore } from "~/store/user"
-import { api } from "~/utils/api"
 import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 import styles from "./styles.module.sass"
 
 const PopoverProfile = () => {
   const userStore = useUserStore()
   const modalStore = useModalStore()
+  const [isDarkTheme, setIsDarkTheme] = useState(false)
 
   return (
     <Popover.Root>
@@ -27,34 +35,57 @@ const PopoverProfile = () => {
                   <BiUser />
                 </span>
               </div>
-              <span className={styles.credentials}>
+              <p className={styles.credentials}>
                 <strong>
-                  {userStore.user?.surname} {userStore.user?.name}{" "}
+                  {userStore.user?.surname}&nbsp;{userStore.user?.name}&nbsp;
                   {userStore.user?.patronymic}
                 </strong>
                 &nbsp;
                 <span className={styles.credentialsRole}>
                   {userStore.user?.role}
                 </span>
-              </span>
-              <span className={styles.profileEmail}>
+              </p>
+              <p className={styles.profileEmail}>
                 {userStore.user?.email ?? "Email не привязан"}
-              </span>
+              </p>
             </div>
             <nav className={styles.nav}>
-              <Link color="default" href={PagePathMap.CoursesPage}>
+              <Checkbox
+                label="Темная тема"
+                type="check"
+                leadingIcon={<BiSun />}
+                checked={isDarkTheme}
+                name="change-theme"
+                id="change-theme"
+                onChange={(checked) => setIsDarkTheme(checked)}
+              />
+              <hr />
+              <Link
+                color="default"
+                href={PagePathMap.CoursesPage}
+                className={styles.navLink}
+              >
                 <BiFolder /> <span>Курсы</span>
               </Link>
-              <Link color="default" href={PagePathMap.SchedulerPage}>
+              <Link
+                color="default"
+                href={PagePathMap.SchedulerPage}
+                className={styles.navLink}
+              >
                 <BiCalendar /> <span>Расписание</span>
               </Link>
-              <Link color="default" href={PagePathMap.SettingsPage}>
+              <Link
+                color="default"
+                href={PagePathMap.SettingsPage}
+                className={styles.navLink}
+              >
                 <BiCog /> <span>Настройки</span>
               </Link>
               <hr />
               <Button
                 type="button"
-                color="default"
+                color="danger"
+                className={styles.navLink}
                 onClick={() => {
                   modalStore.open({ key: ModalKeyMap.SignOut })
                   close()

@@ -1,5 +1,4 @@
 import Image from "next/image"
-import { useEffect } from "react"
 import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
@@ -22,6 +21,7 @@ const Header: React.FC = () => {
   const getSessionQuery = api.user.getSession.useQuery(undefined, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
+    retry: 2,
   })
 
   const changeTypeSidebarHandler = () => {

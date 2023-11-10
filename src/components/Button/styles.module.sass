@@ -12,6 +12,9 @@
 
   border-radius: var(--full-shape)
 
+  svg
+    pointer-events: none
+
   &._sm
     padding: 0.5rem 1rem
 
@@ -45,7 +48,7 @@
 
   &._elevated
     background-color: hsl(var(--primary-container-low-hsl))
-    box-shadow: 0 0.1rem 0.1rem hsla(var(--primary-bxs))
+    box-shadow: 0 0.1rem 0.1rem hsla(var(--primary-bxs-hsla))
 
   &._outlined
     outline: 1px solid hsl(var(--outline-hsl))
@@ -55,7 +58,7 @@
       outline-color: hsl(var(--danger-hsl))
 
   &:focus-visible,
-  &[data-programm-focus]
+  &[data-program-focus]
     outline: 2px solid hsl(var(--focus-outline-clr-hsl))
     outline-offset: 2px
 

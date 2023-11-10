@@ -2,6 +2,7 @@ import { forwardRef } from "react"
 import { BiCheck, BiMinus } from "react-icons/bi"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
+import Button from "../Button"
 import styles from "./styles.module.sass"
 
 export type ExtendedCheckboxValue = "on" | "off" | undefined
@@ -16,26 +17,29 @@ type CheckboxHTMLAttributes = Omit<
   "type" | "value" | "onChange"
 >
 
+type CheckboxBaseProps = {
+  label: string
+  togglerPosition?: "right" | "left"
+  leadingIcon?: React.ReactNode
+} & CheckboxHTMLAttributes
+
 type CheckboxProps =
   | ({
       type: "check"
-      label: string
       onChange: (checked: boolean) => void
-    } & CheckboxHTMLAttributes)
+    } & CheckboxBaseProps)
   | ({
       type: "extended-check"
-      label: string
       value: ExtendedCheckboxValue
       onChange: (value: ExtendedCheckboxValue, checked: boolean) => void
-    } & CheckboxHTMLAttributes)
+    } & CheckboxBaseProps)
   | ({
       type: "switch"
-      label: string
       onChange: (checked: boolean) => void
-    } & CheckboxHTMLAttributes)
+    } & CheckboxBaseProps)
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, ...props }, ref) => {
+  ({ label, leadingIcon, togglerPosition, ...props }, ref) => {
     const rippleEffectEvent = useRippleEffect()
 
     const renderCheckboxIcon = () => {
@@ -43,53 +47,62 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         return props.checked ? <BiCheck /> : null
       }
 
-      if (props.type !== "extended-check") return null
-
-      if (props.value === "on") return <BiCheck />
-      if (props.value === "off") return <BiMinus />
+      if (props.type === "extended-check") {
+        if (props.value === "on") return <BiCheck />
+        if (props.value === "off") return <BiMinus />
+      }
 
       return null
     }
 
     const changeHandler = () => {
+      console.log("call")
       if (props.type === "check" || props.type === "switch") {
         props.onChange(!props.checked)
         return
       }
 
-      if (props.type !== "extended-check") return
-
-      const prevValue: ExtendedCheckboxValue = props.value
       let value: ExtendedCheckboxValue = undefined
       let checked = !!props.checked
 
-      if (prevValue === undefined) {
-        value = "on"
-        checked = true
-      }
-
-      if (prevValue === "on") {
-        value = "off"
-        checked = true
-      }
-
-      if (prevValue === "off") {
-        value = undefined
-        checked = false
+      switch (props.value) {
+        case "on":
+          value = "off"
+          checked = true
+        case "off":
+          value = undefined
+          checked = false
+        default:
+          value = "on"
+          checked = true
       }
 
       props.onChange(value, checked)
     }
 
     return (
-      <div className={cls(styles.wrapper, props.className)}>
+      <div
+        className={cls(styles.wrapper, props.className, {
+          [styles._togglerLeft ?? ""]: togglerPosition === "left"
+        })}
+        onPointerDown={rippleEffectEvent}
+      >
         <input {...props} type="checkbox" onChange={changeHandler} ref={ref} />
-        <div className={styles.labelWrapper}>
-          <label htmlFor={props.id} onPointerDown={rippleEffectEvent}>
-            <span className={styles.icon}>{renderCheckboxIcon()}</span>
-            {label}
-          </label>
-        </div>
+        <label htmlFor={props.id}>
+          {leadingIcon ? (
+            <span className={styles.leadingIcon}>{leadingIcon}</span>
+          ) : null}
+          <span className={styles.labelText}>{label}</span>
+        </label>
+        <Button
+          type="button"
+          asIcon
+          className={styles.toggler}
+          onClick={changeHandler}
+          tabIndex={-1}
+        >
+          <span className={styles.checkboxIcon}>{renderCheckboxIcon()}</span>
+        </Button>
       </div>
     )
   }

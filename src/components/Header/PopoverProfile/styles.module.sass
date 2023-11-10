@@ -3,16 +3,21 @@
 
 .profile
   display: grid
-  grid-template-columns: 4rem 1fr
+  grid-template-columns: [avatar-start] 3rem [avatar-end] 1.5rem [content-start] 1fr [content-end]
   grid-template-rows: auto auto
 
   &Email
-    grid-column: 2
+    grid-column: content
     grid-row: 2
+
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
 
     color: hsl(var(--on-surface-variant-hsl))
 
   &Img
+    grid-column: avatar
     grid-row: span 2
 
     display: grid
@@ -20,10 +25,10 @@
 
     span
       position: relative
-      font-size: 1.3rem
+      font-size: 1.5rem
 
-      width: 50px
-      height: 50px
+      width: 60px
+      height: 60px
 
       display: grid
       place-items: center
@@ -33,10 +38,17 @@
       background-color: hsl(var(--placeholder-hsl))
 
 .credentials
-  white-space: nowrap
+  grid-column: content
+
+  display: flex
+  align-items: flex-end
 
   &Role
     color: hsl(var(--on-surface-variant-hsl))
+
+  strong
+    white-space: nowrap
+    text-overflow: ellipsis
 
 .nav
   margin-top: 0.5rem
@@ -46,11 +58,11 @@
     height: 1px
     margin-block: 0.3rem
 
-  a, button
+  &Link
     width: 100%
     gap: 1rem
     border-radius: var(--small-shape)
-    padding-inline: 0.8rem
+    padding-inline: 1.1rem
 
     svg
       font-size: 1.3rem

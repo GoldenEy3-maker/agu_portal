@@ -119,6 +119,7 @@ const SignInModal: React.FC = () => {
                   type="check"
                   id="rememberMe"
                   label="Запомнить меня"
+                  togglerPosition="left"
                   name={field.name}
                   checked={field.value}
                   onChange={field.onChange}
