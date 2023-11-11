@@ -1,25 +1,29 @@
-import { useState } from "react"
 import {
   BiCalendar,
   BiCog,
   BiFolder,
   BiLogOut,
-  BiSun,
+  BiMoon,
   BiUser,
 } from "react-icons/bi"
 import Button from "~/components/Button"
 import Checkbox from "~/components/Checkbox"
 import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
+import { useLocalStorage } from "~/hooks/localStorage"
 import { useModalStore } from "~/store/modal"
 import { useUserStore } from "~/store/user"
-import { ModalKeyMap, PagePathMap } from "~/utils/enums"
+import { LocalStorageKeyMap, ModalKeyMap, PagePathMap } from "~/utils/enums"
 import styles from "./styles.module.sass"
 
 const PopoverProfile = () => {
   const userStore = useUserStore()
   const modalStore = useModalStore()
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+
+  const [isDarkTheme, setIsDarkTheme] = useLocalStorage(
+    LocalStorageKeyMap.isDarkTheme,
+    false
+  )
 
   return (
     <Popover.Root>
@@ -52,11 +56,12 @@ const PopoverProfile = () => {
             <nav className={styles.nav}>
               <Checkbox
                 label="Темная тема"
-                type="check"
-                leadingIcon={<BiSun />}
+                type="switch"
+                leadingIcon={<BiMoon />}
                 checked={isDarkTheme}
                 name="change-theme"
                 id="change-theme"
+                className={styles.themeController}
                 onChange={(checked) => setIsDarkTheme(checked)}
               />
               <hr />

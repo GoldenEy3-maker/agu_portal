@@ -1,27 +1,58 @@
+.root
+  --_controller-icon-size: 1.2rem
+  --_controller-margin: 0.3rem
+  --_controller-padding: 0.5rem
+  --_label-gap: 0.5rem
+
+  display: flex
+  align-items: center
+
+  input
+    opacity: 0
+    width: 0
+    height: 0
+
+    &:focus-visible + .wrapper,
+    &[data-program-focus] + .wrapper
+      outline: 2px solid hsl(var(--focus-outline-clr-hsl))
+      outline-offset: 2px
+
+    &:checked + .wrapper
+      .checkboxIcon
+        background-color: hsl(var(--primary-hsl))
+        border-color: hsl(var(--primary-hsl))
+
+        animation: jumping 300ms var(--bounce-transition) forwards
+
+      .switchIcon
+        background-color: hsl(var(--primary-hsl))
+        border-color: hsl(var(--primary-hsl))
+
+        span
+          width: 1rem
+          height: 1rem
+          background-color: hsl(var(--on-primary-hsl))
+          translate: 1.25rem 0
+
 .wrapper
   position: relative
   overflow: hidden
   cursor: pointer
 
-  display: flex
-  align-items: center
+  width: 100%
+
   border-radius: var(--small-shape)
 
-  &:has(input:focus-visible),
-  &:has(input[data-program-focus])
-    outline: 2px solid hsl(var(--focus-outline-clr-hsl))
-    outline-offset: 2px
-
-  &._togglerLeft
+  ._controllerLeft &
     label
-      padding-left: calc(0.1rem + 1.3rem + 1.4rem + 0.5rem)
+      padding-left: calc(var(--_controller-margin) + var(--_controller-icon-size) + (var(--_controller-padding) * 2) + var(--_label-gap))
 
-    .toggler
+    .controller
       right: auto
-      left: 0.1rem
+      left: var(--_controller-margin)
 
   @media (hover: hover) and (pointer: fine)
-    &:not(:has(.toggler:hover))
+    &:not(:has(.controller:hover))
       &:hover
         background-color: hsl(var(--primary-container-low-hsl))
 
@@ -33,29 +64,40 @@
 
     display: flex
     align-items: center
-    gap: 0.5rem
+    gap: var(--_label-gap)
 
-    padding: 0.7rem
+    padding: 0.7em
 
-  input
-    opacity: 0
-    width: 0
-    height: 0
+.switchIcon
+  width: 2.6rem
+  height: 1.5rem
 
-    &:checked ~ .toggler
-      .checkboxIcon
-        background-color: hsl(var(--primary-hsl))
-        border-color: hsl(var(--primary-hsl))
+  display: flex
+  align-items: center
 
-        animation: jumping 200ms ease-in-out forwards
+  background-color: hsl(var(--surface-hsl))
+  border: 2px solid hsl(var(--outline-hsl))
+  border-radius: var(--full-shape)
+
+  transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out
+
+  span
+    display: block
+    width: 0.8rem
+    height: 0.8rem
+    background-color: hsl(var(--outline-hsl))
+    border-radius: 50%
+    translate: 0.2rem 0
+
+    transition: background-color 200ms ease-in-out, translate 300ms var(--bounce-transition), width 200ms ease-in-out, height 200ms ease-in-out
 
 .checkboxIcon
   display: flex
   align-items: center
   justify-content: center
 
-  width: 1.3rem
-  height: 1.3rem
+  width: var(--_controller-icon-size)
+  height: var(--_controller-icon-size)
 
   border: 2px solid hsl(var(--outline-hsl))
   border-radius: var(--extra-small-shape)
@@ -65,20 +107,18 @@
   transition: background-color 200ms ease-in-out, border-color 200ms ease-in-out
 
   svg
-    width: 100%
-    height: 100%
-    animation: scaled 200ms ease-in-out forwards
-
-.labelText
-  flex: 1
+    animation: scaling 200ms ease-in-out forwards
 
 .leadingIcon
+  display: flex
   font-size: var(--title-l-fs)
 
-.toggler
+.controller
   position: absolute
   top: 50%
-  right: 0.1rem
+  right: calc(var(--_controller-margin) + var(--_label-gap))
+
+  padding: var(--_controller-padding) !important
 
   translate: 0 -50%
 
@@ -92,7 +132,7 @@
   from
     scale: 1
 
-@keyframes scaled
+@keyframes scaling
   from
     scale: 0
 

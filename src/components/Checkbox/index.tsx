@@ -19,7 +19,7 @@ type CheckboxHTMLAttributes = Omit<
 
 type CheckboxBaseProps = {
   label: string
-  togglerPosition?: "right" | "left"
+  controllerPosition?: "right" | "left"
   leadingIcon?: React.ReactNode
 } & CheckboxHTMLAttributes
 
@@ -39,7 +39,7 @@ type CheckboxProps =
     } & CheckboxBaseProps)
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, leadingIcon, togglerPosition, ...props }, ref) => {
+  ({ label, leadingIcon, controllerPosition, ...props }, ref) => {
     const rippleEffectEvent = useRippleEffect()
 
     const renderCheckboxIcon = () => {
@@ -82,27 +82,36 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     return (
       <div
-        className={cls(styles.wrapper, props.className, {
-          [styles._togglerLeft ?? ""]: togglerPosition === "left"
+        className={cls(styles.root, props.className, {
+          [styles._controllerLeft ?? ""]: controllerPosition === "left",
         })}
-        onPointerDown={rippleEffectEvent}
       >
         <input {...props} type="checkbox" onChange={changeHandler} ref={ref} />
-        <label htmlFor={props.id}>
-          {leadingIcon ? (
-            <span className={styles.leadingIcon}>{leadingIcon}</span>
-          ) : null}
-          <span className={styles.labelText}>{label}</span>
-        </label>
-        <Button
-          type="button"
-          asIcon
-          className={styles.toggler}
-          onClick={changeHandler}
-          tabIndex={-1}
-        >
-          <span className={styles.checkboxIcon}>{renderCheckboxIcon()}</span>
-        </Button>
+        <div className={styles.wrapper} onPointerDown={rippleEffectEvent}>
+          <label htmlFor={props.id}>
+            {leadingIcon ? (
+              <span className={styles.leadingIcon}>{leadingIcon}</span>
+            ) : null}
+            <span>{label}</span>
+          </label>
+          <Button
+            type="button"
+            asIcon
+            className={styles.controller}
+            onClick={changeHandler}
+            tabIndex={-1}
+          >
+            {props.type !== "switch" ? (
+              <span className={styles.checkboxIcon}>
+                {renderCheckboxIcon()}
+              </span>
+            ) : (
+              <div className={styles.switchIcon}>
+                <span></span>
+              </div>
+            )}
+          </Button>
+        </div>
       </div>
     )
   }
