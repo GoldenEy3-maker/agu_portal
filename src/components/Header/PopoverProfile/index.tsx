@@ -58,6 +58,7 @@ const PopoverProfile = () => {
                 label="Темная тема"
                 type="switch"
                 leadingIcon={<BiMoon />}
+                controllerPosition="right"
                 checked={isDarkTheme}
                 name="change-theme"
                 id="change-theme"

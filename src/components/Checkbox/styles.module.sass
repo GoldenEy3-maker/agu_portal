@@ -1,7 +1,9 @@
 .root
-  --_controller-icon-size: 1.2rem
-  --_controller-margin: 0.3rem
+  --_controller-check-size: 1.2rem
+  --_controller-switch-width: 2.6rem
+  --_controller-margin: 0.5rem
   --_controller-padding: 0.5rem
+
   --_label-gap: 0.5rem
 
   display: flex
@@ -34,6 +36,18 @@
           background-color: hsl(var(--on-primary-hsl))
           translate: 1.25rem 0
 
+    &:disabled + .wrapper label
+      cursor: not-allowed
+      color: hsl(var(--on-surface-variant-hsl))
+
+    &:disabled:checked + .wrapper
+      .checkboxIcon
+        background-color: hsl(var(--primary-low-hsl))
+        border-color: hsl(var(--primary-low-hsl))
+
+      .switchIcon
+        background-color: hsl(var(--primary-low-hsl))
+
 .wrapper
   position: relative
   overflow: hidden
@@ -42,19 +56,6 @@
   width: 100%
 
   border-radius: var(--small-shape)
-
-  ._controllerLeft &
-    label
-      padding-left: calc(var(--_controller-margin) + var(--_controller-icon-size) + (var(--_controller-padding) * 2) + var(--_label-gap))
-
-    .controller
-      right: auto
-      left: var(--_controller-margin)
-
-  @media (hover: hover) and (pointer: fine)
-    &:not(:has(.controller:hover))
-      &:hover
-        background-color: hsl(var(--primary-container-low-hsl))
 
   label
     position: relative
@@ -66,10 +67,22 @@
     align-items: center
     gap: var(--_label-gap)
 
-    padding: 0.7em
+    padding: 0.7rem
+    padding-left: calc(var(--_controller-margin) + var(--_controller-check-size) + (var(--_controller-padding) * 2) + var(--_label-gap))
+
+    ._switchController &
+      padding-left: calc(var(--_controller-switch-width) + 1.5rem + var(--_controller-padding))
+
+  ._controllerRight &
+    label
+      padding-left: 0.7rem
+
+    .controller
+      left: auto
+      right: var(--_controller-margin)
 
 .switchIcon
-  width: 2.6rem
+  width: var(--_controller-switch-width)
   height: 1.5rem
 
   display: flex
@@ -96,8 +109,8 @@
   align-items: center
   justify-content: center
 
-  width: var(--_controller-icon-size)
-  height: var(--_controller-icon-size)
+  width: var(--_controller-check-size)
+  height: var(--_controller-check-size)
 
   border: 2px solid hsl(var(--outline-hsl))
   border-radius: var(--extra-small-shape)
@@ -116,7 +129,7 @@
 .controller
   position: absolute
   top: 50%
-  right: calc(var(--_controller-margin) + var(--_label-gap))
+  left: var(--_controller-margin)
 
   padding: var(--_controller-padding) !important
 
@@ -138,3 +151,7 @@
 
   to
     scale: 1
+
+@media (hover: hover) and (pointer: fine)
+  .root:not(:has(input:disabled)) .wrapper:not(:has(.controller:hover)):hover
+    background-color: hsl(var(--primary-container-low-hsl))

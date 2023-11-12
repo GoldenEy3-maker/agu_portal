@@ -83,11 +83,15 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <div
         className={cls(styles.root, props.className, {
-          [styles._controllerLeft ?? ""]: controllerPosition === "left",
+          [styles._controllerRight ?? ""]: controllerPosition === "right",
+          [styles._switchController ?? ""]: props.type === "switch",
         })}
       >
         <input {...props} type="checkbox" onChange={changeHandler} ref={ref} />
-        <div className={styles.wrapper} onPointerDown={rippleEffectEvent}>
+        <div
+          className={styles.wrapper}
+          onPointerDown={!props.disabled ? rippleEffectEvent : undefined}
+        >
           <label htmlFor={props.id}>
             {leadingIcon ? (
               <span className={styles.leadingIcon}>{leadingIcon}</span>
@@ -100,6 +104,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             className={styles.controller}
             onClick={changeHandler}
             tabIndex={-1}
+            disabled={props.disabled}
           >
             {props.type !== "switch" ? (
               <span className={styles.checkboxIcon}>

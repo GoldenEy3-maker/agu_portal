@@ -27,7 +27,10 @@ export default new (class UserController {
     if (!isPassowrdMatch)
       throw ApiError.BadRequest("Неверный логин или пароль!")
 
-    const { accessToken, refreshToken } = tokenService.generateTokens(user)
+    const { accessToken, refreshToken } = tokenService.generateTokens(
+      user,
+      opts.input.rememberMe
+    )
 
     tokenService.setRefreshToken(refreshToken, opts.ctx.req, opts.ctx.res)
 

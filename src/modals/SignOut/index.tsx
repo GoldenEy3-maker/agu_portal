@@ -50,6 +50,7 @@ const SignOutModal: React.FC = () => {
           onClick={closeModalHandler}
           textAlign="center"
           ref={cancelButtonRef}
+          disabled={signOut.isLoading}
         >
           Отмена
         </Button>
@@ -59,6 +60,8 @@ const SignOutModal: React.FC = () => {
           type="button"
           textAlign="center"
           onClick={() => signOut.mutate()}
+          disabled={signOut.isLoading}
+          loading={signOut.isLoading}
         >
           Выйти
         </Button>

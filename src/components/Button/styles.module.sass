@@ -65,8 +65,24 @@
     &._danger
       --focus-outline-clr-hsl: var(--danger-hsl)
 
+  &:disabled
+    cursor: not-allowed
+
+    color: hsl(var(--primary-low-hsl))
+
+    &._outlined
+      outline-color: hsl(var(--outline-variant-hsl))
+
+    &._filled
+      background-color: hsl(var(--primary-low-hsl))
+      color: hsl(var(--on-primary-hsl))
+
+      &._danger
+        background-color: hsl(var(--danger-low-hsl))
+        color: hsl(var(--on-danger-hsl))
+
   @media (hover: hover) and (pointer: fine)
-    &:hover
+    &:not(:disabled):hover
       background-color: hsl(var(--primary-container-hsl))
 
       &._danger

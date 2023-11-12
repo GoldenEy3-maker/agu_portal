@@ -14,7 +14,10 @@ type RefreshTokenPayload = {
 }
 
 export default new (class TokenService {
-  generateTokens(payload: AccessTokenPayload & RefreshTokenPayload) {
+  generateTokens(
+    payload: AccessTokenPayload & RefreshTokenPayload,
+    rememberMe?: boolean
+  ) {
     const accessToken = jwt.sign(
       { login: payload.login },
       env.ACCESS_TOKEN_SECRET,
@@ -26,7 +29,7 @@ export default new (class TokenService {
       { login: payload.login, tokenVersion: payload.tokenVersion },
       env.REFRESH_TOKEN_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: rememberMe ? "7d" : "24h",
       }
     )
 

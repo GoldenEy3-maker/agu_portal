@@ -1,6 +1,7 @@
 import { forwardRef } from "react"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
+import LoadingIcon from "../LoadingIcon"
 import styles from "./styles.module.sass"
 
 export type ButtonProps = {
@@ -9,10 +10,14 @@ export type ButtonProps = {
   color?: "danger" | "primary" | "success" | "default"
   textAlign?: "center" | "left" | "right"
   size?: "sm"
+  loading?: boolean
 } & React.ComponentProps<"button">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, asIcon, color = "primary", textAlign, size, ...props }, ref) => {
+  (
+    { variant, asIcon, color = "primary", textAlign, size, loading, ...props },
+    ref
+  ) => {
     const rippleEffectEvent = useRippleEffect()
 
     return (
@@ -33,6 +38,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onPointerDown={rippleEffectEvent}
         ref={ref}
       >
+        {loading || (props.type === "submit" && props.disabled) ? (
+          <LoadingIcon />
+        ) : null}
         {props.children}
       </button>
     )

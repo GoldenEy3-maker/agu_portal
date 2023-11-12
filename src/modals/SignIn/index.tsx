@@ -88,6 +88,7 @@ const SignInModal: React.FC = () => {
                   ref={loginInputRef}
                   leadingIcon={<BiUser />}
                   errorMessage={form.formState.errors.login?.message}
+                  disabled={signIn.isLoading}
                 />
               )}
             />
@@ -106,6 +107,7 @@ const SignInModal: React.FC = () => {
                   value={field.value}
                   leadingIcon={<BiLockAlt />}
                   errorMessage={form.formState.errors.password?.message}
+                  disabled={signIn.isLoading}
                 />
               )}
             />
@@ -119,11 +121,11 @@ const SignInModal: React.FC = () => {
                   type="check"
                   id="rememberMe"
                   label="Запомнить меня"
-                  controllerPosition="left"
                   name={field.name}
                   checked={field.value}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
+                  disabled={signIn.isLoading}
                 />
               )}
             />
@@ -140,10 +142,19 @@ const SignInModal: React.FC = () => {
         </Form.Root>
       </Modal.Content>
       <Modal.Footer>
-        <Button type="button" onClick={closeModalHandler}>
+        <Button
+          type="button"
+          onClick={closeModalHandler}
+          disabled={signIn.isLoading}
+        >
           Отменить
         </Button>
-        <Button type="submit" form="sign-in-form" variant="filled">
+        <Button
+          type="submit"
+          form="sign-in-form"
+          variant="filled"
+          disabled={signIn.isLoading}
+        >
           Войти
         </Button>
       </Modal.Footer>

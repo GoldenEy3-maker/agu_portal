@@ -1,14 +1,13 @@
 import { z } from "zod"
 
-class UserSchema {
-  signInInput = z.object({
+const UserSchema = {
+  signInInput: z.object({
     login: z.string(),
     password: z.string(),
-  })
+    rememberMe: z.boolean(),
+  }),
 }
 
-const userSchema = new UserSchema()
+export type UserSignInInput = z.TypeOf<typeof UserSchema.signInInput>
 
-export type UserSignInInput = z.TypeOf<typeof userSchema.signInInput>
-
-export default userSchema
+export default UserSchema
