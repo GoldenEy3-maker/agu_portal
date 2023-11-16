@@ -15,6 +15,8 @@ export const ModalKeyMap = {
   SignIn: "sign-in",
   SignOut: "sign-out",
   Sidebar: "sidebar",
+  Notifications: "notifications",
+  Chat: "chat",
 } as const
 
 export const CookieKeyMap = {

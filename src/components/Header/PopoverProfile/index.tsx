@@ -16,7 +16,7 @@ import { useUserStore } from "~/store/user"
 import { LocalStorageKeyMap, ModalKeyMap, PagePathMap } from "~/utils/enums"
 import styles from "./styles.module.sass"
 
-const PopoverProfile = () => {
+const PopoverProfile: React.FC = () => {
   const userStore = useUserStore()
   const modalStore = useModalStore()
 
@@ -27,12 +27,12 @@ const PopoverProfile = () => {
 
   return (
     <Popover.Root>
-      <Popover.Trigger variant="filled" asIcon color="default">
+      <Popover.Trigger variant="filled" asIcon>
         <BiUser />
       </Popover.Trigger>
-      <Popover.Content className={styles.popover}>
+      <Popover.Wrapper className={styles.popover}>
         {(close) => (
-          <>
+          <Popover.Content>
             <div className={styles.profile}>
               <div className={styles.profileImg}>
                 <span>
@@ -100,9 +100,9 @@ const PopoverProfile = () => {
                 <BiLogOut /> <span>Выход</span>
               </Button>
             </nav>
-          </>
+          </Popover.Content>
         )}
-      </Popover.Content>
+      </Popover.Wrapper>
     </Popover.Root>
   )
 }

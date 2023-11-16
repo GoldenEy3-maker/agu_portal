@@ -20,6 +20,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const rippleEffectEvent = useRippleEffect()
 
+    const isLoading = loading || (props.type === "submit" && props.disabled)
+
     return (
       <button
         {...props}
@@ -28,9 +30,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [styles._elevated ?? ""]: variant === "elevated",
           [styles._outlined ?? ""]: variant === "outlined",
           [styles._asIcon ?? ""]: asIcon!!,
-          [styles._danger ?? ""]: color === "danger",
-          [styles._success ?? ""]: color === "success",
-          [styles._default ?? ""]: color === "default",
+          [styles._dangerClr ?? ""]: color === "danger",
+          [styles._successClr ?? ""]: color === "success",
+          [styles._defaultClr ?? ""]: color === "default",
           [styles._textAlignCenter ?? ""]: textAlign === "center",
           [styles._textAlignRight ?? ""]: textAlign === "right",
           [styles._sm ?? ""]: size === "sm",
@@ -38,10 +40,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onPointerDown={rippleEffectEvent}
         ref={ref}
       >
-        {loading || (props.type === "submit" && props.disabled) ? (
-          <LoadingIcon />
-        ) : null}
-        {props.children}
+        {isLoading ? <LoadingIcon /> : null}
+        {isLoading && asIcon ? null : props.children}
       </button>
     )
   }

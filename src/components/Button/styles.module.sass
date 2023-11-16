@@ -27,12 +27,12 @@
   &._asIcon
     padding: 0.7rem
 
-  &._danger
+  &._dangerClr
     --ripple-hsl: var(--danger-hsl)
 
     color: hsl(var(--danger-hsl))
 
-  &._default
+  &._defaultClr
     color: hsl(var(--on-surface-hsl))
 
   &._filled
@@ -41,7 +41,7 @@
     background-color: hsl(var(--primary-hsl))
     color: hsl(var(--on-primary-hsl))
 
-    &._danger
+    &._dangerClr
       --ripple-hsl: 0, 0%, 0%
       background-color: hsl(var(--danger-hsl))
       color: hsl(var(--on-danger-hsl))
@@ -54,7 +54,7 @@
     outline: 1px solid hsl(var(--outline-hsl))
     outline-offset: -1px
 
-    &._danger
+    &._dangerClr
       outline-color: hsl(var(--danger-hsl))
 
   &:focus-visible,
@@ -62,7 +62,7 @@
     outline: 2px solid hsl(var(--focus-outline-clr-hsl))
     outline-offset: 2px
 
-    &._danger
+    &._dangerClr
       --focus-outline-clr-hsl: var(--danger-hsl)
 
   &:disabled
@@ -77,7 +77,7 @@
       background-color: hsl(var(--primary-low-hsl))
       color: hsl(var(--on-primary-hsl))
 
-      &._danger
+      &._dangerClr
         background-color: hsl(var(--danger-low-hsl))
         color: hsl(var(--on-danger-hsl))
 
@@ -85,14 +85,17 @@
     &:not(:disabled):hover
       background-color: hsl(var(--primary-container-hsl))
 
-      &._danger
+      &._dangerClr
         background-color: hsl(var(--danger-container-hsl))
 
       &._filled
         background-color: hsl(var(--primary-low-hsl))
 
-        &._danger
+        &._dangerClr
           background-color: hsl(var(--danger-low-hsl))
 
       &._elevated
         background-color: hsl(var(--primary-container-hsl))
+
+      &._defaultClr
+        color: hsl(var(--primary-hsl))

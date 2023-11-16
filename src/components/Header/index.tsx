@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { BiBell, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import { BiChat, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
 import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useWinEventListener } from "~/hooks/winEvent.hook"
@@ -10,6 +10,7 @@ import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import Button from "../Button"
+import PopoverNotifications from "./PopoverNotifications"
 import PopoverProfile from "./PopoverProfile"
 import styles from "./styles.module.sass"
 
@@ -69,11 +70,15 @@ const Header: React.FC = () => {
         {!getSessionQuery.isLoading ? (
           userStore.token ? (
             <>
-              <Button type="button" asIcon color="default">
-                <BiBell />
-              </Button>
-              <Button type="button" asIcon color="default">
-                <BiMessageSquareDetail />
+              <PopoverNotifications />
+              <Button
+                type="button"
+                asIcon
+                color="default"
+                onClick={() => modalStore.open({ key: ModalKeyMap.Chat })}
+              >
+                {/* <BiMessageSquareDetail /> */}
+                <BiChat />
               </Button>
               <PopoverProfile />
             </>
