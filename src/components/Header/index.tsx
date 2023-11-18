@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { BiChat, BiMenu, BiMessageSquareDetail, BiUser } from "react-icons/bi"
+import { useEffect } from "react"
+import { BiChat, BiMenu, BiUser } from "react-icons/bi"
 import Skeleton from "react-loading-skeleton"
 import HeaderLogoPng from "~/assets/header_logo_resized.png"
 import { useWinEventListener } from "~/hooks/winEvent.hook"
@@ -7,8 +8,9 @@ import { useModalStore } from "~/store/modal"
 import { useSidebarStore } from "~/store/sidebar"
 import { useUserStore } from "~/store/user"
 import { api } from "~/utils/api"
-import { ModalKeyMap } from "~/utils/enums"
+import { ModalKeyMap, PusherChannelMap, PusherEventMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
+import { pusher } from "~/utils/pusher"
 import Button from "../Button"
 import PopoverNotifications from "./PopoverNotifications"
 import PopoverProfile from "./PopoverProfile"
@@ -34,6 +36,20 @@ const Header: React.FC = () => {
   }
 
   useWinEventListener("resize", changeTypeSidebarHandler)
+
+  useEffect(() => {
+    const channel = pusher.subscribe(PusherChannelMap.TestChannel)
+    channel.bind(PusherEventMap.SignInUser, (data: unknown) =>
+      console.log(data)
+    )
+    channel.bind(PusherEventMap.SingOutUser, (data: unknown) =>
+      console.log(data)
+    )
+
+    return () => {
+      pusher.unsubscribe(PusherChannelMap.TestChannel)
+    }
+  }, [])
 
   return (
     <header className={styles.header}>

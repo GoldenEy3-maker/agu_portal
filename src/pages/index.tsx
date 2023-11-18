@@ -14,20 +14,6 @@ import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.sass"
 
 const HomePage: NextPageWithLayout = () => {
-  useEffect(() => {
-    const channel = pusher.subscribe(PusherChannelMap.TestChannel)
-    channel.bind(PusherEventMap.SignInUser, (data: unknown) =>
-      console.log(data)
-    )
-    channel.bind(PusherEventMap.SingOutUser, (data: unknown) =>
-      console.log(data)
-    )
-
-    return () => {
-      pusher.unsubscribe(PusherChannelMap.TestChannel)
-    }
-  }, [])
-
   return (
     <main className={cls(styles.main, "content-grid")}>
       <Welcome />
