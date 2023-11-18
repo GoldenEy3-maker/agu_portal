@@ -27,7 +27,18 @@ export const LocalStorageKeyMap = {
   isDarkTheme: "_d",
 }
 
+export const PusherChannelMap = {
+  TestChannel: "test-channel",
+}
+
+export const PusherEventMap = {
+  SignInUser: "sing-in-user",
+  SingOutUser: "sing-out-user",
+}
+
 export type PagePathMap = ValueOf<typeof PagePathMap>
 export type ModalKeyMap = ValueOf<typeof ModalKeyMap>
 export type CookieKeyMap = ValueOf<typeof CookieKeyMap>
 export type LocalStorageKeyMap = ValueOf<typeof LocalStorageKeyMap>
+export type PusherChannelMap = ValueOf<typeof PusherChannelMap>
+export type PusherEventMap = ValueOf<typeof PusherEventMap>

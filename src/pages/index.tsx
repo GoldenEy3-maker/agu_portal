@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { BiCalendar, BiFolder, BiNews, BiRightArrowAlt } from "react-icons/bi"
 import CoursesFeed from "~/components/#pages/home/CoursesFeed"
 import NewsFeed from "~/components/#pages/home/NewsFeed"
@@ -7,7 +7,7 @@ import Calendar from "~/components/Calendar"
 import Link from "~/components/Link"
 import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
-import { PagePathMap } from "~/utils/enums"
+import { PagePathMap, PusherChannelMap, PusherEventMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import { pusher } from "~/utils/pusher"
 import { NextPageWithLayout } from "./_app"
@@ -15,9 +15,19 @@ import styles from "./styles.module.sass"
 
 const HomePage: NextPageWithLayout = () => {
   useEffect(() => {
-    const channel = pusher.subscribe("my-channel")
-    channel.bind("new-auth-user", (data: unknown) => console.log(data))
+    const channel = pusher.subscribe(PusherChannelMap.TestChannel)
+    channel.bind(PusherEventMap.SignInUser, (data: unknown) =>
+      console.log(data)
+    )
+    channel.bind(PusherEventMap.SingOutUser, (data: unknown) =>
+      console.log(data)
+    )
+
+    return () => {
+      pusher.unsubscribe(PusherChannelMap.TestChannel)
+    }
   }, [])
+
   return (
     <main className={cls(styles.main, "content-grid")}>
       <Welcome />

@@ -1,9 +1,10 @@
 import Pusher from "pusher"
+import { env } from "~/env.mjs"
 
 export const pusher = new Pusher({
-  appId: "1684614",
-  key: "d35d2cba55ec5d76f28e",
-  secret: "1ae72b193af106445edb",
-  cluster: "eu",
+  appId: env.PUSHER_APP_ID,
+  key: env.NEXT_PUBLIC_PUSHER_KEY,
+  secret: env.PUSHER_SECRET,
+  cluster: env.NEXT_PUBLIC_PUSHER_CLUSTER,
   useTLS: true,
 })

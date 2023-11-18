@@ -1,8 +1,8 @@
 import { User } from "@prisma/client"
 import bcrypt from "bcrypt"
 import ApiError from "~/server/exeptions"
-import { pusher } from "~/server/pusher"
 import tokenService from "~/services/token.service"
+import { PusherChannelMap, PusherEventMap } from "~/utils/enums"
 import { AuthSignInInput } from "../schemas/auth.schema"
 import { Context } from "../trpc"
 
@@ -33,18 +33,27 @@ export default new (class AuthController {
       opts.input.rememberMe
     )
 
-    pusher.trigger("my-channel", "new-auth-user", {
-      message: "new user was authed - " + user.id,
-    })
+    opts.ctx.pusher.trigger(
+      PusherChannelMap.TestChannel,
+      PusherEventMap.SignInUser,
+      {
+        message: "singin user - " + user.id,
+      }
+    )
 
-    // @ts-ignore
     tokenService.setRefreshToken(refreshToken, opts.ctx.req, opts.ctx.res)
 
     return { accessToken, user }
   }
 
   signOut(opts: { ctx: Context }) {
-    // @ts-ignore
+    opts.ctx.pusher.trigger(
+      PusherChannelMap.TestChannel,
+      PusherEventMap.SingOutUser,
+      {
+        message: "singout user",
+      }
+    )
     tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)
   }
 })()

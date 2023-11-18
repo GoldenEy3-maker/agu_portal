@@ -20,6 +20,8 @@ export const env = createEnv({
     ACTIVATE_TOKEN_SECRET: z.string(),
     ACCESS_TOKEN_SECRET: z.string(),
     REFRESH_TOKEN_SECRET: z.string(),
+    PUSHER_APP_ID: z.string(),
+    PUSHER_SECRET: z.string(),
   },
 
   /**
@@ -27,7 +29,10 @@ export const env = createEnv({
    * isn't built with invalid env vars. To expose them to the client, prefix them with
    * `NEXT_PUBLIC_`.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_PUSHER_KEY: z.string(),
+    NEXT_PUBLIC_PUSHER_CLUSTER: z.string(),
+  },
 
   /**
    * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
@@ -39,6 +44,10 @@ export const env = createEnv({
     ACTIVATE_TOKEN_SECRET: process.env.ACTIVATE_TOKEN_SECRET,
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
     REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+    PUSHER_APP_ID: process.env.PUSHER_APP_ID,
+    PUSHER_SECRET: process.env.PUSHER_SECRET,
+    NEXT_PUBLIC_PUSHER_KEY: process.env.NEXT_PUBLIC_PUSHER_KEY,
+    NEXT_PUBLIC_PUSHER_CLUSTER: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

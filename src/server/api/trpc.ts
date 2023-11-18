@@ -1,27 +1,23 @@
 import { inferAsyncReturnType, initTRPC } from "@trpc/server"
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next"
 import { CreateWSSContextFnOptions } from "@trpc/server/adapters/ws"
-import EventEmitter from "events"
 import superjson from "superjson"
 import { ZodError } from "zod"
 import { db } from "~/server/db"
 import tokenService from "~/services/token.service"
 import ApiError from "../exeptions"
+import { pusher } from "../pusher"
 
 type CreateContextOptions = Record<string, never>
-
-const ee = new EventEmitter()
 
 const createInnerTRPCContext = (_opts?: CreateContextOptions) => {
   return {
     db,
-    ee,
+    pusher,
   }
 }
 
-export const createTRPCContext = (
-  _opts: CreateNextContextOptions | CreateWSSContextFnOptions
-) => {
+export const createTRPCContext = (_opts: CreateNextContextOptions) => {
   return { ...createInnerTRPCContext(), req: _opts.req, res: _opts.res }
 }
 
