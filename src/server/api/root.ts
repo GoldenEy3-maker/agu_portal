@@ -1,8 +1,8 @@
 import { createTRPCRouter } from "~/server/api/trpc"
-import { userRouter } from "./routers/user.router"
+import { authRouter } from "./routers/auth.router"
 
 export const appRouter = createTRPCRouter({
-  user: userRouter,
+  auth: authRouter,
 })
 
 export type AppRouter = typeof appRouter

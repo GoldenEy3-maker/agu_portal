@@ -56,7 +56,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     }
 
     const changeHandler = () => {
-      console.log("call")
       if (props.type === "check" || props.type === "switch") {
         props.onChange(!props.checked)
         return

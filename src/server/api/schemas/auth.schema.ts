@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-const UserSchema = {
+const AuthSchema = {
   signInInput: z.object({
     login: z.string(),
     password: z.string(),
@@ -8,6 +8,6 @@ const UserSchema = {
   }),
 }
 
-export type UserSignInInput = z.TypeOf<typeof UserSchema.signInInput>
+export type AuthSignInInput = z.TypeOf<typeof AuthSchema.signInInput>
 
-export default UserSchema
+export default AuthSchema

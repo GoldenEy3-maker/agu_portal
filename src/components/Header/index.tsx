@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const sidebarStore = useSidebarStore()
   const userStore = useUserStore()
 
-  const getSessionQuery = api.user.getSession.useQuery(undefined, {
+  const getSessionQuery = api.auth.getSession.useQuery(undefined, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     retry: 2,

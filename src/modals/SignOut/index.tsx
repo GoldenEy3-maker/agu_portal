@@ -19,7 +19,7 @@ const SignOutModal: React.FC = () => {
 
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignOut
 
-  const signOut = api.user.signOut.useMutation({
+  const signOut = api.auth.signOut.useMutation({
     onSuccess() {
       router.push(PagePathMap.HomePage)
       userStore.clear()

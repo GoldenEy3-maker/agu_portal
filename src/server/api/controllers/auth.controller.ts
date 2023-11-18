@@ -1,16 +1,17 @@
 import { User } from "@prisma/client"
 import bcrypt from "bcrypt"
 import ApiError from "~/server/exeptions"
+import { pusher } from "~/server/pusher"
 import tokenService from "~/services/token.service"
-import { UserSignInInput } from "../schemas/user.schema"
+import { AuthSignInInput } from "../schemas/auth.schema"
 import { Context } from "../trpc"
 
-export default new (class UserController {
+export default new (class AuthController {
   getSession(opts: { ctx: Context & { user: User } }) {
     return opts.ctx.user
   }
 
-  async signIn(opts: { input: UserSignInInput; ctx: Context }) {
+  async signIn(opts: { input: AuthSignInInput; ctx: Context }) {
     const user = await opts.ctx.db.user.findUnique({
       where: {
         login: opts.input.login,
@@ -32,12 +33,18 @@ export default new (class UserController {
       opts.input.rememberMe
     )
 
+    pusher.trigger("my-channel", "new-auth-user", {
+      message: "new user was authed - " + user.id,
+    })
+
+    // @ts-ignore
     tokenService.setRefreshToken(refreshToken, opts.ctx.req, opts.ctx.res)
 
     return { accessToken, user }
   }
 
   signOut(opts: { ctx: Context }) {
+    // @ts-ignore
     tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)
   }
 })()

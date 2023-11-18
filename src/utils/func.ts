@@ -20,16 +20,10 @@ export const toUpperCaseInitialLetter = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
-export const getProdUrl = () => {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
-}
-
-export const getDevUrl = () => {
-  return `http://localhost:${process.env.PORT ?? 3000}`
-}
-
 export const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""
 
-  return getProdUrl() ?? getDevUrl()
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
+
+  return `http://localhost:${process.env.PORT ?? 3000}`
 }

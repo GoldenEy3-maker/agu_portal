@@ -4,6 +4,9 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { env } from "~/env.mjs"
 import { CookieKeyMap } from "~/utils/enums"
 
+import { IncomingMessage, ServerResponse } from "http"
+import { WebSocket } from "ws"
+
 type AccessTokenPayload = {
   login: string
 }

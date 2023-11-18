@@ -1,15 +1,14 @@
+import { User } from "@prisma/client"
 import { httpBatchLink, loggerLink } from "@trpc/client"
 import { createTRPCNext } from "@trpc/next"
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server"
 import superjson from "superjson"
-
-import { User } from "@prisma/client"
 import { type AppRouter } from "~/server/api/root"
 import { useUserStore } from "~/store/user"
 import { getBaseUrl } from "./func"
 
 export const api = createTRPCNext<AppRouter>({
-  config() {
+  config({ ctx }) {
     return {
       transformer: superjson,
       links: [
@@ -58,13 +57,14 @@ export const api = createTRPCNext<AppRouter>({
 
             return response
           },
-          headers(opts) {
+          headers() {
             const token = useUserStore.getState().token
+            const headers = ctx?.req?.headers
 
-            if (!token) return {}
+            if (!token) return { ...headers }
 
             return {
-              ...opts,
+              ...headers,
               authorization: `Bearer ${token}`,
             }
           },

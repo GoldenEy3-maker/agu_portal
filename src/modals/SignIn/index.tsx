@@ -33,7 +33,7 @@ const SignInModal: React.FC = () => {
 
   const closeModalHandler = () => modalStore.close()
 
-  const signIn = api.user.signIn.useMutation({
+  const signIn = api.auth.signIn.useMutation({
     onSuccess(data) {
       toast.success("Вы успешно авторизировались!")
       userStore.setToken(data.accessToken)

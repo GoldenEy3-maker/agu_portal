@@ -1,11 +1,11 @@
-import userController from "../controllers/user.controller"
-import UserSchema from "../schemas/user.schema"
+import userController from "../controllers/auth.controller"
+import AuthSchema from "../schemas/auth.schema"
 import { authProcedure, createTRPCRouter, publicProcedure } from "../trpc"
 
-export const userRouter = createTRPCRouter({
+export const authRouter = createTRPCRouter({
   getSession: authProcedure.query(userController.getSession),
   signIn: publicProcedure
-    .input(UserSchema.signInInput)
+    .input(AuthSchema.signInInput)
     .mutation(userController.signIn),
   signOut: publicProcedure.mutation(userController.signOut),
 })
