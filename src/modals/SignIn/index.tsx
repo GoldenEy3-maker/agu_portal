@@ -12,7 +12,7 @@ import Input from "~/components/Input"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
-import { useUserStore } from "~/store/user"
+import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
 
@@ -26,7 +26,7 @@ type FormDataSchema = z.TypeOf<typeof formDataSchema>
 
 const SignInModal: React.FC = () => {
   const modalStore = useModalStore()
-  const userStore = useUserStore()
+  const userStore = useSessionStore()
 
   const loginInputRef = useRef<HTMLInputElement>(null)
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignIn

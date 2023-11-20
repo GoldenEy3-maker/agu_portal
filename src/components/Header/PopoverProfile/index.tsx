@@ -12,12 +12,12 @@ import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import { useLocalStorage } from "~/hooks/localStorage"
 import { useModalStore } from "~/store/modal"
-import { useUserStore } from "~/store/user"
+import { useSessionStore } from "~/store/session"
 import { LocalStorageKeyMap, ModalKeyMap, PagePathMap } from "~/utils/enums"
 import styles from "./styles.module.sass"
 
 const PopoverProfile: React.FC = () => {
-  const userStore = useUserStore()
+  const userStore = useSessionStore()
   const modalStore = useModalStore()
 
   const [isDarkTheme, setIsDarkTheme] = useLocalStorage(

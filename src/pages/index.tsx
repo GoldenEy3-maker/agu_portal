@@ -9,7 +9,6 @@ import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
 import { PagePathMap, PusherChannelMap, PusherEventMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
-import { pusher } from "~/utils/pusher"
 import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.sass"
 

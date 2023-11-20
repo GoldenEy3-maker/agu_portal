@@ -5,7 +5,6 @@ import ModalContainer from "~/components/#layouts/main/ModalContaier"
 import Footer from "~/components/Footer"
 import Header from "~/components/Header"
 import Sidebar from "~/components/Sidebar"
-import { cls } from "~/utils/func"
 
 const inter = Inter({ subsets: ["cyrillic", "latin"] })
 

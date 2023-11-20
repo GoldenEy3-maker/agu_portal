@@ -34,10 +34,10 @@ export default new (class AuthController {
     )
 
     opts.ctx.pusher.trigger(
-      PusherChannelMap.TestChannel,
+      `presence-${PusherChannelMap.Auth}`,
       PusherEventMap.SignInUser,
       {
-        message: "singin user - " + user.id,
+        message: `Authorized user - ${user.id}`,
       }
     )
 
@@ -48,10 +48,10 @@ export default new (class AuthController {
 
   signOut(opts: { ctx: Context }) {
     opts.ctx.pusher.trigger(
-      PusherChannelMap.TestChannel,
+      `presence-${PusherChannelMap.Auth}`,
       PusherEventMap.SingOutUser,
       {
-        message: "singout user",
+        message: `User was sing-out`,
       }
     )
     tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)

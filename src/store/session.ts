@@ -1,7 +1,7 @@
 import { User } from "@prisma/client"
 import { create } from "zustand"
 
-type UserStore = {
+type SessionStore = {
   token: string | null
   user: Partial<User> | null
   setToken: (token: string) => void
@@ -10,7 +10,7 @@ type UserStore = {
   clear: () => void
 }
 
-export const useUserStore = create<UserStore>((set, get) => ({
+export const useSessionStore = create<SessionStore>((set, get) => ({
   token: null,
   user: null,
   setToken(token) {

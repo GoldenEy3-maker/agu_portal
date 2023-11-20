@@ -4,7 +4,7 @@ import { createTRPCNext } from "@trpc/next"
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server"
 import superjson from "superjson"
 import { type AppRouter } from "~/server/api/root"
-import { useUserStore } from "~/store/user"
+import { useSessionStore } from "~/store/session"
 import { getBaseUrl } from "./func"
 
 export const api = createTRPCNext<AppRouter>({
@@ -20,7 +20,7 @@ export const api = createTRPCNext<AppRouter>({
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
           async fetch(url, options) {
-            const userStore = useUserStore.getState()
+            const userStore = useSessionStore.getState()
 
             const response = await fetch(url, {
               ...options,
@@ -58,7 +58,7 @@ export const api = createTRPCNext<AppRouter>({
             return response
           },
           headers() {
-            const token = useUserStore.getState().token
+            const token = useSessionStore.getState().token
             const headers = ctx?.req?.headers
 
             if (!token) return { ...headers }

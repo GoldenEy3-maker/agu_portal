@@ -6,6 +6,7 @@
     "build": "cross-env NODE_ENV=production next build",
     "migrate-dev": "prisma migrate dev",
     "migrate": "prisma migrate deploy",
+    "studio": "prisma studio",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",

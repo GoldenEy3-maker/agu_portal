@@ -5,14 +5,14 @@ import Button from "~/components/Button"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
-import { useUserStore } from "~/store/user"
+import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
 import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 
 const SignOutModal: React.FC = () => {
   const router = useRouter()
   const modalStore = useModalStore()
-  const userStore = useUserStore()
+  const userStore = useSessionStore()
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
 
   const closeModalHandler = () => modalStore.close()
