@@ -1,11 +1,11 @@
-import userController from "../controllers/auth.controller"
-import AuthSchema from "../schemas/auth.schema"
-import { authProcedure, createTRPCRouter, publicProcedure } from "../trpc"
+import {
+  default as authController,
+  default as userController,
+} from "../controllers/auth.controller"
+import { createTRPCRouter } from "../trpc"
 
 export const authRouter = createTRPCRouter({
-  getSession: authProcedure.query(userController.getSession),
-  signIn: publicProcedure
-    .input(AuthSchema.signInInput)
-    .mutation(userController.signIn),
-  signOut: publicProcedure.mutation(userController.signOut),
+  getSession: authController.getSession(),
+  signIn: authController.signIn(),
+  signOut: userController.signOut(),
 })

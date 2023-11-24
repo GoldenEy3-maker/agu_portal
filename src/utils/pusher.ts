@@ -23,6 +23,7 @@ export const useChannelSubscribe = <T>(
   useEffect(() => {
     const pusherClient = new Pusher(env.NEXT_PUBLIC_PUSHER_KEY, {
       cluster: env.NEXT_PUBLIC_PUSHER_CLUSTER,
+      forceTLS: true,
     })
 
     pusherClient.connect()
@@ -68,6 +69,7 @@ export const usePresenceChannelSubscribe = <T>(
     const pusherClient = new Pusher(env.NEXT_PUBLIC_PUSHER_KEY, {
       cluster: env.NEXT_PUBLIC_PUSHER_CLUSTER,
       authEndpoint: "/api/pusher/auth-channel",
+      forceTLS: true,
       auth: {
         headers: { user_id: sessionStore.user.id },
       },

@@ -12,7 +12,7 @@ import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 const SignOutModal: React.FC = () => {
   const router = useRouter()
   const modalStore = useModalStore()
-  const userStore = useSessionStore()
+  const sessionStore = useSessionStore()
   const cancelButtonRef = useRef<HTMLButtonElement>(null)
 
   const closeModalHandler = () => modalStore.close()
@@ -22,7 +22,7 @@ const SignOutModal: React.FC = () => {
   const signOut = api.auth.signOut.useMutation({
     onSuccess() {
       router.push(PagePathMap.HomePage)
-      userStore.clear()
+      sessionStore.clear()
       modalStore.close(ModalKeyMap.SignOut)
     },
     onError(error) {

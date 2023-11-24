@@ -1,23 +1,23 @@
-import {
-  BiCalendar,
-  BiChevronDown,
-  BiCog,
-  BiFolder,
-  BiGroup,
-  BiHelpCircle,
-  BiHome,
-  BiSolidCalendar,
-  BiSolidCog,
-  BiSolidFolder,
-  BiSolidGroup,
-  BiSolidHelpCircle,
-  BiSolidHome,
-} from "react-icons/bi"
 import Link from "~/components/Link"
 import { useSidebarStore } from "~/store/sidebar"
 import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import Button from "../Button"
+import {
+  IconCalendar,
+  IconChevronDown,
+  IconCog,
+  IconFolder,
+  IconGroup,
+  IconHelpCircle,
+  IconHome,
+  IconSolidCalendar,
+  IconSolidCog,
+  IconSolidFolder,
+  IconSolidGroup,
+  IconSolidHelpCircle,
+  IconSolidHome,
+} from "../Icons"
 import styles from "./styles.module.sass"
 
 type SidebarProps = {
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidHome /> : <BiHome />}
+                {isActive ? <IconSolidHome /> : <IconHome />}
                 <span>Главная</span>
               </>
             )}
@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidGroup /> : <BiGroup />}
+                {isActive ? <IconSolidGroup /> : <IconGroup />}
                 <span>Люди</span>
               </>
             )}
@@ -72,7 +72,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidCalendar /> : <BiCalendar />}
+                {isActive ? <IconSolidCalendar /> : <IconCalendar />}
                 <span>Календарь</span>
               </>
             )}
@@ -139,7 +139,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
             </Link>
 
             <Button className={styles.navLink} color="default">
-              <BiChevronDown />
+              <IconChevronDown />
               <span>Раскрыть</span>
             </Button>
           </div>
@@ -153,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidCog /> : <BiCog />}
+                {isActive ? <IconSolidCog /> : <IconCog />}
                 <span>Настройки</span>
               </>
             )}
@@ -166,7 +166,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidHelpCircle /> : <BiHelpCircle />}
+                {isActive ? <IconSolidHelpCircle /> : <IconHelpCircle />}
                 <span>Поддержка</span>
               </>
             )}
@@ -183,7 +183,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidHome /> : <BiHome />}
+                {isActive ? <IconSolidHome /> : <IconHome />}
                 <span>Главная</span>
               </>
             )}
@@ -196,7 +196,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidFolder /> : <BiFolder />}
+                {isActive ? <IconSolidFolder /> : <IconFolder />}
                 <span>Курсы</span>
               </>
             )}
@@ -209,7 +209,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidGroup /> : <BiGroup />}
+                {isActive ? <IconSolidGroup /> : <IconGroup />}
                 <span>Люди</span>
               </>
             )}
@@ -222,7 +222,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidCalendar /> : <BiCalendar />}
+                {isActive ? <IconSolidCalendar /> : <IconCalendar />}
                 <span>Календарь</span>
               </>
             )}
@@ -235,7 +235,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           >
             {(isActive) => (
               <>
-                {isActive ? <BiSolidHelpCircle /> : <BiHelpCircle />}
+                {isActive ? <IconSolidHelpCircle /> : <IconHelpCircle />}
                 <span>Поддержка</span>
               </>
             )}

@@ -64,6 +64,13 @@ const isAuth = middleware(async (opts) => {
     where: {
       login: accessTokenPayload.login,
     },
+    include: {
+      receivedNotifications: {
+        include: {
+          sender: true,
+        },
+      },
+    },
   })
 
   if (!user) throw ApiError.Unauthorized()

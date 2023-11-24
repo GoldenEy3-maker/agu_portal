@@ -1,9 +1,10 @@
 import { User } from "@prisma/client"
 import { create } from "zustand"
+import { RouterOutputs } from "~/utils/api"
 
 type SessionStore = {
   token: string | null
-  user: Partial<User> | null
+  user: Partial<RouterOutputs["auth"]["getSession"]> | null
   setToken: (token: string) => void
   removeToken: () => void
   setUser: (data: User) => void

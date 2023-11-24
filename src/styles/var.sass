@@ -25,9 +25,10 @@
   --primary-low-hsl: var(--primary-base-hsl), 55%
   --primary-lowest-hsl: var(--primary-base-hsl), 60%
   --primary-container-low-hsl: var(--primary-base-hsl), 93%
+  --primary-container-lowest-hsl: var(--primary-base-hsl), 95%
   --primary-container-hsl: var(--primary-container-base-hsl), 91%
   --primary-container-high-hsl: var(--primary-container-base-hsl), 88%
-  --primary-container-highest-hsl: var(--primary-container-base-hsl), 33%
+  --primary-container-highest-hsl: var(--primary-container-base-hsl), 65%
   --on-primary-hsl: var(--primary-base-hsl), 95%
   --on-primary-variant-hsl: var(--primary-base-hsl), 85%
 
@@ -91,11 +92,11 @@
 
   --display-l-fs: 57px
   --display-m-fs: 45px
-  --display-s-fs: 36px
+  --display-s-fs: clamp(1.75rem, 1.65rem + 0.5vw, 2.25rem)
   --headline-l-fs: 32px
   --headline-m-fs: 28px
   --headline-s-fs: 24px
-  --title-l-fs: 22px
+  --title-l-fs: clamp(1.125rem, 1.075rem + 0.25vw, 1.375rem)
   --body-extra-fs: 18px
   --body-l-fs: 16px
   --body-m-fs: 14px

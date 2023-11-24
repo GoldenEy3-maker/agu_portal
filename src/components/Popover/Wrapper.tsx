@@ -1,23 +1,18 @@
 import { cls } from "~/utils/func"
-import { usePopoverContext } from "./context"
 import styles from "./styles.module.sass"
 
 type WrapperProps = {
-  children: React.ReactNode | ((close: () => void) => React.ReactNode)
-} & Omit<React.ComponentProps<"div">, "children">
+  isOpen: boolean
+} & React.ComponentProps<"div">
 
-export const Wrapper: React.FC<WrapperProps> = (props) => {
-  const ctx = usePopoverContext()
-
+export const Wrapper: React.FC<WrapperProps> = ({ isOpen, ...props }) => {
   return (
     <div
       {...props}
       className={cls(styles.wrapper, props.className)}
-      aria-hidden={!ctx.isOpen}
+      aria-hidden={!isOpen}
     >
-      {typeof props.children === "function"
-        ? props.children(ctx.close)
-        : props.children}
+      {props.children}
     </div>
   )
 }

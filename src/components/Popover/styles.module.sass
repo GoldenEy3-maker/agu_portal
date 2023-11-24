@@ -3,8 +3,11 @@
 
 .wrapper
   position: absolute
-  top: 100%
+  top: 115%
   right: 0
+
+  display: grid
+  grid-template-rows: auto 1fr
 
   opacity: 0
   visibility: hidden
@@ -13,33 +16,40 @@
   border-radius: var(--medium-shape)
   box-shadow: 0 0 0.5rem hsla(var(--surface-bxs-hsla))
 
-  max-width: 400px
   width: max-content
   max-height: 80svh
 
-  overflow: hidden auto
+  transform-origin: top right
+  scale: 0.9
 
-  transition: top 200ms ease-in-out, opacity 200ms ease-in-out, visibility 200ms ease-in-out
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out, scale 200ms ease-in-out
 
   &[aria-hidden=false]
-    top: 115%
+    scale: 1
     opacity: 1
     visibility: visible
 
 .header
   display: flex
   align-items: center
+  justify-content: space-between
   gap: 1rem
 
-  font-size: var(--body-l-fs)
-  padding: 0.7rem 1rem
+  font-size: var(--title-l-fs)
+  padding: 0.3rem 1rem
 
   border-bottom: 1px solid hsl(var(--outline-variant-hsl))
 
 .title
-  font-size: var(--title-l-fs)
   font-weight: 500
+  padding-block: 0.45rem
 
 .content
+  font-size: var(--body-l-fs)
+  padding: 0.7rem 1rem
+  overflow: hidden auto
 
-  padding: 0.5rem 1rem
+.actions
+  display: flex
+  align-items: center
+  gap: 0.3rem

@@ -1,5 +1,5 @@
 import { forwardRef } from "react"
-import { BiX } from "react-icons/bi"
+import { IconX } from "~/components/Icons"
 import Button, { ButtonProps } from "../Button"
 import styles from "./styles.module.sass"
 
@@ -10,7 +10,7 @@ export const Close = forwardRef<
   return (
     <div className={styles.close}>
       <Button {...props} ref={ref} asIcon type="button" color="default">
-        <BiX />
+        <IconX />
       </Button>
     </div>
   )

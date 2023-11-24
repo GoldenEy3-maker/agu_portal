@@ -1,72 +1,92 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    class   Class?  @relation(fields: [classId], references: [id])
-    classId String? @unique
+  class   Class?  @relation(fields: [classId], references: [id])
+  classId String? @unique
 
-    login        String @unique
-    password     String
-    tokenVersion Int    @default(0)
+  login        String @unique
+  password     String
+  tokenVersion Int    @default(0)
 
-    email      String?
-    name       String
-    surname    String
-    patronymic String?
+  email      String?
+  name       String
+  surname    String
+  patronymic String?
+  avatar     String?
 
-    role Role
+  role Role
 
-    courses Course[]
+  courses Course[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  sendedNotifications   Notification[] @relation("sendedNotifications")
+  receivedNotifications Notification[] @relation("receivedNotifications")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Class {
-    id       String     @id
-    users    User[]
-    sheduler Sheduler[]
+  id       String     @id
+  users    User[]
+  sheduler Sheduler[]
 }
 
 model Course {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    title       String
-    description String
+  title       String
+  description String
 
-    password String?
+  password String?
 
-    users User[]
+  users User[]
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Sheduler {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    class   Class  @relation(fields: [classId], references: [id])
-    classId String
+  class   Class  @relation(fields: [classId], references: [id])
+  classId String
 
-    subject  String
-    teacher  String
-    address  String
-    audience Int
+  subject  String
+  teacher  String
+  address  String
+  audience Int
 
-    start DateTime
-    end   DateTime
+  start DateTime
+  end   DateTime
+}
+
+model Notification {
+  id String @id @default(uuid())
+
+  sender      User   @relation("sendedNotifications", fields: [senderId], references: [id])
+  senderId    String
+  recipient   User   @relation("receivedNotifications", fields: [recipientId], references: [id])
+  recipientId String
+
+  isReaded Boolean @default(false)
+
+  subject String
+  link    String
+
+  createdAt DateTime @default(now())
 }
 
 enum Role {
-    Admin
-    Student
-    Teacher
+  Admin
+  Student
+  Teacher
 }

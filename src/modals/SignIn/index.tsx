@@ -26,7 +26,7 @@ type FormDataSchema = z.TypeOf<typeof formDataSchema>
 
 const SignInModal: React.FC = () => {
   const modalStore = useModalStore()
-  const userStore = useSessionStore()
+  const sessionStore = useSessionStore()
 
   const loginInputRef = useRef<HTMLInputElement>(null)
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignIn
@@ -36,8 +36,8 @@ const SignInModal: React.FC = () => {
   const signIn = api.auth.signIn.useMutation({
     onSuccess(data) {
       toast.success("Вы успешно авторизировались!")
-      userStore.setToken(data.accessToken)
-      userStore.setUser(data.user)
+      sessionStore.setToken(data.accessToken)
+      sessionStore.setUser(data.user)
       closeModalHandler()
       form.reset()
     },

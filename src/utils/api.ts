@@ -20,7 +20,7 @@ export const api = createTRPCNext<AppRouter>({
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
           async fetch(url, options) {
-            const userStore = useSessionStore.getState()
+            const sessionStore = useSessionStore.getState()
 
             const response = await fetch(url, {
               ...options,
@@ -42,8 +42,8 @@ export const api = createTRPCNext<AppRouter>({
                 user: User
               }
 
-              userStore.setToken(refreshData.accessToken)
-              userStore.setUser(refreshData.user)
+              sessionStore.setToken(refreshData.accessToken)
+              sessionStore.setUser(refreshData.user)
 
               return await fetch(url, {
                 ...options,
