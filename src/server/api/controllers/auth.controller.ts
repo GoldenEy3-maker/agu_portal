@@ -40,7 +40,7 @@ export default new (class AuthController {
       })
   }
 
-  signOut() {
+  logOut() {
     return publicProcedure.mutation((opts) => {
       tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)
     })

@@ -11,11 +11,21 @@ export type ButtonProps = {
   textAlign?: "center" | "left" | "right"
   size?: "sm"
   loading?: boolean
+  isActive?: boolean
 } & React.ComponentProps<"button">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant, asIcon, color = "primary", textAlign, size, loading, ...props },
+    {
+      variant,
+      asIcon,
+      color = "primary",
+      textAlign,
+      size,
+      loading,
+      isActive,
+      ...props
+    },
     ref
   ) => {
     const rippleEffectEvent = useRippleEffect()
@@ -36,6 +46,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [styles._textAlignCenter ?? ""]: textAlign === "center",
           [styles._textAlignRight ?? ""]: textAlign === "right",
           [styles._sm ?? ""]: size === "sm",
+          [styles._isActive ?? ""]: !!isActive,
         })}
         onPointerDown={rippleEffectEvent}
         ref={ref}

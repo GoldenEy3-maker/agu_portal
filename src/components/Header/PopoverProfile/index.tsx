@@ -99,7 +99,7 @@ const PopoverProfile: React.FC = () => {
               color="danger"
               className={styles.navLink}
               onClick={() => {
-                modalStore.open({ key: ModalKeyMap.SignOut })
+                modalStore.open({ key: ModalKeyMap.LogOut })
                 closePopoverHandler()
               }}
             >

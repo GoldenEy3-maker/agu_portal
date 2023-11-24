@@ -134,7 +134,7 @@ const SignInModal: React.FC = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault()
-              modalStore.open({ key: ModalKeyMap.SignOut })
+              modalStore.open({ key: ModalKeyMap.LogOut })
             }}
           >
             Забыли логин или пароль?

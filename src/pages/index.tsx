@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react"
-import { BiCalendar, BiFolder, BiNews, BiRightArrowAlt } from "react-icons/bi"
 import CoursesFeed from "~/components/#pages/home/CoursesFeed"
 import NewsFeed from "~/components/#pages/home/NewsFeed"
 import Welcome from "~/components/#pages/home/Welcome"
 import Calendar from "~/components/Calendar"
+import {
+  IconCalendar,
+  IconFolder,
+  IconNews,
+  IconRightArrowAlt,
+} from "~/components/Icons"
 import Link from "~/components/Link"
 import * as Section from "~/components/Section"
 import MainLayout from "~/layouts/main"
-import { PagePathMap, PusherChannelMap, PusherEventMap } from "~/utils/enums"
+import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import { NextPageWithLayout } from "./_app"
 import styles from "./styles.module.sass"
@@ -20,10 +24,10 @@ const HomePage: NextPageWithLayout = () => {
         <Section.Root isSpanGridArea>
           <Section.Header>
             <Section.Title>
-              <BiFolder /> Курсы
+              <IconFolder /> Курсы
             </Section.Title>
             <Link href={PagePathMap.CoursesPage} variant="elevated" size="sm">
-              Посмотреть все <BiRightArrowAlt />
+              Посмотреть все <IconRightArrowAlt />
             </Link>
           </Section.Header>
           <Section.Content>
@@ -33,7 +37,7 @@ const HomePage: NextPageWithLayout = () => {
         <Section.Root isSpanGridArea>
           <Section.Header>
             <Section.Title>
-              <BiNews /> Новости
+              <IconNews /> Новости
             </Section.Title>
             <Link
               variant="elevated"
@@ -42,7 +46,7 @@ const HomePage: NextPageWithLayout = () => {
               target="_blank"
             >
               Посмотреть все
-              <BiRightArrowAlt />
+              <IconRightArrowAlt />
             </Link>
           </Section.Header>
           <Section.Content>
@@ -52,7 +56,7 @@ const HomePage: NextPageWithLayout = () => {
         <Section.Root>
           <Section.Header>
             <Section.Title>
-              <BiCalendar /> Календарь
+              <IconCalendar /> Календарь
             </Section.Title>
           </Section.Header>
           <Section.Content>

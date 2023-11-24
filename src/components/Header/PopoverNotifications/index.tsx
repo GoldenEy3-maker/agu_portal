@@ -41,6 +41,7 @@ const PopoverNotifications: React.FC = () => {
         asIcon
         color="default"
         onClick={togglePopoverHandler}
+        isActive={isPopoverOpen}
       >
         <IconBell />
       </Popover.Trigger>

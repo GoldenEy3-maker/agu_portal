@@ -9,7 +9,7 @@ import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
 import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 
-const SignOutModal: React.FC = () => {
+const LogOutModal: React.FC = () => {
   const router = useRouter()
   const modalStore = useModalStore()
   const sessionStore = useSessionStore()
@@ -17,13 +17,13 @@ const SignOutModal: React.FC = () => {
 
   const closeModalHandler = () => modalStore.close()
 
-  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignOut
+  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.LogOut
 
-  const signOut = api.auth.signOut.useMutation({
+  const logOut = api.auth.logOut.useMutation({
     onSuccess() {
       router.push(PagePathMap.HomePage)
       sessionStore.clear()
-      modalStore.close(ModalKeyMap.SignOut)
+      modalStore.close(ModalKeyMap.LogOut)
     },
     onError(error) {
       console.log("🚀 ~ file: index.tsx:24 ~ onError ~ error:", error)
@@ -40,17 +40,16 @@ const SignOutModal: React.FC = () => {
         <Modal.Close onClick={closeModalHandler} />
       </Modal.Header>
       <Modal.Content>
-        Вы можете покинуть этот аккаунт. После чего попадете в режим гостя, в
+        Вы можете покинуть этот аккаунт. После чего перейдете в режим гостя, в
         котором ограничен доступ ко многим элементам портала.
       </Modal.Content>
       <Modal.Footer>
         <Button
-          variant="elevated"
           type="button"
           onClick={closeModalHandler}
           textAlign="center"
           ref={cancelButtonRef}
-          disabled={signOut.isLoading}
+          disabled={logOut.isLoading}
         >
           Отмена
         </Button>
@@ -59,9 +58,9 @@ const SignOutModal: React.FC = () => {
           color="danger"
           type="button"
           textAlign="center"
-          onClick={() => signOut.mutate()}
-          disabled={signOut.isLoading}
-          loading={signOut.isLoading}
+          onClick={() => logOut.mutate()}
+          disabled={logOut.isLoading}
+          loading={logOut.isLoading}
         >
           Выйти
         </Button>
@@ -70,4 +69,4 @@ const SignOutModal: React.FC = () => {
   )
 }
 
-export default SignOutModal
+export default LogOutModal

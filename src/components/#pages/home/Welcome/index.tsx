@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { BiRightArrowAlt } from "react-icons/bi"
 import WelcomeAguJpg from "~/assets/preview.jpg"
+import { IconRightArrowAlt } from "~/components/Icons"
 import Link from "~/components/Link"
 import styles from "./styles.module.sass"
 
@@ -29,7 +29,7 @@ const Welcome: React.FC = () => {
           </p>
           <Link variant="filled" href="https://www.asu.ru/" target="_blank">
             Перейти на сайт
-            <BiRightArrowAlt />
+            <IconRightArrowAlt />
           </Link>
         </div>
       </div>

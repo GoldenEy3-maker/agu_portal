@@ -1,7 +1,12 @@
 import { create } from "zustand"
 import { ModalKeyMap } from "~/utils/enums"
 
-type ModalProps = {}
+type ModalProps = {
+  [ModalKeyMap.SignIn]: undefined
+  [ModalKeyMap.LogOut]: undefined
+  [ModalKeyMap.Sidebar]: undefined
+  [ModalKeyMap.Chat]: undefined
+}
 
 type OpenModalStoreActionArgs<T extends ModalKeyMap> =
   T extends keyof ModalProps
@@ -10,7 +15,7 @@ type OpenModalStoreActionArgs<T extends ModalKeyMap> =
 
 type ModalStore = {
   queue: ModalKeyMap[]
-  props: ModalProps | null
+  props: Partial<ModalProps> | null
   target: HTMLElement | null
   open: <T extends ModalKeyMap>(args: OpenModalStoreActionArgs<T>) => void
   close: (key?: ModalKeyMap) => void
@@ -45,9 +50,7 @@ export const useModalStore = create<ModalStore>((set, get) => ({
       }))
     }
 
-    // @ts-ignore
     if (args.props) {
-      // @ts-ignore
       set((store) => ({ props: { ...store.props, [args.key]: args.props } }))
     }
   },
@@ -70,7 +73,6 @@ export const useModalStore = create<ModalStore>((set, get) => ({
     set(() => ({ queue: newQueue }))
   },
   setProps(key, props) {
-    // @ts-ignore
     set((store) => ({ props: { ...store.props, [key]: props } }))
   },
 }))

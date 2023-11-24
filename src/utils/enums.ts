@@ -13,9 +13,8 @@ export const PagePathMap = {
 
 export const ModalKeyMap = {
   SignIn: "sign-in",
-  SignOut: "sign-out",
+  LogOut: "log-out",
   Sidebar: "sidebar",
-  Notifications: "notifications",
   Chat: "chat",
 } as const
 
