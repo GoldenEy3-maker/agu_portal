@@ -33,6 +33,7 @@ export const PusherChannelMap = {
 export const PusherEventMap = {
   SignInUser: "sing-in-user",
   SingOutUser: "sing-out-user",
+  SendNotification: "send-notification",
 } as const
 
 export type PagePathMap = ValueOf<typeof PagePathMap>

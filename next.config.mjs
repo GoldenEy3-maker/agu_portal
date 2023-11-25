@@ -6,10 +6,10 @@ await import("./src/env.mjs")
 
 /** @type {import("next").NextConfig} */
 const config = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ["placehold.co"],
-    dangerouslyAllowSVG: true
+    dangerouslyAllowSVG: true,
   },
 
   /**
@@ -19,8 +19,8 @@ const config = {
    */
   i18n: {
     locales: ["ru"],
-    defaultLocale: "ru"
-  }
+    defaultLocale: "ru",
+  },
 }
 
 export default config

@@ -78,7 +78,6 @@ export const usePresenceChannelSubscribe = <T>(
     pusherClient.connect()
 
     const channel = pusherClient.subscribe(`presence-${channelName}`)
-
     channel.bind(event, callback)
 
     channel.bind("pusher:subscription_succeeded", updateMembers)

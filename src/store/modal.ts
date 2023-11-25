@@ -1,12 +1,7 @@
 import { create } from "zustand"
 import { ModalKeyMap } from "~/utils/enums"
 
-type ModalProps = {
-  [ModalKeyMap.SignIn]: undefined
-  [ModalKeyMap.LogOut]: undefined
-  [ModalKeyMap.Sidebar]: undefined
-  [ModalKeyMap.Chat]: undefined
-}
+type ModalProps = Record<ModalKeyMap, unknown>
 
 type OpenModalStoreActionArgs<T extends ModalKeyMap> =
   T extends keyof ModalProps

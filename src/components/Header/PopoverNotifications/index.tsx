@@ -1,6 +1,7 @@
 import dayjs from "dayjs"
 import NextLink from "next/link"
-import { useState } from "react"
+import Pusher from "pusher-js"
+import { useEffect, useState } from "react"
 import Button from "~/components/Button"
 import {
   IconBell,
@@ -11,28 +12,60 @@ import {
 import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
+import { env } from "~/env.mjs"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
-import { PagePathMap } from "~/utils/enums"
+import { PagePathMap, PusherEventMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
+import {
+  useChannelSubscribe,
+  usePresenceChannelSubscribe,
+} from "~/utils/pusher"
 import LoadingSkeleton from "./LoadingSkeleton"
 import styles from "./styles.module.sass"
 
+const pusherClient = new Pusher(env.NEXT_PUBLIC_PUSHER_KEY, {
+  cluster: env.NEXT_PUBLIC_PUSHER_CLUSTER,
+  forceTLS: true,
+})
+
 const PopoverNotifications: React.FC = () => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const sessionStore = useSessionStore()
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const rippleEffectEvent = useRippleEffect()
 
   const closePopoverHandler = () => setIsPopoverOpen(false)
 
   const togglePopoverHandler = () => setIsPopoverOpen((prevState) => !prevState)
 
-  const getSessionQuery = api.auth.getSession.useQuery(undefined, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    retry: 2,
-  })
+  const getNotificationsBySessionQuery =
+    api.notification.getAllBySession.useQuery()
+
+  usePresenceChannelSubscribe(
+    `user-${sessionStore.user?.id}`,
+    "send-notification",
+    (data) => {
+      console.log("🚀 ~ file: index.tsx:40 ~ useChannelSubscribe ~ data:", data)
+      getNotificationsBySessionQuery.refetch()
+    }
+  )
+
+  // useEffect(() => {
+  //   pusherClient.connect()
+
+  //   const channel = pusherClient.subscribe(`user-${sessionStore.user?.id}`)
+  //   console.log("🚀 ~ file: index.tsx:57 ~ useEffect ~ channel:", channel)
+  //   channel.bind(PusherEventMap.SendNotification, (data: unknown) => {
+  //     console.log("🚀 ~ file: index.tsx:58 ~ channel.bind ~ data:", data)
+  //     getNotificationsBySessionQuery.refetch()
+  //   })
+
+  //   return () => {
+  //     console.log("disconnected")
+  //     pusherClient.disconnect()
+  //   }
+  // }, [])
 
   return (
     <Popover.Root closeHandler={closePopoverHandler}>
@@ -62,10 +95,10 @@ const PopoverNotifications: React.FC = () => {
           </Popover.Actions>
         </Popover.Header>
         <Popover.Content className={styles.content}>
-          {!getSessionQuery.isLoading ? (
-            sessionStore.user?.receivedNotifications?.length ? (
+          {!getNotificationsBySessionQuery.isLoading ? (
+            getNotificationsBySessionQuery.data?.length ? (
               <ul className={styles.list}>
-                {sessionStore.user.receivedNotifications.map((notification) => (
+                {getNotificationsBySessionQuery.data?.map((notification) => (
                   <li key={notification.id}>
                     <NextLink
                       href={PagePathMap.HomePage}
@@ -83,8 +116,8 @@ const PopoverNotifications: React.FC = () => {
                         <strong>Лабораторная работа №1</strong>
                       </p>
                       <p className={styles.extraInfo}>
-                        <time dateTime="2023-02-02">
-                          {dayjs().to(dayjs("2023-11-22:14:00:00"))}
+                        <time dateTime={notification.createdAt.toISOString()}>
+                          {dayjs().to(dayjs(notification.createdAt))}
                         </time>
                         <i></i>
                         <span>Менеджмент в профессиональной деятельности</span>
@@ -92,52 +125,6 @@ const PopoverNotifications: React.FC = () => {
                     </NextLink>
                   </li>
                 ))}
-                <li>
-                  <NextLink
-                    href={PagePathMap.HomePage}
-                    onPointerDown={rippleEffectEvent}
-                    className={styles.item}
-                  >
-                    <div className={styles.avatar}>
-                      <UserAvatar />
-                    </div>
-                    <p className={styles.text}>
-                      <strong>Виктория</strong>
-                      &nbsp;оставил-(ла) отзыв на&nbsp;
-                      <strong>Лабораторная работа №1</strong>
-                    </p>
-                    <p className={styles.extraInfo}>
-                      <time dateTime="2023-02-02">
-                        {dayjs().to(dayjs("2023-11-22:14:00:00"))}
-                      </time>
-                      <i></i>
-                      <span>Менеджмент в профессиональной деятельности</span>
-                    </p>
-                  </NextLink>
-                </li>
-                <li>
-                  <NextLink
-                    href={PagePathMap.HomePage}
-                    onPointerDown={rippleEffectEvent}
-                    className={styles.item}
-                  >
-                    <div className={styles.avatar}>
-                      <UserAvatar />
-                    </div>
-                    <p className={styles.text}>
-                      <strong>Виктория</strong>
-                      &nbsp;оставил-(ла) отзыв на&nbsp;
-                      <strong>Лабораторная работа №1</strong>
-                    </p>
-                    <p className={styles.extraInfo}>
-                      <time dateTime="2023-02-02">
-                        {dayjs().to(dayjs("2023-11-22:14:00:00"))}
-                      </time>
-                      <i></i>
-                      <span>Менеджмент в профессиональной деятельности</span>
-                    </p>
-                  </NextLink>
-                </li>
               </ul>
             ) : (
               <div className={styles.empty}>
