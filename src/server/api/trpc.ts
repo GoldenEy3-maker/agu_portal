@@ -3,21 +3,25 @@ import { type CreateNextContextOptions } from "@trpc/server/adapters/next"
 import { CreateWSSContextFnOptions } from "@trpc/server/adapters/ws"
 import superjson from "superjson"
 import { ZodError } from "zod"
-import { db } from "~/server/db"
-import tokenService from "~/services/token.service"
+import tokenService from "../../services/token.service"
+import { db } from "../db"
 import ApiError from "../exeptions"
-import { pusher } from "../pusher"
+import { pubRedisClient, redisClient, subRedisClient } from "../redis"
 
 type CreateContextOptions = Record<string, never>
 
 const createInnerTRPCContext = (_opts?: CreateContextOptions) => {
   return {
     db,
-    pusher,
+    subRedisClient,
+    pubRedisClient,
+    redisClient,
   }
 }
 
-export const createTRPCContext = (_opts: CreateNextContextOptions) => {
+export const createTRPCContext = (
+  _opts: CreateNextContextOptions | CreateWSSContextFnOptions
+) => {
   return { ...createInnerTRPCContext(), req: _opts.req, res: _opts.res }
 }
 

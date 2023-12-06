@@ -16,6 +16,7 @@ export const ModalKeyMap = {
   LogOut: "log-out",
   Sidebar: "sidebar",
   Chat: "chat",
+  DeleteNotifications: "delete-notifications",
 } as const
 
 export const CookieKeyMap = {
@@ -26,19 +27,7 @@ export const LocalStorageKeyMap = {
   isDarkTheme: "_d",
 } as const
 
-export const PusherChannelMap = {
-  Auth: "auth-channel",
-} as const
-
-export const PusherEventMap = {
-  SignInUser: "sing-in-user",
-  SingOutUser: "sing-out-user",
-  SendNotification: "send-notification",
-} as const
-
 export type PagePathMap = ValueOf<typeof PagePathMap>
 export type ModalKeyMap = ValueOf<typeof ModalKeyMap>
 export type CookieKeyMap = ValueOf<typeof CookieKeyMap>
 export type LocalStorageKeyMap = ValueOf<typeof LocalStorageKeyMap>
-export type PusherChannelMap = ValueOf<typeof PusherChannelMap>
-export type PusherEventMap = ValueOf<typeof PusherEventMap>

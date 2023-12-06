@@ -4,25 +4,20 @@ import { useRef } from "react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { BiLockAlt, BiUser } from "react-icons/bi"
-import { z } from "zod"
 import Button from "~/components/Button"
 import Checkbox from "~/components/Checkbox"
 import * as Form from "~/components/Form"
 import Input from "~/components/Input"
 import * as Modal from "~/components/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
+import {
+  AuthSignInInput,
+  authSignInInput,
+} from "~/server/api/schemas/auth.schema"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
 import { ModalKeyMap } from "~/utils/enums"
-
-const formDataSchema = z.object({
-  login: z.string(),
-  password: z.string().min(4, "Минимум 4 символов!"),
-  rememberMe: z.boolean(),
-})
-
-type FormDataSchema = z.TypeOf<typeof formDataSchema>
 
 const SignInModal: React.FC = () => {
   const modalStore = useModalStore()
@@ -48,13 +43,13 @@ const SignInModal: React.FC = () => {
     },
   })
 
-  const form = useForm<FormDataSchema>({
+  const form = useForm<AuthSignInInput>({
     defaultValues: {
       login: "",
       password: "",
       rememberMe: false,
     },
-    resolver: zodResolver(formDataSchema),
+    resolver: zodResolver(authSignInInput),
   })
 
   const submitFormHandler = form.handleSubmit((data) => {

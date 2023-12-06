@@ -1,6 +1,6 @@
-import { createTRPCRouter } from "~/server/api/trpc"
 import { authRouter } from "./routers/auth.router"
 import { notificationRouter } from "./routers/notification.router"
+import { createTRPCRouter } from "./trpc"
 
 export const appRouter = createTRPCRouter({
   auth: authRouter,

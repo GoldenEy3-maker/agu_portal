@@ -1,11 +1,7 @@
 import { setCookie } from "cookies-next"
 import jwt from "jsonwebtoken"
 import { NextApiRequest, NextApiResponse } from "next"
-import { env } from "~/env.mjs"
-import { CookieKeyMap } from "~/utils/enums"
-
-import { IncomingMessage, ServerResponse } from "http"
-import { WebSocket } from "ws"
+import { CookieKeyMap } from "../utils/enums"
 
 type AccessTokenPayload = {
   login: string
@@ -23,14 +19,14 @@ export default new (class TokenService {
   ) {
     const accessToken = jwt.sign(
       { login: payload.login },
-      env.ACCESS_TOKEN_SECRET,
+      process.env.ACCESS_TOKEN_SECRET ?? "",
       {
         expiresIn: "1m",
       }
     )
     const refreshToken = jwt.sign(
       { login: payload.login, tokenVersion: payload.tokenVersion },
-      env.REFRESH_TOKEN_SECRET,
+      process.env.REFRESH_TOKEN_SECRET ?? "",
       {
         expiresIn: rememberMe ? "7d" : "24h",
       }
@@ -41,7 +37,10 @@ export default new (class TokenService {
 
   verifyAccessToken(token: string) {
     try {
-      return jwt.verify(token, env.ACCESS_TOKEN_SECRET) as AccessTokenPayload
+      return jwt.verify(
+        token,
+        process.env.ACCESS_TOKEN_SECRET ?? ""
+      ) as AccessTokenPayload
     } catch (error) {
       return null
     }
@@ -49,7 +48,10 @@ export default new (class TokenService {
 
   verifyRefreshToken(token: string) {
     try {
-      return jwt.verify(token, env.REFRESH_TOKEN_SECRET) as RefreshTokenPayload
+      return jwt.verify(
+        token,
+        process.env.REFRESH_TOKEN_SECRET ?? ""
+      ) as RefreshTokenPayload
     } catch (error) {
       return null
     }

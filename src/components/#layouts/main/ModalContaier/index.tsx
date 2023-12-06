@@ -1,5 +1,6 @@
 import * as Modal from "~/components/Modal"
 import ChatModal from "~/modals/Chat"
+import DeleteNotificationsModal from "~/modals/DeleteNotifications"
 import LogOutModal from "~/modals/LogOut"
 import SidebarModal from "~/modals/Sidebar"
 import SignInModal from "~/modals/SignIn"
@@ -17,6 +18,7 @@ const ModalContainer: React.FC = () => {
       <SignInModal />
       <LogOutModal />
       <ChatModal />
+      <DeleteNotificationsModal />
     </Modal.Container>
   )
 }

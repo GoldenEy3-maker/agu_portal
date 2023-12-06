@@ -1,48 +1,88 @@
-import { PusherEventMap } from "~/utils/enums"
-import NotificationSchema from "../schemas/notification.schema"
-import { authProcedure } from "../trpc"
+import { observable } from "@trpc/server/observable"
+import { z } from "zod"
+import ApiError from "../../exeptions"
+import {
+  NotificationModel,
+  NotificationTestSendInput,
+} from "../schemas/notification.schema"
+import { authProcedure, publicProcedure } from "../trpc"
 
 export default new (class NotificationController {
   getAllBySession() {
     return authProcedure.query(async (opts) => {
-      const notifications = await opts.ctx.db.notification.findMany({
-        where: {
-          recipientId: opts.ctx.user.id,
-        },
-        include: {
-          sender: true,
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      })
+      let notificaitons = ((await opts.ctx.redisClient.json_get(
+        "notifications"
+      )) || []) as NotificationModel[]
 
-      return notifications
+      if (notificaitons.length > 0) {
+        notificaitons = notificaitons
+          .filter(
+            (notification) => notification.recipientId === opts.ctx.user.id
+          )
+          .sort((a, b) => {
+            const dateA = new Date(a.createdAt).getTime()
+            const dateB = new Date(b.createdAt).getTime()
+
+            return dateB - dateA
+          })
+      }
+
+      return notificaitons
+    })
+  }
+
+  deleteAll() {
+    return authProcedure.mutation(async (opts) => {
+      return true
+    })
+  }
+
+  onSend() {
+    return publicProcedure.input(z.string().optional()).subscription((opts) => {
+      return observable<NotificationModel[]>((emit) => {
+        if (!opts.input) throw ApiError.Unauthorized()
+        const onSend = (channel: string, message: string) => {
+          const notification = JSON.parse(message) as NotificationModel[]
+          emit.next(notification)
+        }
+
+        opts.ctx.subRedisClient.subscribe(`user-notification-${opts.input}`)
+        opts.ctx.subRedisClient.on("message", onSend)
+
+        return () => {
+          opts.ctx.subRedisClient.off("message", onSend)
+        }
+      })
     })
   }
 
   testSend() {
     return authProcedure
-      .input(NotificationSchema.testSend)
+      .input(NotificationTestSendInput)
       .mutation(async (opts) => {
-        await opts.ctx.db.notification.create({
-          data: {
-            link: opts.input.link,
-            subject: opts.input.subjet,
-            senderId: opts.ctx.user.id,
-            recipientId: opts.input.recipientId,
+        const notification = NotificationModel.parse({
+          ...opts.input,
+          id: crypto.randomUUID(),
+          sender: {
+            id: opts.ctx.user.id,
+            avatar: opts.ctx.user.avatar,
+            name: opts.ctx.user.name,
           },
+          isReaded: false,
+          createdAt: new Date().toString(),
         })
 
-        opts.ctx.pusher.trigger(
-          `presence-user-${opts.input.recipientId}`,
-          PusherEventMap.SendNotification,
-          {
-            message: "sended new notification",
-          }
+        await opts.ctx.redisClient.json_arrappend(
+          `notifications`,
+          "$",
+          notification
         )
 
-        return true
+        await opts.ctx.pubRedisClient.publish(
+          `user-notification-${opts.input.recipientId}`,
+          JSON.stringify(notification)
+        )
+        return notification
       })
   }
 })()

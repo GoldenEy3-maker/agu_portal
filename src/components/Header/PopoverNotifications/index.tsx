@@ -1,38 +1,31 @@
 import dayjs from "dayjs"
 import NextLink from "next/link"
-import Pusher from "pusher-js"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Button from "~/components/Button"
 import {
   IconBell,
   IconCheckDouble,
   IconCog,
   IconSolidAlarm,
+  IconTrash,
 } from "~/components/Icons"
 import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
-import { env } from "~/env.mjs"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
+import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
-import { PagePathMap, PusherEventMap } from "~/utils/enums"
+import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
-import {
-  useChannelSubscribe,
-  usePresenceChannelSubscribe,
-} from "~/utils/pusher"
 import LoadingSkeleton from "./LoadingSkeleton"
 import styles from "./styles.module.sass"
 
-const pusherClient = new Pusher(env.NEXT_PUBLIC_PUSHER_KEY, {
-  cluster: env.NEXT_PUBLIC_PUSHER_CLUSTER,
-  forceTLS: true,
-})
-
 const PopoverNotifications: React.FC = () => {
-  const sessionStore = useSessionStore()
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+
+  const modalStore = useModalStore()
+  const sessionStore = useSessionStore()
   const rippleEffectEvent = useRippleEffect()
 
   const closePopoverHandler = () => setIsPopoverOpen(false)
@@ -42,30 +35,15 @@ const PopoverNotifications: React.FC = () => {
   const getNotificationsBySessionQuery =
     api.notification.getAllBySession.useQuery()
 
-  usePresenceChannelSubscribe(
-    `user-${sessionStore.user?.id}`,
-    "send-notification",
-    (data) => {
-      console.log("🚀 ~ file: index.tsx:40 ~ useChannelSubscribe ~ data:", data)
+  api.notification.onSend.useSubscription(sessionStore.user?.id, {
+    onData(data) {
+      console.log("🚀 ~ file: index.tsx:37 ~ onData ~ data:", data)
       getNotificationsBySessionQuery.refetch()
-    }
-  )
-
-  // useEffect(() => {
-  //   pusherClient.connect()
-
-  //   const channel = pusherClient.subscribe(`user-${sessionStore.user?.id}`)
-  //   console.log("🚀 ~ file: index.tsx:57 ~ useEffect ~ channel:", channel)
-  //   channel.bind(PusherEventMap.SendNotification, (data: unknown) => {
-  //     console.log("🚀 ~ file: index.tsx:58 ~ channel.bind ~ data:", data)
-  //     getNotificationsBySessionQuery.refetch()
-  //   })
-
-  //   return () => {
-  //     console.log("disconnected")
-  //     pusherClient.disconnect()
-  //   }
-  // }, [])
+    },
+    onError(error) {
+      console.log("🚀 ~ file: index.tsx:41 ~ onError ~ error:", error)
+    },
+  })
 
   return (
     <Popover.Root closeHandler={closePopoverHandler}>
@@ -85,13 +63,17 @@ const PopoverNotifications: React.FC = () => {
             <Button type="button" asIcon title="Пометить все, как прочитанное">
               <IconCheckDouble />
             </Button>
-            <Link
-              href={PagePathMap.SettingsPage}
+            <Button
               asIcon
-              title="Настройки уведомлений"
+              type="button"
+              color="danger"
+              title="Удалить все"
+              onClick={() =>
+                modalStore.open({ key: ModalKeyMap.DeleteNotifications })
+              }
             >
-              <IconCog />
-            </Link>
+              <IconTrash />
+            </Button>
           </Popover.Actions>
         </Popover.Header>
         <Popover.Content className={styles.content}>
@@ -116,7 +98,9 @@ const PopoverNotifications: React.FC = () => {
                         <strong>Лабораторная работа №1</strong>
                       </p>
                       <p className={styles.extraInfo}>
-                        <time dateTime={notification.createdAt.toISOString()}>
+                        <time
+                          dateTime={dayjs(notification.createdAt).toISOString()}
+                        >
                           {dayjs().to(dayjs(notification.createdAt))}
                         </time>
                         <i></i>
