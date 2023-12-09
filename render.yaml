@@ -25,11 +25,11 @@ services:
           name: agu_portal
           property: host
 
-      - key: WS_URL
-        fromService:
+      - key: PORT
+        formService:
           type: web
           name: agu_portal
-          property: host
+          property: port
 
       - key: REDIS_URL
         fromService:
