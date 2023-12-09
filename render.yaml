@@ -8,6 +8,7 @@ services:
 
   - type: web
     name: agu_portal
+    runtime: node
     env: node
     plan: free
     buildCommand: NODE_ENV=development yarn && yarn build
