@@ -33,7 +33,7 @@ services:
           property: host
 
       - key: PORT
-        formService:
+        fromService:
           type: web
           name: agu_portal
           property: port
