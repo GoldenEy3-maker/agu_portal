@@ -26,18 +26,6 @@ services:
       - key: REFRESH_TOKEN_SECRET
         generateValue: true
 
-      - key: APP_URL
-        fromService:
-          type: web
-          name: agu_portal
-          property: host
-
-      - key: PORT
-        fromService:
-          type: web
-          name: agu_portal
-          property: port
-
       - key: REDIS_URL
         fromService:
           type: redis
