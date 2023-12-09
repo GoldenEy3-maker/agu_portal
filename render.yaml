@@ -1,7 +1,7 @@
 services:
   - type: redis
     name: lightning
-    isAllowList:
+    ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
     plan: free
