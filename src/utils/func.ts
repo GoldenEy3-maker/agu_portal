@@ -32,8 +32,6 @@ export const getBaseUrl = () => {
 }
 
 export const getBaseWsUrl = () => {
-  if (typeof window !== "undefined") return ""
-
   if (process.env.RENDER_EXTERNAL_URL)
     return `ws://${process.env.RENDER_EXTERNAL_URL}:${process.env.PORT}`
 
