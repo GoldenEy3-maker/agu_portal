@@ -7,7 +7,7 @@ import { WebSocketServer } from "ws"
 import { appRouter } from "./api/root"
 import { createTRPCContext } from "./api/trpc"
 
-const port = parseInt(process.env.PORT || "3000", 10)
+const port = parseInt(process.env.NEXT_PUBLIC_PORT || "3000", 10)
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -45,7 +45,7 @@ void app.prepare().then(() => {
   server.listen(port, () => {
     console.log(
       `> Server listening https & ws requests at ${
-        (process.env.APP_URL || process.env.WS_URL) ?? "127.0.0.1"
+        process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
       }:${port} as ${dev ? "development" : process.env.NODE_ENV}`
     )
   })

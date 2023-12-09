@@ -23,15 +23,17 @@ export const toUpperCaseInitialLetter = (str: string) => {
 export const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""
 
-  if (process.env.APP_HOSTHAME)
-    return `https://${process.env.APP_HOSTHAME}:${process.env.PORT}`
+  if (process.env.NEXT_PUBLIC_APP_HOSTHAME)
+    return `https://${process.env.NEXT_PUBLIC_APP_HOSTHAME}:${process.env.NEXT_PUBLIC_PORT}`
 
-  return `http://localhost:${process.env.PORT ?? 3000}`
+  return `http://localhost:${process.env.NEXT_PUBLIC_PORT ?? 3000}`
 }
 
 export const getBaseWsUrl = () => {
-  if (process.env.APP_HOSTHAME)
-    return `ws://${process.env.APP_HOSTHAME}:${process.env.PORT}`
+  if (process.env.NEXT_PUBLIC_APP_HOSTNAME)
+    return `ws://${process.env.NEXT_PUBLIC_APP_HOSTNAME}:${process.env.NEXT_PUBLIC_PORT}`
 
-  return `ws://127.0.0.1:${process.env.PORT ?? 3000}`
+  console.log(process.env.NEXT_PUBLIC_APP_HOSTNAME)
+
+  return `ws://127.0.0.1:${process.env.NEXT_PUBLIC_PORT ?? 3000}`
 }
