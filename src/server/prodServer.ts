@@ -44,7 +44,7 @@ void app.prepare().then(() => {
 
   server.listen(port, () => {
     console.log(
-      `> Server listening https & ws requests at ${
+      `> Server listening http(s)/ws(s) requests at ${
         process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
       }:${port} as ${dev ? "development" : process.env.NODE_ENV}`
     )
