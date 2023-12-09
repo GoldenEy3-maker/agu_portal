@@ -3,10 +3,13 @@ services:
     name: agu_portal
     env: node
     plan: free
-    buildCommand: yarn && yarn build
+    buildCommand: NODE_ENV=development yarn && yarn build
     startCommand: yarn start
     healthCheckPath: /api/trpc/healthCheck
     envVars:
+      - key: NODE_ENV
+        value: production
+
       - key: DATABASE_URL
         value: postgresql://postgres:TbHrxNZjPx7XHkJJ@db.phshwfdxephgllzibuap.supabase.co:5432/postgres
 
