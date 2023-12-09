@@ -24,7 +24,10 @@ const Actions = () => {
     return (<div className={styles_module_sass_1.default.actions}>
       {!getSessionQuery.isLoading ? (sessionStore.token ? (<>
             <PopoverNotifications_1.default />
-            <Button_1.default type="button" asIcon color="default" onClick={() => modalStore.open({ key: enums_1.ModalKeyMap.Chat })}>
+            <Button_1.default type="button" asIcon color="default" onClick={(event) => modalStore.open({
+                key: enums_1.ModalKeyMap.Chat,
+                target: event.currentTarget,
+            })}>
               <Icons_1.IconChat />
             </Button_1.default>
             <PopoverProfile_1.default />

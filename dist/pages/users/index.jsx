@@ -8,7 +8,7 @@ const react_hot_toast_1 = __importDefault(require("react-hot-toast"));
 const Button_1 = __importDefault(require("~/components/Button"));
 const api_1 = require("~/utils/api");
 const UsersPage = () => {
-    const testSend = api_1.api.notification.testSend.useMutation({
+    const testSend = api_1.api.notification.send.useMutation({
         onSuccess() {
             react_hot_toast_1.default.success("Уведомление успешно отправлено!");
         },

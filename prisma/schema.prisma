@@ -50,9 +50,6 @@ model User {
 
   courses Course[]
 
-  sendedNotifications   Notification[] @relation("sendedNotifications")
-  receivedNotifications Notification[] @relation("receivedNotifications")
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -90,22 +87,6 @@ model Sheduler {
 
   start DateTime
   end   DateTime
-}
-
-model Notification {
-  id String @id @default(uuid())
-
-  sender      User   @relation("sendedNotifications", fields: [senderId], references: [id])
-  senderId    String
-  recipient   User   @relation("receivedNotifications", fields: [recipientId], references: [id])
-  recipientId String
-
-  isReaded Boolean @default(false)
-
-  subject String
-  link    String
-
-  createdAt DateTime @default(now())
 }
 
 enum Role {

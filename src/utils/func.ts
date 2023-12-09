@@ -25,5 +25,13 @@ export const getBaseUrl = () => {
 
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`
 
+  if (process.env.APP_URL) return `https://${process.env.APP_URL}`
+
   return `http://localhost:${process.env.PORT ?? 3000}`
+}
+
+export const getBaseWsUrl = () => {
+  if (process.env.WS_URL) return `ws://${process.env.WS_URL}`
+
+  return `ws://127.0.0.1:3000`
 }

@@ -86,8 +86,11 @@ const PopoverProfile = () => {
               <Icons_1.IconCog /> <span>Настройки</span>
             </Link_1.default>
             <hr />
-            <Button_1.default type="button" color="danger" className={styles_module_sass_1.default.navLink} onClick={() => {
-            modalStore.open({ key: enums_1.ModalKeyMap.LogOut });
+            <Button_1.default type="button" color="danger" className={styles_module_sass_1.default.navLink} onClick={(event) => {
+            modalStore.open({
+                key: enums_1.ModalKeyMap.LogOut,
+                target: event.currentTarget,
+            });
             closePopoverHandler();
         }}>
               <Icons_1.IconLogOut /> <span>Выход</span>

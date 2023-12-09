@@ -41,6 +41,7 @@ void app.prepare().then(() => {
         });
     });
     server.listen(port, () => {
-        console.log(`> Server listening at http://127.0.0.1:${port} as ${dev ? "development" : process.env.NODE_ENV}`);
+        var _a;
+        console.log(`> Server listening https & ws requests at ${(_a = (process.env.APP_URL || process.env.WS_URL)) !== null && _a !== void 0 ? _a : "127.0.0.1"}:${port} as ${dev ? "development" : process.env.NODE_ENV}`);
     });
 });

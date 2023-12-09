@@ -1,6 +1,8 @@
 import { inferAsyncReturnType, initTRPC } from "@trpc/server"
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next"
 import { CreateWSSContextFnOptions } from "@trpc/server/adapters/ws"
+import { IncomingMessage } from "http"
+import { NextApiRequest, NextApiResponse } from "next"
 import superjson from "superjson"
 import { ZodError } from "zod"
 import tokenService from "../../services/token.service"
@@ -43,6 +45,8 @@ const t = initTRPC.context<Context>().create({
 
 export const createTRPCRouter = t.router
 export const middleware = t.middleware
+
+const test = (req: IncomingMessage | NextApiRequest, res: NextApiResponse) => {}
 
 const isApi = middleware((opts) => {
   if (!opts.ctx.req || !opts.ctx.res) throw ApiError.BadRequest("Context lost!")

@@ -1,15 +1,14 @@
 import dayjs from "dayjs"
 import NextLink from "next/link"
 import { useState } from "react"
+import toast from "react-hot-toast"
 import Button from "~/components/Button"
 import {
   IconBell,
   IconCheckDouble,
-  IconCog,
   IconSolidAlarm,
   IconTrash,
 } from "~/components/Icons"
-import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
@@ -33,15 +32,28 @@ const PopoverNotifications: React.FC = () => {
   const togglePopoverHandler = () => setIsPopoverOpen((prevState) => !prevState)
 
   const getNotificationsBySessionQuery =
-    api.notification.getAllBySession.useQuery()
+    api.notification.getBySession.useQuery()
 
-  api.notification.onSend.useSubscription(sessionStore.user?.id, {
-    onData(data) {
-      console.log("🚀 ~ file: index.tsx:37 ~ onData ~ data:", data)
+  api.notification.onSend.useSubscription(
+    { userId: sessionStore.user?.id },
+    {
+      onData() {
+        getNotificationsBySessionQuery.refetch()
+      },
+      onError(err) {
+        console.log("🚀 ~ file: index.tsx:41 ~ onError ~ err:", err)
+      },
+    }
+  )
+
+  const readAllNotifications = api.notification.readAll.useMutation({
+    onSuccess() {
+      toast.success("Все уведомления прочитаны.")
       getNotificationsBySessionQuery.refetch()
     },
-    onError(error) {
-      console.log("🚀 ~ file: index.tsx:41 ~ onError ~ error:", error)
+    onError(err) {
+      console.log("🚀 ~ file: index.tsx:57 ~ onError ~ err:", err)
+      toast.error(err.message)
     },
   })
 
@@ -60,7 +72,18 @@ const PopoverNotifications: React.FC = () => {
         <Popover.Header>
           <Popover.Title>Уведомления</Popover.Title>
           <Popover.Actions>
-            <Button type="button" asIcon title="Пометить все, как прочитанное">
+            <Button
+              type="button"
+              loading={readAllNotifications.isLoading}
+              asIcon
+              onClick={() => readAllNotifications.mutate()}
+              title="Пометить все, как прочитанное"
+              disabled={
+                getNotificationsBySessionQuery.isLoading ||
+                !getNotificationsBySessionQuery.data ||
+                getNotificationsBySessionQuery.data.length === 0
+              }
+            >
               <IconCheckDouble />
             </Button>
             <Button
@@ -68,8 +91,16 @@ const PopoverNotifications: React.FC = () => {
               type="button"
               color="danger"
               title="Удалить все"
-              onClick={() =>
-                modalStore.open({ key: ModalKeyMap.DeleteNotifications })
+              onClick={(event) =>
+                modalStore.open({
+                  key: ModalKeyMap.DeleteNotifications,
+                  target: event.currentTarget,
+                })
+              }
+              disabled={
+                getNotificationsBySessionQuery.isLoading ||
+                !getNotificationsBySessionQuery.data ||
+                getNotificationsBySessionQuery.data.length === 0
               }
             >
               <IconTrash />

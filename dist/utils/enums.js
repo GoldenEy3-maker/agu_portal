@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LocalStorageKeyMap = exports.CookieKeyMap = exports.ModalKeyMap = exports.PagePathMap = void 0;
+exports.RedisKeyMap = exports.LocalStorageKeyMap = exports.CookieKeyMap = exports.ModalKeyMap = exports.PagePathMap = void 0;
 exports.PagePathMap = {
     HomePage: "/",
     NotificationsPage: "/notifications",
@@ -23,4 +23,7 @@ exports.CookieKeyMap = {
 };
 exports.LocalStorageKeyMap = {
     isDarkTheme: "_d",
+};
+exports.RedisKeyMap = {
+    Notifications: "notifications",
 };

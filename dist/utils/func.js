@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBaseUrl = exports.toUpperCaseInitialLetter = exports.cls = void 0;
+exports.getBaseWsUrl = exports.getBaseUrl = exports.toUpperCaseInitialLetter = exports.cls = void 0;
 const cls = (...classes) => {
     const result = [];
     const filteredCls = classes.filter((c) => c !== undefined);
@@ -27,6 +27,14 @@ const getBaseUrl = () => {
         return "";
     if (process.env.VERCEL_URL)
         return `https://${process.env.VERCEL_URL}`;
+    if (process.env.APP_URL)
+        return `https://${process.env.APP_URL}`;
     return `http://localhost:${(_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3000}`;
 };
 exports.getBaseUrl = getBaseUrl;
+const getBaseWsUrl = () => {
+    if (process.env.WS_URL)
+        return `ws://${process.env.WS_URL}`;
+    return `ws://127.0.0.1:3000`;
+};
+exports.getBaseWsUrl = getBaseWsUrl;

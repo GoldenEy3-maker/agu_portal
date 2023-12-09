@@ -28,7 +28,10 @@ const Header = () => {
         <Button_1.default className={styles_module_sass_1.default.sidebarControl} asIcon type="button" color="default" onClick={sidebarStore.toggle}>
           <Icons_1.IconMenu />
         </Button_1.default>
-        <Button_1.default className={(0, func_1.cls)(styles_module_sass_1.default.sidebarControl, styles_module_sass_1.default._modal)} asIcon type="button" color="default" onClick={() => modalStore.open({ key: enums_1.ModalKeyMap.Sidebar })}>
+        <Button_1.default className={(0, func_1.cls)(styles_module_sass_1.default.sidebarControl, styles_module_sass_1.default._modal)} asIcon type="button" color="default" onClick={(event) => modalStore.open({
+            key: enums_1.ModalKeyMap.Sidebar,
+            target: event.currentTarget,
+        })}>
           <Icons_1.IconMenu />
         </Button_1.default>
         <div className={styles_module_sass_1.default.title}>

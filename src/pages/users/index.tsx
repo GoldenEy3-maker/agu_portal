@@ -6,7 +6,7 @@ import { api } from "~/utils/api"
 import { NextPageWithLayout } from "../_app"
 
 const UsersPage: NextPageWithLayout = () => {
-  const testSend = api.notification.testSend.useMutation({
+  const testSend = api.notification.send.useMutation({
     onSuccess() {
       toast.success("Уведомление успешно отправлено!")
     },

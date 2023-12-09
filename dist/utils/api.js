@@ -11,7 +11,6 @@ const session_1 = require("~/store/session");
 const func_1 = require("./func");
 exports.api = (0, next_1.createTRPCNext)({
     config({ ctx }) {
-        var _a;
         return {
             transformer: superjson_1.default,
             links: [
@@ -25,7 +24,7 @@ exports.api = (0, next_1.createTRPCNext)({
                     },
                     true: (0, client_1.wsLink)({
                         client: (0, client_1.createWSClient)({
-                            url: (_a = process.env.NEXT_PUBLIC_WS_URL) !== null && _a !== void 0 ? _a : "ws://127.0.0.1:3000",
+                            url: (0, func_1.getBaseWsUrl)(),
                         }),
                     }),
                     false: (0, client_1.httpBatchLink)({

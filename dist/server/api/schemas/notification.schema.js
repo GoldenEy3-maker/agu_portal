@@ -1,13 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotificationModel = exports.NotificationTestSendInput = void 0;
+exports.notificationModel = exports.notificationOnSendInput = exports.notificationSendInput = void 0;
 const zod_1 = require("zod");
-exports.NotificationTestSendInput = zod_1.z.object({
+exports.notificationSendInput = zod_1.z.object({
     link: zod_1.z.string(),
     subject: zod_1.z.string(),
     recipientId: zod_1.z.string(),
 });
-exports.NotificationModel = zod_1.z.object({
+exports.notificationOnSendInput = zod_1.z.object({
+    userId: zod_1.z.string().optional(),
+});
+exports.notificationModel = zod_1.z.object({
     id: zod_1.z.string(),
     recipientId: zod_1.z.string(),
     subject: zod_1.z.string(),

@@ -12,18 +12,19 @@ const styles_module_sass_1 = __importDefault(require("./styles.module.sass"));
 const Root = ({ closeHandler, ...props }) => {
     const modalStore = (0, modal_1.useModalStore)();
     const rootRef = (0, react_1.useRef)(null);
+    const isModalsClosed = modalStore.queue.length === 0;
     const blurHandler = (event) => {
         var _a;
-        if (event.relatedTarget && !((_a = rootRef.current) === null || _a === void 0 ? void 0 : _a.contains(event.relatedTarget)))
+        if (isModalsClosed &&
+            event.relatedTarget &&
+            !((_a = rootRef.current) === null || _a === void 0 ? void 0 : _a.contains(event.relatedTarget)))
             closeHandler();
         if (props.onBlur)
             props.onBlur(event);
     };
     const clickOutsideHandler = (event) => {
         var _a;
-        if (modalStore.queue.length > 0)
-            return;
-        if (!((_a = rootRef.current) === null || _a === void 0 ? void 0 : _a.contains(event.target)))
+        if (isModalsClosed && !((_a = rootRef.current) === null || _a === void 0 ? void 0 : _a.contains(event.target)))
             closeHandler();
     };
     (0, docEvent_hook_1.useDocEventListener)("pointerdown", clickOutsideHandler);

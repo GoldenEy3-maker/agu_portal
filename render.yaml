@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: agu_portal
+    env: node
+    plan: free
+    buildCommand: yarn && yarn build
+    startCommand: yarn start
+    healthCheckPath: /api/trpc/healthCheck
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: DATABASE_URL
+        value: postgresql://postgres:TbHrxNZjPx7XHkJJ@db.phshwfdxephgllzibuap.supabase.co:5432/postgres
+
+      - key: ACCESS_TOKEN_SECRET
+        generateValue: true
+
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+
+      - key: APP_URL
+        fromService:
+          type: web
+          name: agu_portal
+          property: host
+
+      - key: WS_URL
+        fromService:
+          type: web
+          name: agu_portal
+          property: host
+
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: agu_portal_redis
+          property: connectionString

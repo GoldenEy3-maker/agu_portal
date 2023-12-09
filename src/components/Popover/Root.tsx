@@ -12,16 +12,22 @@ export const Root: React.FC<RootProps> = ({ closeHandler, ...props }) => {
   const modalStore = useModalStore()
   const rootRef = useRef<HTMLDivElement>(null)
 
+  const isModalsClosed = modalStore.queue.length === 0
+
   const blurHandler: React.FocusEventHandler<HTMLDivElement> = (event) => {
-    if (event.relatedTarget && !rootRef.current?.contains(event.relatedTarget))
+    if (
+      isModalsClosed &&
+      event.relatedTarget &&
+      !rootRef.current?.contains(event.relatedTarget)
+    )
       closeHandler()
 
     if (props.onBlur) props.onBlur(event)
   }
 
   const clickOutsideHandler = (event: MouseEvent) => {
-    if (modalStore.queue.length > 0) return
-    if (!rootRef.current?.contains(event.target as Element)) closeHandler()
+    if (isModalsClosed && !rootRef.current?.contains(event.target as Element))
+      closeHandler()
   }
 
   useDocEventListener("pointerdown", clickOutsideHandler)

@@ -96,9 +96,12 @@ const SignInModal = () => {
           <Form.Fieldset type="checkbox">
             <react_hook_form_1.Controller control={form.control} name="rememberMe" render={({ field }) => (<Checkbox_1.default type="check" id="rememberMe" label="Запомнить меня" name={field.name} checked={field.value} onChange={field.onChange} onBlur={field.onBlur} disabled={signIn.isLoading}/>)}/>
           </Form.Fieldset>
-          <link_1.default href="#" onClick={(e) => {
-            e.preventDefault();
-            modalStore.open({ key: enums_1.ModalKeyMap.LogOut });
+          <link_1.default href="#" onClick={(event) => {
+            event.preventDefault();
+            modalStore.open({
+                key: enums_1.ModalKeyMap.LogOut,
+                target: event.currentTarget,
+            });
         }}>
             Забыли логин или пароль?
           </link_1.default>

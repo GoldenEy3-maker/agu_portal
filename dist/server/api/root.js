@@ -5,6 +5,7 @@ const auth_router_1 = require("./routers/auth.router");
 const notification_router_1 = require("./routers/notification.router");
 const trpc_1 = require("./trpc");
 exports.appRouter = (0, trpc_1.createTRPCRouter)({
+    healthCheck: trpc_1.publicProcedure.query(() => "healthCheck trpc!"),
     auth: auth_router_1.authRouter,
     notification: notification_router_1.notificationRouter,
 });

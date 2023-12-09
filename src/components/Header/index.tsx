@@ -41,7 +41,12 @@ const Header: React.FC = () => {
           asIcon
           type="button"
           color="default"
-          onClick={() => modalStore.open({ key: ModalKeyMap.Sidebar })}
+          onClick={(event) =>
+            modalStore.open({
+              key: ModalKeyMap.Sidebar,
+              target: event.currentTarget,
+            })
+          }
         >
           <IconMenu />
         </Button>

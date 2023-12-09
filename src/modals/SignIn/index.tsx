@@ -127,9 +127,12 @@ const SignInModal: React.FC = () => {
           </Form.Fieldset>
           <Link
             href="#"
-            onClick={(e) => {
-              e.preventDefault()
-              modalStore.open({ key: ModalKeyMap.LogOut })
+            onClick={(event) => {
+              event.preventDefault()
+              modalStore.open({
+                key: ModalKeyMap.LogOut,
+                target: event.currentTarget,
+              })
             }}
           >
             Забыли логин или пароль?

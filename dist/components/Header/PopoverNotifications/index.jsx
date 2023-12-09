@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dayjs_1 = __importDefault(require("dayjs"));
 const link_1 = __importDefault(require("next/link"));
 const react_1 = require("react");
+const react_hot_toast_1 = __importDefault(require("react-hot-toast"));
 const Button_1 = __importDefault(require("~/components/Button"));
 const Icons_1 = require("~/components/Icons");
 const Popover = __importStar(require("~/components/Popover"));
@@ -49,14 +50,23 @@ const PopoverNotifications = () => {
     const rippleEffectEvent = (0, rippleEffect_hook_1.useRippleEffect)();
     const closePopoverHandler = () => setIsPopoverOpen(false);
     const togglePopoverHandler = () => setIsPopoverOpen((prevState) => !prevState);
-    const getNotificationsBySessionQuery = api_1.api.notification.getAllBySession.useQuery();
-    api_1.api.notification.onSend.useSubscription((_a = sessionStore.user) === null || _a === void 0 ? void 0 : _a.id, {
-        onData(data) {
-            console.log("🚀 ~ file: index.tsx:37 ~ onData ~ data:", data);
+    const getNotificationsBySessionQuery = api_1.api.notification.getBySession.useQuery();
+    api_1.api.notification.onSend.useSubscription({ userId: (_a = sessionStore.user) === null || _a === void 0 ? void 0 : _a.id }, {
+        onData() {
             getNotificationsBySessionQuery.refetch();
         },
-        onError(error) {
-            console.log("🚀 ~ file: index.tsx:41 ~ onError ~ error:", error);
+        onError(err) {
+            console.log("🚀 ~ file: index.tsx:41 ~ onError ~ err:", err);
+        },
+    });
+    const readAllNotifications = api_1.api.notification.readAll.useMutation({
+        onSuccess() {
+            react_hot_toast_1.default.success("Все уведомления прочитаны.");
+            getNotificationsBySessionQuery.refetch();
+        },
+        onError(err) {
+            console.log("🚀 ~ file: index.tsx:57 ~ onError ~ err:", err);
+            react_hot_toast_1.default.error(err.message);
         },
     });
     return (<Popover.Root closeHandler={closePopoverHandler}>
@@ -67,10 +77,17 @@ const PopoverNotifications = () => {
         <Popover.Header>
           <Popover.Title>Уведомления</Popover.Title>
           <Popover.Actions>
-            <Button_1.default type="button" asIcon title="Пометить все, как прочитанное">
+            <Button_1.default type="button" loading={readAllNotifications.isLoading} asIcon onClick={() => readAllNotifications.mutate()} title="Пометить все, как прочитанное" disabled={getNotificationsBySessionQuery.isLoading ||
+            !getNotificationsBySessionQuery.data ||
+            getNotificationsBySessionQuery.data.length === 0}>
               <Icons_1.IconCheckDouble />
             </Button_1.default>
-            <Button_1.default asIcon type="button" color="danger" title="Удалить все" onClick={() => modalStore.open({ key: enums_1.ModalKeyMap.DeleteNotifications })}>
+            <Button_1.default asIcon type="button" color="danger" title="Удалить все" onClick={(event) => modalStore.open({
+            key: enums_1.ModalKeyMap.DeleteNotifications,
+            target: event.currentTarget,
+        })} disabled={getNotificationsBySessionQuery.isLoading ||
+            !getNotificationsBySessionQuery.data ||
+            getNotificationsBySessionQuery.data.length === 0}>
               <Icons_1.IconTrash />
             </Button_1.default>
           </Popover.Actions>

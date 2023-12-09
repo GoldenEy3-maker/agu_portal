@@ -37,6 +37,7 @@ const t = server_1.initTRPC.context().create({
 });
 exports.createTRPCRouter = t.router;
 exports.middleware = t.middleware;
+const test = (req, res) => { };
 const isApi = (0, exports.middleware)((opts) => {
     if (!opts.ctx.req || !opts.ctx.res)
         throw exeptions_1.default.BadRequest("Context lost!");

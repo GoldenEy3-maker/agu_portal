@@ -2,10 +2,10 @@ import { useEffect } from "react"
 
 export const useAutoFocus = (
   target: React.RefObject<HTMLElement>,
-  state: boolean
+  condition: boolean
 ) => {
   useEffect(() => {
-    if (!target.current || !state) return
+    if (!target.current || !condition) return
 
     setTimeout(() => {
       target.current!.focus({ preventScroll: true })
@@ -14,5 +14,5 @@ export const useAutoFocus = (
         target.current!.removeAttribute("data-auto-focus")
       )
     }, 30)
-  }, [state])
+  }, [condition])
 }

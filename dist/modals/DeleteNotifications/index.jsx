@@ -36,8 +36,8 @@ const DeleteNotificationsModal = () => {
     const modalStore = (0, modal_1.useModalStore)();
     const isModalOpen = modalStore.queue.at(-1) === enums_1.ModalKeyMap.DeleteNotifications;
     const closeModalHandler = () => modalStore.close(enums_1.ModalKeyMap.DeleteNotifications);
-    const getNotificationsQuery = api_1.api.notification.getAllBySession.useQuery();
-    const deleteNotifications = api_1.api.notification.deleteAll.useMutation({
+    const getNotificationsQuery = api_1.api.notification.getBySession.useQuery();
+    const clearNotifications = api_1.api.notification.clear.useMutation({
         onSuccess() {
             react_hot_toast_1.default.success("Уведомления успешно удалены.");
             getNotificationsQuery.refetch();
@@ -57,10 +57,10 @@ const DeleteNotificationsModal = () => {
         <p>Ваши уведомления пропадут навседа!</p>
       </Modal.Content>
       <Modal.Footer>
-        <Button_1.default type="button" onClick={closeModalHandler} disabled={deleteNotifications.isLoading}>
+        <Button_1.default type="button" onClick={closeModalHandler} disabled={clearNotifications.isLoading}>
           Отмена
         </Button_1.default>
-        <Button_1.default type="button" color="danger" variant="filled" disabled={deleteNotifications.isLoading} loading={deleteNotifications.isLoading} onClick={() => deleteNotifications.mutate()}>
+        <Button_1.default type="button" color="danger" variant="filled" disabled={clearNotifications.isLoading} loading={clearNotifications.isLoading} onClick={() => clearNotifications.mutate()}>
           Удалить
         </Button_1.default>
       </Modal.Footer>

@@ -1,13 +1,16 @@
 import { z } from "zod"
-import { UserModel } from "./prisma"
 
-export const NotificationTestSendInput = z.object({
+export const notificationSendInput = z.object({
   link: z.string(),
   subject: z.string(),
   recipientId: z.string(),
 })
 
-export const NotificationModel = z.object({
+export const notificationOnSendInput = z.object({
+  userId: z.string().optional(),
+})
+
+export const notificationModel = z.object({
   id: z.string(),
   recipientId: z.string(),
   subject: z.string(),
@@ -21,8 +24,6 @@ export const NotificationModel = z.object({
   }),
 })
 
-export type NotificationTestSendInput = z.TypeOf<
-  typeof NotificationTestSendInput
->
-
-export type NotificationModel = z.TypeOf<typeof NotificationModel>
+export type NotificationSendInput = z.TypeOf<typeof notificationSendInput>
+export type NotificationOnSendInput = z.TypeOf<typeof notificationOnSendInput>
+export type NotificationModel = z.TypeOf<typeof notificationModel>

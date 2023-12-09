@@ -11,7 +11,7 @@ import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server"
 import superjson from "superjson"
 import { type AppRouter } from "~/server/api/root"
 import { useSessionStore } from "~/store/session"
-import { getBaseUrl } from "./func"
+import { getBaseUrl, getBaseWsUrl } from "./func"
 
 export const api = createTRPCNext<AppRouter>({
   config({ ctx }) {
@@ -29,7 +29,7 @@ export const api = createTRPCNext<AppRouter>({
           },
           true: wsLink({
             client: createWSClient({
-              url: process.env.NEXT_PUBLIC_WS_URL ?? "ws://127.0.0.1:3000",
+              url: getBaseWsUrl(),
             }),
           }),
           false: httpBatchLink({

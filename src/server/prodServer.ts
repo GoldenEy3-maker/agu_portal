@@ -44,9 +44,9 @@ void app.prepare().then(() => {
 
   server.listen(port, () => {
     console.log(
-      `> Server listening at http://127.0.0.1:${port} as ${
-        dev ? "development" : process.env.NODE_ENV
-      }`
+      `> Server listening https & ws requests at ${
+        (process.env.APP_URL || process.env.WS_URL) ?? "127.0.0.1"
+      }:${port} as ${dev ? "development" : process.env.NODE_ENV}`
     )
   })
 })

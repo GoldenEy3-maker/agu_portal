@@ -29,7 +29,12 @@ const Actions: React.FC = () => {
               type="button"
               asIcon
               color="default"
-              onClick={() => modalStore.open({ key: ModalKeyMap.Chat })}
+              onClick={(event) =>
+                modalStore.open({
+                  key: ModalKeyMap.Chat,
+                  target: event.currentTarget,
+                })
+              }
             >
               <IconChat />
             </Button>

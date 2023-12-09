@@ -13,9 +13,9 @@ const DeleteNotificationsModal = () => {
   const closeModalHandler = () =>
     modalStore.close(ModalKeyMap.DeleteNotifications)
 
-  const getNotificationsQuery = api.notification.getAllBySession.useQuery()
+  const getNotificationsQuery = api.notification.getBySession.useQuery()
 
-  const deleteNotifications = api.notification.deleteAll.useMutation({
+  const clearNotifications = api.notification.clear.useMutation({
     onSuccess() {
       toast.success("Уведомления успешно удалены.")
       getNotificationsQuery.refetch()
@@ -40,7 +40,7 @@ const DeleteNotificationsModal = () => {
         <Button
           type="button"
           onClick={closeModalHandler}
-          disabled={deleteNotifications.isLoading}
+          disabled={clearNotifications.isLoading}
         >
           Отмена
         </Button>
@@ -48,9 +48,9 @@ const DeleteNotificationsModal = () => {
           type="button"
           color="danger"
           variant="filled"
-          disabled={deleteNotifications.isLoading}
-          loading={deleteNotifications.isLoading}
-          onClick={() => deleteNotifications.mutate()}
+          disabled={clearNotifications.isLoading}
+          loading={clearNotifications.isLoading}
+          onClick={() => clearNotifications.mutate()}
         >
           Удалить
         </Button>
