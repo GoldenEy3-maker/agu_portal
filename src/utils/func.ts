@@ -32,8 +32,10 @@ export const getBaseUrl = () => {
 }
 
 export const getBaseWsUrl = () => {
+  if (typeof window !== "undefined") return ""
+
   if (process.env.APP_URL)
     return `ws://${process.env.APP_URL}:${process.env.PORT}`
 
-  return `ws://127.0.0.1:3000`
+  return `ws://127.0.0.1:${process.env.PORT ?? 3000}`
 }
