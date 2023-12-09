@@ -20,6 +20,12 @@ services:
       - key: DATABASE_URL
         value: postgresql://postgres:TbHrxNZjPx7XHkJJ@db.phshwfdxephgllzibuap.supabase.co:5432/postgres
 
+      - key: APP_HOSTNAME
+        fromService:
+          type: web
+          name: agu_portal
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
+
       - key: ACCESS_TOKEN_SECRET
         generateValue: true
 
