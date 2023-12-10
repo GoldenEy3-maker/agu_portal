@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
     <section className={styles.welcome}>
       <div className={styles.wrapper}>
         <Image
-          src={WelcomeAguJpg}
+          src={WelcomeAguJpg.src}
           alt=""
           blurDataURL={WelcomeAguJpg.blurDataURL}
           fill

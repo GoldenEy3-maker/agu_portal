@@ -1,8 +1,7 @@
+import { applyWSSHandler } from "@trpc/server/adapters/ws"
 import next from "next"
 import { createServer } from "node:http"
 import { parse } from "node:url"
-
-import { applyWSSHandler } from "@trpc/server/adapters/ws"
 import { WebSocketServer } from "ws"
 import { appRouter } from "./api/root"
 import { createTRPCContext } from "./api/trpc"

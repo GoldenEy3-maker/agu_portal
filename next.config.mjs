@@ -8,6 +8,7 @@ const config = {
       },
     ],
     dangerouslyAllowSVG: true,
+    unoptimized: true,
   },
   i18n: {
     locales: ["ru"],
