@@ -1,5 +1,5 @@
 import next from "next"
-import { createServer } from "node:http"
+import { createServer } from "node:https"
 import { parse } from "node:url"
 
 import { applyWSSHandler } from "@trpc/server/adapters/ws"
@@ -8,9 +8,15 @@ import { appRouter } from "./api/root"
 import { createTRPCContext } from "./api/trpc"
 
 const port = parseInt(process.env.NEXT_PUBLIC_PORT || "3000", 10)
+const hostname = process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
 const dev = process.env.NODE_ENV !== "production"
-const app = next({ dev })
+const app = next({ dev, port, hostname })
 const handle = app.getRequestHandler()
+
+// const sslOptions = {
+//   key: fs.readFileSync(process.cwd() + "/ssl/server.key"),
+//   cert: fs.readFileSync(process.cwd() + "/ssl/server.crt"),
+// }
 
 void app.prepare().then(() => {
   const server = createServer(async (req, res) => {
@@ -19,7 +25,10 @@ void app.prepare().then(() => {
     await handle(req, res, parsedUrl)
   })
 
-  const wss = new WebSocketServer({ server })
+  const wss = new WebSocketServer({
+    server,
+  })
+
   const handler = applyWSSHandler({
     wss,
     router: appRouter,
@@ -44,9 +53,9 @@ void app.prepare().then(() => {
 
   server.listen(port, () => {
     console.log(
-      `> Server listening http(s)/ws(s) requests at ${
-        process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
-      }:${port} as ${dev ? "development" : process.env.NODE_ENV}`
+      `> Server listening http(s)/ws(s) requests at ${hostname}:${port} as ${
+        dev ? "development" : process.env.NODE_ENV
+      }`
     )
   })
 })
