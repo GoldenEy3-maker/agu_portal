@@ -12,43 +12,49 @@ import { authProcedure, publicProcedure } from "../trpc"
 export default new (class NotificationController {
   getBySession() {
     return authProcedure.query(async (opts) => {
-      let notificaitons = ((await opts.ctx.redisClient.json_get(
-        RedisKeyMap.Notifications
-      )) || []) as NotificationModel[]
+      const scan = await opts.ctx.redisClient.scan(
+        0,
+        "MATCH",
+        RedisKeyMap.Notification + ":*"
+      )
+      const keys = scan[1]
+      let notifications: NotificationModel[] = []
 
-      if (notificaitons.length > 0) {
-        notificaitons = notificaitons
-          .filter(
-            (notification) => notification.recipientId === opts.ctx.user.id
-          )
-          .sort((a, b) => {
-            const dateA = new Date(a.createdAt).getTime()
-            const dateB = new Date(b.createdAt).getTime()
+      for (const key of keys) {
+        const result = await opts.ctx.redisClient.get(key)
 
-            return dateB - dateA
-          })
+        if (!result) return
+
+        const notification = notificationModel.parse(JSON.parse(result))
+
+        if (notification.recipientId !== opts.ctx.user.id) return
+
+        notifications.push(notification)
       }
 
-      return notificaitons
+      return notifications
     })
   }
 
   clear() {
     return authProcedure.mutation(async (opts) => {
-      let notifications = ((await opts.ctx.redisClient.json_get(
-        RedisKeyMap.Notifications
-      )) || []) as NotificationModel[]
+      const scan = await opts.ctx.redisClient.scan(
+        0,
+        "MATCH",
+        RedisKeyMap.Notification + ":*"
+      )
+      const keys = scan[1]
 
-      if (notifications.length > 0) {
-        notifications = notifications.filter(
-          (notificaiton) => notificaiton.recipientId !== opts.ctx.user.id
-        )
+      for (const key of keys) {
+        const result = await opts.ctx.redisClient.get(key)
 
-        await opts.ctx.redisClient.json_set(
-          RedisKeyMap.Notifications,
-          "$",
-          notifications
-        )
+        if (!result) return
+
+        const notification = notificationModel.parse(JSON.parse(result))
+
+        if (notification.recipientId !== opts.ctx.user.id) return
+
+        await opts.ctx.redisClient.del(key)
       }
 
       return true
@@ -81,60 +87,52 @@ export default new (class NotificationController {
 
   readAll() {
     return authProcedure.mutation(async (opts) => {
-      let notifications = ((await opts.ctx.redisClient.json_get(
-        RedisKeyMap.Notifications
-      )) || []) as NotificationModel[]
+      const scan = await opts.ctx.redisClient.scan(
+        0,
+        "MATCH",
+        RedisKeyMap.Notification + ":*"
+      )
+      const keys = scan[1]
 
-      if (notifications.length > 0) {
-        notifications = notifications
-          .filter(
-            (notification) => notification.recipientId === opts.ctx.user.id
-          )
-          .map((notification) => ({
-            ...notification,
-            isReaded: true,
-          }))
+      for (const key of keys) {
+        let result = await opts.ctx.redisClient.get(key)
 
-        await opts.ctx.redisClient.json_set(
-          RedisKeyMap.Notifications,
-          "$",
-          notifications
-        )
+        if (!result) return
+
+        let notification = notificationModel.parse(JSON.parse(result))
+
+        if (notification.recipientId !== opts.ctx.user.id) return
+
+        notification = { ...notification, isReaded: true }
+
+        await opts.ctx.redisClient.set(key, JSON.stringify(notification))
       }
 
-      return notifications
+      return true
     })
   }
 
   send() {
     return authProcedure.input(notificationSendInput).mutation(async (opts) => {
-      const notifications = ((await opts.ctx.redisClient.json_get(
-        RedisKeyMap.Notifications
-      )) || []) as NotificationModel[]
-
       const newNotification = notificationModel.parse({
         ...opts.input,
         id: crypto.randomUUID(),
-        sender: {
-          id: opts.ctx.user.id,
-          avatar: opts.ctx.user.avatar,
-          name: opts.ctx.user.name,
-        },
         isReaded: false,
-        createdAt: new Date().toString(),
+        sender: opts.ctx.user,
+        createdAt: new Date().toISOString(),
       })
 
-      await opts.ctx.redisClient.json_set(RedisKeyMap.Notifications, "$", [
-        ...notifications,
-        newNotification,
-      ])
+      await opts.ctx.redisClient.set(
+        `${RedisKeyMap.Notification}:${crypto.randomUUID()}`,
+        JSON.stringify(newNotification)
+      )
 
       await opts.ctx.pubRedisClient.publish(
         `user-notification-${opts.input.recipientId}`,
         JSON.stringify(newNotification)
       )
 
-      return newNotification
+      return true
     })
   }
 })()

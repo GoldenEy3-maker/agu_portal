@@ -28,8 +28,8 @@ export const LocalStorageKeyMap = {
 } as const
 
 export const RedisKeyMap = {
-  Notifications: "notifications",
-}
+  Notification: "notification",
+} as const
 
 export type PagePathMap = ValueOf<typeof PagePathMap>
 export type ModalKeyMap = ValueOf<typeof ModalKeyMap>
