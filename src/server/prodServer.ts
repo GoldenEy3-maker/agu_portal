@@ -1,5 +1,5 @@
 import next from "next"
-import { createServer } from "node:https"
+import { createServer } from "node:http"
 import { parse } from "node:url"
 
 import { applyWSSHandler } from "@trpc/server/adapters/ws"
@@ -12,11 +12,6 @@ const hostname = process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev, port, hostname })
 const handle = app.getRequestHandler()
-
-// const sslOptions = {
-//   key: fs.readFileSync(process.cwd() + "/ssl/server.key"),
-//   cert: fs.readFileSync(process.cwd() + "/ssl/server.crt"),
-// }
 
 void app.prepare().then(() => {
   const server = createServer(async (req, res) => {
