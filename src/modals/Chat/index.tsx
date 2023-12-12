@@ -6,6 +6,7 @@ const ChatModal: React.FC = () => {
   const modalStore = useModalStore()
   const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.Chat
   const closeModalHandler = () => modalStore.close(ModalKeyMap.Chat)
+
   return (
     <Modal.Root state={isModalOpen} asDrawer>
       <Modal.Header>

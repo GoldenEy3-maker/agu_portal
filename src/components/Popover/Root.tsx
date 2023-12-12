@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useDocEventListener } from "~/hooks/docEvent.hook"
-import { useModalStore } from "~/store/modal"
+import { GlobalDatasetKeyMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.sass"
 
@@ -9,14 +9,11 @@ type RootProps = {
 } & React.ComponentProps<"div">
 
 export const Root: React.FC<RootProps> = ({ closeHandler, ...props }) => {
-  const modalStore = useModalStore()
   const rootRef = useRef<HTMLDivElement>(null)
-
-  const isModalsClosed = modalStore.queue.length === 0
 
   const blurHandler: React.FocusEventHandler<HTMLDivElement> = (event) => {
     if (
-      isModalsClosed &&
+      !document.body.hasAttribute(GlobalDatasetKeyMap.LockByModal) &&
       event.relatedTarget &&
       !rootRef.current?.contains(event.relatedTarget)
     )
@@ -26,8 +23,12 @@ export const Root: React.FC<RootProps> = ({ closeHandler, ...props }) => {
   }
 
   const clickOutsideHandler = (event: MouseEvent) => {
-    if (isModalsClosed && !rootRef.current?.contains(event.target as Element))
+    if (
+      !document.body.hasAttribute(GlobalDatasetKeyMap.LockByModal) &&
+      !rootRef.current?.contains(event.target as Element)
+    ) {
       closeHandler()
+    }
   }
 
   useDocEventListener("pointerdown", clickOutsideHandler)

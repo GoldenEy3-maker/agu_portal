@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useDocEventListener } from "~/hooks/docEvent.hook"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.sass"
@@ -22,7 +22,7 @@ export const Container: React.FC<ContainerProps> = ({
       !(event.target as HTMLElement).closest("[data-modal-root]") ||
       !containerRef.current?.contains(event.target as HTMLElement)
     )
-      closeHandler && closeHandler()
+      closeHandler()
 
     if (props.onPointerDown) props.onPointerDown(event)
   }
@@ -35,7 +35,7 @@ export const Container: React.FC<ContainerProps> = ({
       !event.relatedTarget.closest("[data-modal-root]") &&
       !containerRef.current?.contains(event.relatedTarget as HTMLElement)
     )
-      closeHandler && closeHandler()
+      closeHandler()
 
     if (props.onBlur) props.onBlur(event)
   }

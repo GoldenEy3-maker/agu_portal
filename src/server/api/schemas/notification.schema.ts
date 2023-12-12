@@ -15,7 +15,7 @@ export const notificationModel = z.object({
   recipientId: z.string(),
   subject: z.string(),
   link: z.string(),
-  isReaded: z.boolean(),
+  isRead: z.boolean(),
   createdAt: z.string(),
   sender: z.object({
     id: z.string(),

@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { ModalKeyMap } from "~/utils/enums"
+import { GlobalDatasetKeyMap, ModalKeyMap } from "~/utils/enums"
 
 type ModalProps = Record<ModalKeyMap, unknown>
 
@@ -31,7 +31,7 @@ export const useModalStore = create<ModalStore>((set, get) => ({
         "--scrollbar-offset",
         window.innerWidth - document.body.offsetWidth + "px"
       )
-    document.body.dataset.lock = "true"
+    document.body.setAttribute(GlobalDatasetKeyMap.LockByModal, "true")
 
     if (args.target) set(() => ({ target: args.target }))
 
@@ -55,7 +55,7 @@ export const useModalStore = create<ModalStore>((set, get) => ({
     )
 
     if (newQueue.length === 0) {
-      setTimeout(() => document.body.removeAttribute("data-lock"), 200)
+      setTimeout(() => document.body.removeAttribute(GlobalDatasetKeyMap.LockByModal), 200)
 
       const target = get().target
 

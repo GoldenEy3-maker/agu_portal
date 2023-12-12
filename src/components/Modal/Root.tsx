@@ -22,7 +22,7 @@ export const Root: React.FC<RootProps> = ({
       })}
       aria-hidden={!state}
     >
-      <div data-modal-root className={styles.rootWrapper}>
+      <div data-modal-root="" className={styles.rootWrapper}>
         {props.children}
       </div>
     </div>

@@ -103,7 +103,6 @@ const PopoverProfile: React.FC = () => {
                   key: ModalKeyMap.LogOut,
                   target: event.currentTarget,
                 })
-                closePopoverHandler()
               }}
             >
               <IconLogOut /> <span>Выход</span>
