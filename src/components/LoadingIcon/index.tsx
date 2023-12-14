@@ -1,8 +1,16 @@
-import { BiLoader } from "react-icons/bi"
 import styles from "./styles.module.sass"
 
-const LoadingIcon = () => {
-  return <BiLoader className={styles.icon} />
+const LoadingIcon: React.FC = () => {
+  return (
+    <div className={styles.spinner}>
+      <div className={styles.rightSide}>
+        <div className={styles.bar}></div>
+      </div>
+      <div className={styles.leftSide}>
+        <div className={styles.bar}></div>
+      </div>
+    </div>
+  )
 }
 
 export default LoadingIcon

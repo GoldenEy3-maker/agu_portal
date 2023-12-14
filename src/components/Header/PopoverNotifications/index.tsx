@@ -5,10 +5,11 @@ import toast from "react-hot-toast"
 import Button from "~/components/Button"
 import {
   IconBell,
-  IconCheckDouble,
+  IconCheckSqure,
   IconSolidAlarm,
-  IconTrash
+  IconTrash,
 } from "~/components/Icons"
+import LoadingIcon from "~/components/LoadingIcon"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
@@ -35,14 +36,14 @@ const PopoverNotifications: React.FC = () => {
     api.notification.getBySession.useQuery()
 
   api.notification.onSend.useSubscription(
-    {userId: sessionStore.user?.id},
+    { userId: sessionStore.user?.id },
     {
       onData() {
         void getNotificationsBySessionQuery.refetch()
       },
       onError(err) {
         console.log("🚀 ~ file: index.tsx:41 ~ onError ~ err:", err)
-      }
+      },
     }
   )
 
@@ -54,7 +55,7 @@ const PopoverNotifications: React.FC = () => {
     onError(err) {
       console.log("🚀 ~ file: index.tsx:57 ~ onError ~ err:", err)
       toast.error(err.message)
-    }
+    },
   })
 
   return (
@@ -66,7 +67,7 @@ const PopoverNotifications: React.FC = () => {
         onClick={togglePopoverHandler}
         isActive={isPopoverOpen}
       >
-        <IconBell/>
+        <IconBell />
       </Popover.Trigger>
       <Popover.Wrapper isOpen={isPopoverOpen}>
         <Popover.Header>
@@ -84,7 +85,7 @@ const PopoverNotifications: React.FC = () => {
                 getNotificationsBySessionQuery.data.length === 0
               }
             >
-              <IconCheckDouble/>
+              <IconCheckSqure />
             </Button>
             <Button
               asIcon
@@ -94,7 +95,7 @@ const PopoverNotifications: React.FC = () => {
               onClick={(event) =>
                 modalStore.open({
                   key: ModalKeyMap.DeleteNotifications,
-                  target: event.currentTarget
+                  target: event.currentTarget,
                 })
               }
               disabled={
@@ -103,7 +104,7 @@ const PopoverNotifications: React.FC = () => {
                 getNotificationsBySessionQuery.data.length === 0
               }
             >
-              <IconTrash/>
+              <IconTrash />
             </Button>
           </Popover.Actions>
         </Popover.Header>
@@ -111,52 +112,58 @@ const PopoverNotifications: React.FC = () => {
           {!getNotificationsBySessionQuery.isLoading ? (
             getNotificationsBySessionQuery.data?.length ? (
               <ul className={styles.list}>
-                {getNotificationsBySessionQuery.data?.sort((a, b) => {
-                  const dateA = new Date(a.createdAt).getTime()
-                  const dateB = new Date(b.createdAt).getTime()
+                {getNotificationsBySessionQuery.data
+                  ?.sort((a, b) => {
+                    const dateA = new Date(a.createdAt).getTime()
+                    const dateB = new Date(b.createdAt).getTime()
 
-                  return dateB - dateA
-                }).map((notification) => (
-                  <li key={notification.id}>
-                    <NextLink
-                      href={PagePathMap.HomePage}
-                      onPointerDown={rippleEffectEvent}
-                      className={cls(styles.item, {
-                        [styles._notReaded ?? ""]: !notification.isRead
-                      })}
-                    >
-                      <div className={styles.avatar}>
-                        <UserAvatar src={notification.sender.avatar}/>
-                      </div>
-                      <p className={styles.text}>
-                        <strong>{notification.sender.name}</strong>
-                        &nbsp;оставил-(ла) отзыв на&nbsp;
-                        <strong>Лабораторная работа №1</strong>
-                      </p>
-                      <p className={styles.extraInfo}>
-                        <time
-                          dateTime={dayjs(notification.createdAt).toISOString()}
-                        >
-                          {dayjs().to(dayjs(notification.createdAt))}
-                        </time>
-                        <i></i>
-                        <span>Менеджмент в профессиональной деятельности</span>
-                      </p>
-                    </NextLink>
-                  </li>
-                ))}
+                    return dateB - dateA
+                  })
+                  .map((notification) => (
+                    <li key={notification.id}>
+                      <NextLink
+                        href={PagePathMap.HomePage}
+                        onPointerDown={rippleEffectEvent}
+                        className={cls(styles.item, {
+                          [styles._notReaded ?? ""]: !notification.isRead,
+                        })}
+                      >
+                        <div className={styles.avatar}>
+                          <UserAvatar src={notification.sender.avatar} />
+                        </div>
+                        <p className={styles.text}>
+                          <strong>{notification.sender.name}</strong>
+                          &nbsp;оставил-(ла) отзыв на&nbsp;
+                          <strong>Лабораторная работа №1</strong>
+                        </p>
+                        <p className={styles.extraInfo}>
+                          <time
+                            dateTime={dayjs(
+                              notification.createdAt
+                            ).toISOString()}
+                          >
+                            {dayjs().to(dayjs(notification.createdAt))}
+                          </time>
+                          <i></i>
+                          <span>
+                            Менеджмент в профессиональной деятельности
+                          </span>
+                        </p>
+                      </NextLink>
+                    </li>
+                  ))}
               </ul>
             ) : (
               <div className={styles.empty}>
                 <span>
-                  <IconSolidAlarm/>
+                  <IconSolidAlarm />
                 </span>
                 <p>У вас пока нет уведомлений.</p>
                 <p>Возвращайтесь позже.</p>
               </div>
             )
           ) : (
-            <LoadingSkeleton/>
+            <LoadingSkeleton />
           )}
         </Popover.Content>
       </Popover.Wrapper>
