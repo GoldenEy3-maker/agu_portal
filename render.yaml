@@ -1,15 +1,17 @@
 services:
   - type: redis
-    name: lightning
+    name: agu-portal-redis
     ipAllowList:
       - source: 0.0.0.0/0
         description: everywhere
+    region: frankfurt
     plan: free
 
   - type: web
-    name: agu_portal
+    name: agu-portal-hosting
     runtime: node
     env: node
+    region: frankfurt
     plan: free
     buildCommand: NODE_ENV=development yarn && yarn build
     startCommand: yarn start
@@ -18,7 +20,9 @@ services:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        value: postgresql://postgres:TbHrxNZjPx7XHkJJ@db.phshwfdxephgllzibuap.supabase.co:5432/postgres
+        fromDatabase:
+          name: agu-portal-database
+          property: connectionString
       - key: NEXT_PUBLIC_APP_HOSTNAME
         fromService:
           type: web
@@ -38,3 +42,8 @@ services:
           type: redis
           name: lightning
           property: connectionString
+
+databases:
+  name: agu-portal-database
+  region: frankfurt
+  plan: free
