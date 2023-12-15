@@ -44,6 +44,6 @@ services:
           property: connectionString
 
 databases:
-  name: agu-portal-db
-  region: frankfurt
-  plan: free
+  - name: agu-portal-db
+    region: frankfurt
+    plan: free
