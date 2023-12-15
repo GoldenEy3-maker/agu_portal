@@ -24,7 +24,7 @@ const UsersPage: NextPageWithLayout = () => {
           testSend.mutate({
             link: "",
             subject: "",
-            recipientId: "b9c9a596-ce65-4f20-a1b8-5c7ce94e8ab3",
+            recipientId: "7a5b2e46-6bdd-46e5-9149-b35dfae50982",
           })
         }
       >
