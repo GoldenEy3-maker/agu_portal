@@ -4,7 +4,7 @@ import { RouterOutputs } from "~/utils/api"
 
 type SessionStore = {
   token: string | null
-  user: Partial<RouterOutputs["auth"]["getSession"]> | null
+  user: RouterOutputs["auth"]["getSession"] | null
   setToken: (token: string) => void
   removeToken: () => void
   setUser: (data: User) => void

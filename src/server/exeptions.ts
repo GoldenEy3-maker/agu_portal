@@ -20,4 +20,8 @@ export default class ApiError extends TRPCError {
       message ?? "Неавторизованный пользователь!"
     )
   }
+
+  static EnvVarsNotFound() {
+    return new ApiError("INTERNAL_SERVER_ERROR", "Env vars not found!")
+  }
 }

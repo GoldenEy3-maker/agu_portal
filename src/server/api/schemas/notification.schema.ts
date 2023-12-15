@@ -7,7 +7,7 @@ export const notificationSendInput = z.object({
 })
 
 export const notificationOnSendInput = z.object({
-  userId: z.string().optional(),
+  userId: z.string().nullable(),
 })
 
 export const notificationModel = z.object({

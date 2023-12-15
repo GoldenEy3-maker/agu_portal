@@ -12,12 +12,13 @@
   opacity: 0
   visibility: hidden
 
+  contain: paint
   background-color: hsl(var(--surface-container-hsl))
   border-radius: var(--medium-shape)
   box-shadow: 0 0 0.5rem hsla(var(--surface-bxs-hsla))
 
   width: max-content
-  max-height: 80svh
+  max-height: calc(100vh - var(--header-h))
 
   transform-origin: top right
   scale: 0.9

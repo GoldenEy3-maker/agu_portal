@@ -1,58 +1,71 @@
 import { setCookie } from "cookies-next"
 import jwt from "jsonwebtoken"
 import { NextApiRequest, NextApiResponse } from "next"
+import { z } from "zod"
+import ApiError from "../server/exeptions"
 import { CookieKeyMap } from "../utils/enums"
 
-type AccessTokenPayload = {
-  login: string
-}
+const accessTokenPayloadSchema = z.object({
+  login: z.string(),
+})
 
-type RefreshTokenPayload = {
-  login: string
-  tokenVersion: number
-}
+const refreshTokenPayloadSchema = z.object({
+  login: z.string(),
+  tokenVersion: z.number(),
+})
+
+type AccessTokenPayload = z.TypeOf<typeof accessTokenPayloadSchema>
+type RefreshTokenPayload = z.TypeOf<typeof refreshTokenPayloadSchema>
 
 export default new (class TokenService {
   generateTokens(
     payload: AccessTokenPayload & RefreshTokenPayload,
     rememberMe?: boolean
   ) {
-    const accessToken = jwt.sign(
-      { login: payload.login },
-      process.env.ACCESS_TOKEN_SECRET ?? "",
-      {
-        expiresIn: "1m",
-      }
-    )
-    const refreshToken = jwt.sign(
-      { login: payload.login, tokenVersion: payload.tokenVersion },
-      process.env.REFRESH_TOKEN_SECRET ?? "",
-      {
-        expiresIn: rememberMe ? "7d" : "24h",
-      }
-    )
+    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+    const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET
+
+    if (!ACCESS_TOKEN_SECRET || !REFRESH_TOKEN_SECRET)
+      throw ApiError.EnvVarsNotFound()
+
+    const accessToken = jwt.sign(payload, ACCESS_TOKEN_SECRET, {
+      expiresIn: "1m",
+    })
+
+    const refreshToken = jwt.sign(payload, REFRESH_TOKEN_SECRET, {
+      expiresIn: rememberMe ? "7d" : "24h",
+    })
 
     return { accessToken, refreshToken }
   }
 
   verifyAccessToken(token: string) {
+    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+
+    if (!ACCESS_TOKEN_SECRET) throw ApiError.EnvVarsNotFound()
+
     try {
-      return jwt.verify(
-        token,
-        process.env.ACCESS_TOKEN_SECRET ?? ""
-      ) as AccessTokenPayload
-    } catch (error) {
+      const payload = accessTokenPayloadSchema.parse(
+        jwt.verify(token, ACCESS_TOKEN_SECRET)
+      )
+      return payload
+    } catch (err) {
       return null
     }
   }
 
   verifyRefreshToken(token: string) {
+    const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET
+
+    if (!REFRESH_TOKEN_SECRET) throw ApiError.EnvVarsNotFound()
+
     try {
-      return jwt.verify(
-        token,
-        process.env.REFRESH_TOKEN_SECRET ?? ""
-      ) as RefreshTokenPayload
-    } catch (error) {
+      const payload = refreshTokenPayloadSchema.parse(
+        jwt.verify(token, REFRESH_TOKEN_SECRET)
+      )
+
+      return payload
+    } catch (err) {
       return null
     }
   }

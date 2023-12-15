@@ -9,7 +9,6 @@ import {
   IconSolidAlarm,
   IconTrash,
 } from "~/components/Icons"
-import LoadingIcon from "~/components/LoadingIcon"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
@@ -36,7 +35,7 @@ const PopoverNotifications: React.FC = () => {
     api.notification.getBySession.useQuery()
 
   api.notification.onSend.useSubscription(
-    { userId: sessionStore.user?.id },
+    { userId: sessionStore.user?.id ?? null },
     {
       onData() {
         void getNotificationsBySessionQuery.refetch()

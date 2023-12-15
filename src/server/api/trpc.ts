@@ -44,8 +44,6 @@ const t = initTRPC.context<Context>().create({
 export const createTRPCRouter = t.router
 export const middleware = t.middleware
 
-const test = (req: IncomingMessage | NextApiRequest, res: NextApiResponse) => {}
-
 const isApi = middleware((opts) => {
   if (!opts.ctx.req || !opts.ctx.res) throw ApiError.BadRequest("Context lost!")
 

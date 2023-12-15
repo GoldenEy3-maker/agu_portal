@@ -1,73 +1,23 @@
 
 .spinner
-  width: 1em
-  height: 1em
-  position: relative
-  animation: rotate-all 1s linear infinite
+  animation: rotate-spinner 1.4s linear infinite
 
-.rightSide,
-.leftSide
-  width: 50%
-  height: 100%
-  position: absolute
-  top: 0
-  overflow: hidden
+.circle
+  stroke-dasharray: 60
+  stroke-dashoffset: 0
+  transform-origin: center
+  animation: rotate-circle 1.4s ease-in-out infinite
 
-.leftSide
-  left: 0
-
-.rightSide
-  right: 0
-
-.bar
-  width: 100%
-  height: 100%
-  border-radius: var(--full-shape) 0 0 var(--full-shape)
-  border: 2px solid currentColor
-  position: relative
-
-  &:after
-    content: ""
-    width: 2px
-    height: 2px
-    display: block
-    background: currentColor
-    position: absolute
-    border-radius: 2px
-
-  .rightSide &
-    border-radius: 0 var(--full-shape) var(--full-shape) 0
-    border-left: none
-    transform: rotate(2deg)
-    transform-origin: left center
-    animation: rotate-right .75s linear infinite alternate
-    &:after
-      bottom: -2px
-      left: -1px
-
-  .leftSide &
-    border-right: none
-    transform: rotate(-2deg)
-    transform-origin: right center
-    animation: rotate-left .75s linear infinite alternate
-    &:after
-      bottom: -2px
-      right: -1px
-
-@keyframes rotate-left
-  to
-    transform: rotate(-30deg)
+@keyframes rotate-circle
   from
-    transform: rotate(-175deg)
-
-@keyframes rotate-right
-  from
-    transform: rotate(175deg)
+    stroke-dashoffset: 60
+  50%
+    stroke-dashoffset: calc(60 / 4)
+    rotate: 135deg
   to
-    transform: rotate(30deg)
+    stroke-dashoffset: 60
+    rotate: 450deg
 
-@keyframes rotate-all
-  from
-    transform: rotate(0deg)
+@keyframes rotate-spinner
   to
-    transform: rotate(360deg)
+    rotate: 270deg
