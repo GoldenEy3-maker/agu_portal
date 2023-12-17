@@ -27,7 +27,7 @@ const DeleteNotificationsModal = () => {
       closeModalHandler()
     },
     onError(error) {
-      console.log("🚀 ~ file: index.tsx:20 ~ onError ~ error:", error)
+      console.error("🚀 ~ file: index.tsx:20 ~ onError ~ error:", error)
       toast.error(error.message)
     },
   })

@@ -39,7 +39,7 @@ export default new (class AuthController {
     })
   }
 
-  logOut() {
+  signOut() {
     return publicProcedure.mutation((opts) => {
       // @ts-ignore
       tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)

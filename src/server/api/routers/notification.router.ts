@@ -6,5 +6,5 @@ export const notificationRouter = createTRPCRouter({
   onSend: notificationController.onSend(),
   send: notificationController.send(),
   clear: notificationController.clear(),
-  readAll: notificationController.readAll(),
+  read: notificationController.read(),
 })

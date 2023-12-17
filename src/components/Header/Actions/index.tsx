@@ -16,7 +16,7 @@ const Actions: React.FC = () => {
   const getSessionQuery = api.auth.getSession.useQuery(undefined, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
-    retry: 2,
+    retry: 1,
   })
 
   return (

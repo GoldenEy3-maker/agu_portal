@@ -7,11 +7,24 @@ export default class ApiError extends TRPCError {
   }
 
   static BadRequest(message?: string) {
-    return new ApiError("BAD_REQUEST", message)
+    return new ApiError(
+      "BAD_REQUEST",
+      message ?? "Возникла неожиданная ошибка! Повторите попытку позже."
+    )
+  }
+
+  static PrismaError(message?: string) {
+    return new ApiError(
+      "BAD_REQUEST",
+      message ?? "Наблюдаются проблемы с базой данных! Повторите попытку позже."
+    )
   }
 
   static ServerError(message?: string) {
-    return new ApiError("INTERNAL_SERVER_ERROR", message)
+    return new ApiError(
+      "INTERNAL_SERVER_ERROR",
+      message ?? "Произошла ошибка сервера! Повторите попытку позже."
+    )
   }
 
   static Unauthorized(message?: string) {
@@ -21,7 +34,14 @@ export default class ApiError extends TRPCError {
     )
   }
 
+  static ZodError(message?: string) {
+    return new ApiError(
+      "BAD_REQUEST",
+      message ?? "Данные не прошли проверку типов!"
+    )
+  }
+
   static EnvVarsNotFound() {
-    return new ApiError("INTERNAL_SERVER_ERROR", "Env vars not found!")
+    return new ApiError("INTERNAL_SERVER_ERROR", "Переменные среди не найдены!")
   }
 }

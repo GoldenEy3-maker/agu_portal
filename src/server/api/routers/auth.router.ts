@@ -7,5 +7,5 @@ import { createTRPCRouter } from "../trpc"
 export const authRouter = createTRPCRouter({
   getSession: authController.getSession(),
   signIn: authController.signIn(),
-  logOut: userController.logOut(),
+  signOut: userController.signOut(),
 })

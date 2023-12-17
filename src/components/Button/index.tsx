@@ -12,6 +12,7 @@ export type ButtonProps = {
   size?: "sm"
   loading?: boolean
   isActive?: boolean
+  counter?: number
 } & React.ComponentProps<"button">
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,6 +25,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size,
       loading,
       isActive,
+      counter,
       ...props
     },
     ref
@@ -47,10 +49,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           [styles._textAlignRight ?? ""]: textAlign === "right",
           [styles._sm ?? ""]: size === "sm",
           [styles._isActive ?? ""]: !!isActive,
+          [styles._loading ?? ""]: !!isLoading,
         })}
         onPointerDown={rippleEffectEvent}
         ref={ref}
+        disabled={isLoading || props.disabled}
       >
+        {counter ? (
+          <span className={styles.counter}>{Math.min(counter ?? 0, 99)}</span>
+        ) : null}
         {isLoading ? <LoadingIcon /> : null}
         {isLoading && asIcon ? null : props.children}
       </button>

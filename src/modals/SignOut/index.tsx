@@ -9,7 +9,7 @@ import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
 import { ModalKeyMap, PagePathMap } from "~/utils/enums"
 
-const LogOutModal: React.FC = () => {
+const SignOutModal: React.FC = () => {
   const router = useRouter()
   const modalStore = useModalStore()
   const sessionStore = useSessionStore()
@@ -17,16 +17,16 @@ const LogOutModal: React.FC = () => {
 
   const closeModalHandler = () => modalStore.close()
 
-  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.LogOut
+  const isModalOpen = modalStore.queue.at(-1) === ModalKeyMap.SignOut
 
-  const logOut = api.auth.logOut.useMutation({
+  const signOut = api.auth.signOut.useMutation({
     onSuccess() {
       router.push(PagePathMap.HomePage)
       sessionStore.clear()
-      modalStore.close(ModalKeyMap.LogOut)
+      modalStore.close(ModalKeyMap.SignOut)
     },
     onError(error) {
-      console.log("🚀 ~ file: index.tsx:24 ~ onError ~ error:", error)
+      console.error("🚀 ~ file: index.tsx:24 ~ onError ~ error:", error)
       toast.error(error.message)
     },
   })
@@ -49,7 +49,7 @@ const LogOutModal: React.FC = () => {
           onClick={closeModalHandler}
           textAlign="center"
           ref={cancelButtonRef}
-          disabled={logOut.isLoading}
+          disabled={signOut.isLoading}
         >
           Отмена
         </Button>
@@ -58,9 +58,9 @@ const LogOutModal: React.FC = () => {
           color="danger"
           type="button"
           textAlign="center"
-          onClick={() => logOut.mutate()}
-          disabled={logOut.isLoading}
-          loading={logOut.isLoading}
+          onClick={() => signOut.mutate()}
+          disabled={signOut.isLoading}
+          loading={signOut.isLoading}
         >
           Выйти
         </Button>
@@ -69,4 +69,4 @@ const LogOutModal: React.FC = () => {
   )
 }
 
-export default LogOutModal
+export default SignOutModal

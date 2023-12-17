@@ -1,7 +1,7 @@
 import { ValueOf } from "./types"
 
 export const GlobalDatasetKeyMap = {
-  LockByModal: "data-lock-by-modal"
+  LockByModal: "data-lock-by-modal",
 } as const
 
 export const PagePathMap = {
@@ -12,27 +12,34 @@ export const PagePathMap = {
   UsersPage: "/users",
   SchedulerPage: "/scheduler",
   SupportPage: "/support",
-  SettingsPage: "/settings"
+  SettingsPage: "/settings",
 } as const
 
 export const ModalKeyMap = {
   SignIn: "sign-in",
-  LogOut: "log-out",
+  SignOut: "sign-out",
   Sidebar: "sidebar",
   Chat: "chat",
-  DeleteNotifications: "delete-notifications"
+  DeleteNotifications: "delete-notifications",
 } as const
 
 export const CookieKeyMap = {
-  RefreshToken: "_v"
+  RefreshToken: "_v",
 } as const
 
 export const LocalStorageKeyMap = {
-  isDarkTheme: "_d"
+  isDarkTheme: "_d",
 } as const
 
 export const RedisKeyMap = {
-  Notification: "notification"
+  Notification: "notification",
+} as const
+
+export const NotificationTypeMap = {
+  Review: "review",
+  NewCourseElement: "new-course-Element",
+  OpenCourseElement: "open-curse-element",
+  CoursePublish: "course-publish",
 } as const
 
 export type GlobalDatasetKeyMap = ValueOf<typeof GlobalDatasetKeyMap>
@@ -41,3 +48,4 @@ export type ModalKeyMap = ValueOf<typeof ModalKeyMap>
 export type CookieKeyMap = ValueOf<typeof CookieKeyMap>
 export type LocalStorageKeyMap = ValueOf<typeof LocalStorageKeyMap>
 export type RedisKeyMap = ValueOf<typeof RedisKeyMap>
+export type NotificationTypeMap = ValueOf<typeof NotificationTypeMap>

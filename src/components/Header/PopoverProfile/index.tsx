@@ -100,7 +100,7 @@ const PopoverProfile: React.FC = () => {
               className={styles.navLink}
               onClick={(event) => {
                 modalStore.open({
-                  key: ModalKeyMap.LogOut,
+                  key: ModalKeyMap.SignOut,
                   target: event.currentTarget,
                 })
               }}

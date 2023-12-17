@@ -14,7 +14,6 @@ const Welcome: React.FC = () => {
           blurDataURL={WelcomeAguJpg.blurDataURL}
           fill
           style={{ objectFit: "cover" }}
-          sizes="100vw"
         />
         <div className={styles.overlay}>
           <h2>Алтайский государственный университет (АлтГУ)</h2>

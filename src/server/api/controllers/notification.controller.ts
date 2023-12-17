@@ -4,6 +4,7 @@ import {
   NotificationModel,
   notificationModel,
   notificationOnSendInput,
+  notificationReadInput,
   notificationSendInput,
 } from "../schemas/notification.schema"
 import { authProcedure, publicProcedure } from "../trpc"
@@ -11,13 +12,15 @@ import { authProcedure, publicProcedure } from "../trpc"
 export default new (class NotificationController {
   getBySession() {
     return authProcedure.query(
-      async (opts) => await opts.ctx.redis.getNotifications(opts.ctx.user.id)
+      async (opts) =>
+        await opts.ctx.redis.getUserNotifications(opts.ctx.user.id)
     )
   }
 
   clear() {
     return authProcedure.mutation(
-      async (opts) => await opts.ctx.redis.clearNotifications(opts.ctx.user.id)
+      async (opts) =>
+        await opts.ctx.redis.clearUserNotifications(opts.ctx.user.id)
     )
   }
 
@@ -33,7 +36,7 @@ export default new (class NotificationController {
             emit.next(notification)
           }
 
-          opts.ctx.redis.subscribeToNotification(opts.input.userId)
+          opts.ctx.redis.subscribeToUserNotification(opts.input.userId)
           opts.ctx.redis.on("message", onSend)
 
           return () => {
@@ -43,10 +46,14 @@ export default new (class NotificationController {
       })
   }
 
-  readAll() {
-    return authProcedure.mutation(
-      async (opts) => await opts.ctx.redis.readNotifications(opts.ctx.user.id)
-    )
+  read() {
+    return authProcedure.input(notificationReadInput).mutation(async (opts) => {
+      if (opts.input) {
+        return await opts.ctx.redis.readNotification(opts.input.id)
+      }
+
+      return await opts.ctx.redis.readUserNotifications(opts.ctx.user.id)
+    })
   }
 
   send() {
@@ -62,7 +69,7 @@ export default new (class NotificationController {
 
       await opts.ctx.redis.setNotification(key, notification)
 
-      await opts.ctx.redis.publishNotification(
+      await opts.ctx.redis.publishUserNotification(
         opts.input.recipientId,
         notification
       )

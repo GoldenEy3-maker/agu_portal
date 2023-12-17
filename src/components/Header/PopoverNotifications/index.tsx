@@ -15,10 +15,17 @@ import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
-import { ModalKeyMap, PagePathMap } from "~/utils/enums"
+import { ModalKeyMap, NotificationTypeMap, PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import LoadingSkeleton from "./LoadingSkeleton"
 import styles from "./styles.module.sass"
+
+const tableNotificationTextByType: Record<NotificationTypeMap, string> = {
+  "course-publish": "оставил(а) уведомление",
+  "new-course-Element": "выложил(а) новое задание",
+  "open-curse-element": "открыл(а) задание",
+  review: "оставил(а) отзыв на",
+}
 
 const PopoverNotifications: React.FC = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
@@ -41,18 +48,21 @@ const PopoverNotifications: React.FC = () => {
         void getNotificationsBySessionQuery.refetch()
       },
       onError(err) {
-        console.log("🚀 ~ file: index.tsx:41 ~ onError ~ err:", err)
+        console.error("🚀 ~ file: index.tsx:41 ~ onError ~ err:", err)
       },
     }
   )
 
-  const readAllNotifications = api.notification.readAll.useMutation({
-    onSuccess() {
-      toast.success("Все уведомления прочитаны.")
+  const readNotification = api.notification.read.useMutation({
+    onSuccess(data) {
+      if (Array.isArray(data)) {
+        toast.success("Все уведомления прочитаны.")
+      }
+
       void getNotificationsBySessionQuery.refetch()
     },
     onError(err) {
-      console.log("🚀 ~ file: index.tsx:57 ~ onError ~ err:", err)
+      console.error("🚀 ~ file: index.tsx:57 ~ onError ~ err:", err)
       toast.error(err.message)
     },
   })
@@ -65,6 +75,11 @@ const PopoverNotifications: React.FC = () => {
         color="default"
         onClick={togglePopoverHandler}
         isActive={isPopoverOpen}
+        counter={
+          getNotificationsBySessionQuery.data?.filter(
+            (notification) => notification.isRead === false
+          ).length
+        }
       >
         <IconBell />
       </Popover.Trigger>
@@ -74,9 +89,9 @@ const PopoverNotifications: React.FC = () => {
           <Popover.Actions>
             <Button
               type="button"
-              loading={readAllNotifications.isLoading}
+              loading={readNotification.isLoading}
               asIcon
-              onClick={() => readAllNotifications.mutate()}
+              onClick={() => readNotification.mutate()}
               title="Пометить все, как прочитанное"
               disabled={
                 getNotificationsBySessionQuery.isLoading ||
@@ -126,14 +141,22 @@ const PopoverNotifications: React.FC = () => {
                         className={cls(styles.item, {
                           [styles._notReaded ?? ""]: !notification.isRead,
                         })}
+                        onClick={() => {
+                          if (!notification.isRead)
+                            readNotification.mutate({ id: notification.id })
+                        }}
+                        title={`${notification.sender.name} ${
+                          tableNotificationTextByType[notification.type]
+                        } ${notification.target} (${notification.subject})`}
                       >
                         <div className={styles.avatar}>
                           <UserAvatar src={notification.sender.avatar} />
                         </div>
                         <p className={styles.text}>
                           <strong>{notification.sender.name}</strong>
-                          &nbsp;оставил-(ла) отзыв на&nbsp;
-                          <strong>Лабораторная работа №1</strong>
+                          &nbsp;{tableNotificationTextByType[notification.type]}
+                          &nbsp;
+                          <strong>{notification.target}</strong>
                         </p>
                         <p className={styles.extraInfo}>
                           <time
@@ -144,9 +167,7 @@ const PopoverNotifications: React.FC = () => {
                             {dayjs().to(dayjs(notification.createdAt))}
                           </time>
                           <i></i>
-                          <span>
-                            Менеджмент в профессиональной деятельности
-                          </span>
+                          <span>{notification.subject}</span>
                         </p>
                       </NextLink>
                     </li>

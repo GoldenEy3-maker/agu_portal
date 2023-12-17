@@ -37,7 +37,7 @@ const SignInModal: React.FC = () => {
       form.reset()
     },
     onError(error) {
-      console.log("🚀 ~ file: index.tsx:39 ~ onError ~ error:", error)
+      console.error("🚀 ~ file: index.tsx:39 ~ onError ~ error:", error)
       toast.error(error.message)
       loginInputRef.current?.focus()
     },
@@ -130,7 +130,7 @@ const SignInModal: React.FC = () => {
             onClick={(event) => {
               event.preventDefault()
               modalStore.open({
-                key: ModalKeyMap.LogOut,
+                key: ModalKeyMap.SignOut,
                 target: event.currentTarget,
               })
             }}
