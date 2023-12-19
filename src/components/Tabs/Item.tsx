@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { cls } from "~/utils/func"
 import { useTabsContext } from "./context"
@@ -6,12 +7,14 @@ import styles from "./styles.module.sass"
 type ItemProps = {
   id: string
   label: string
+  isActive: boolean
 } & Omit<React.ComponentProps<"input">, "id" | "name">
 
 export const Item: React.FC<ItemProps> = ({
   className,
   id,
   label,
+  isActive,
   ...props
 }) => {
   const rippleEffectEvent = useRippleEffect()
@@ -37,8 +40,17 @@ export const Item: React.FC<ItemProps> = ({
     if (props.onChange) props.onChange(event)
   }
 
+  const initialActiveItem = (node: HTMLDivElement | null) => {
+    if (node && isActive) {
+      const width = node.offsetWidth
+
+      ctx.setActiveItemWidth(width / 2)
+      ctx.setCursorOffset(node.offsetLeft + width / 4)
+    }
+  }
+
   return (
-    <div className={cls(styles.item, className)}>
+    <div className={cls(styles.item, className)} ref={initialActiveItem}>
       <input
         {...props}
         type="radio"

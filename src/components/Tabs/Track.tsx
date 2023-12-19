@@ -5,17 +5,19 @@ import styles from "./styles.module.sass"
 
 type TrackProps = {
   labels: Record<string, string>
-  render: (key: string, label: string) => React.ReactNode
+  children:
+    | React.ReactNode
+    | ((key: string, label: string) => React.ReactNode)
+    | (React.ReactNode | ((key: string, label: string) => React.ReactNode))[]
 } & Omit<React.ComponentProps<"div">, "children">
 
-export const Track: React.FC<TrackProps> = ({ labels, render, ...props }) => {
+export const Track: React.FC<TrackProps> = ({ labels, children, ...props }) => {
   const [isTransitionLock, setIsTransitionLock] = useState(false)
 
   const trackRef = useRef<HTMLDivElement>(null)
 
   const startOffsetRef = useRef(0)
   const currentOffsetRef = useRef(0)
-  const newOffsetRef = useRef(0)
 
   const ctx = useTabsContext()
 
@@ -99,7 +101,15 @@ export const Track: React.FC<TrackProps> = ({ labels, render, ...props }) => {
           left: ctx.cursorOffset + "px",
         }}
       />
-      {Object.keys(labels).map((key) => render(key, labels[key]!))}
+      {Array.isArray(children)
+        ? children.map((child) =>
+            typeof child === "function"
+              ? Object.keys(labels).map((key) => child(key, labels[key]!))
+              : child
+          )
+        : typeof children === "function"
+        ? Object.keys(labels).map((key) => children(key, labels[key]!))
+        : children}
     </div>
   )
 }

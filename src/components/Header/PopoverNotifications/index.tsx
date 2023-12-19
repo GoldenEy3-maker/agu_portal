@@ -133,17 +133,23 @@ const PopoverNotifications: React.FC = () => {
           </Popover.Actions>
         </Popover.Header>
         <Tabs.Root name="notification-tabs">
-          <Tabs.Track
-            labels={tableNotificationTabLabelByType}
-            render={(key, label) => (
+          <Tabs.Track labels={tableNotificationTabLabelByType}>
+            <Tabs.Item
+              id="all"
+              label="Все"
+              isActive={activeTab === null}
+              onChange={() => setActiveTab(null)}
+            />
+            {(key, label) => (
               <Tabs.Item
                 key={key}
                 id={key}
                 label={label}
+                isActive={activeTab === (key as NotificationTypeMap)}
                 onChange={() => setActiveTab(key as NotificationTypeMap)}
               />
             )}
-          />
+          </Tabs.Track>
         </Tabs.Root>
         <Popover.Content className={styles.content}>
           {!getNotificationsBySessionQuery.isLoading ? (

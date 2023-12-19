@@ -7,7 +7,8 @@ const config = {
         hostname: "placehold.co",
       },
     ],
-    // unoptimized: true,
+    dangerouslyAllowSVG: true,
+    unoptimized: true,
   },
   i18n: {
     locales: ["ru"],

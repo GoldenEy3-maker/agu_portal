@@ -11,7 +11,7 @@ import {
 import Link from "~/components/Link"
 import * as Popover from "~/components/Popover"
 import UserAvatar from "~/components/UserAvatar"
-import { useLocalStorage } from "~/hooks/localStorage"
+import { useLocalStorage } from "~/hooks/localStorage.hook"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
 import { LocalStorageKeyMap, ModalKeyMap, PagePathMap } from "~/utils/enums"
