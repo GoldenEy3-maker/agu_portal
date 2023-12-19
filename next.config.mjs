@@ -7,7 +7,6 @@ const config = {
         hostname: "placehold.co",
       },
     ],
-    dangerouslyAllowSVG: true,
     // unoptimized: true,
   },
   i18n: {

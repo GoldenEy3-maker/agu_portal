@@ -1,3 +1,4 @@
+import { table } from "console"
 import dayjs from "dayjs"
 import NextLink from "next/link"
 import { useState } from "react"
@@ -10,6 +11,7 @@ import {
   IconTrash,
 } from "~/components/Icons"
 import * as Popover from "~/components/Popover"
+import * as Tabs from "~/components/Tabs"
 import UserAvatar from "~/components/UserAvatar"
 import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { useModalStore } from "~/store/modal"
@@ -27,7 +29,15 @@ const tableNotificationTextByType: Record<NotificationTypeMap, string> = {
   review: "оставил(а) отзыв на",
 }
 
+const tableNotificationTabLabelByType: Record<NotificationTypeMap, string> = {
+  review: "Отзывы",
+  "course-publish": "Публикации",
+  "new-course-Element": "Новые задания",
+  "open-curse-element": "Открытые задания",
+}
+
 const PopoverNotifications: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<NotificationTypeMap | null>(null)
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
   const modalStore = useModalStore()
@@ -122,11 +132,27 @@ const PopoverNotifications: React.FC = () => {
             </Button>
           </Popover.Actions>
         </Popover.Header>
+        <Tabs.Root name="notification-tabs">
+          <Tabs.Track
+            labels={tableNotificationTabLabelByType}
+            render={(key, label) => (
+              <Tabs.Item
+                key={key}
+                id={key}
+                label={label}
+                onChange={() => setActiveTab(key as NotificationTypeMap)}
+              />
+            )}
+          />
+        </Tabs.Root>
         <Popover.Content className={styles.content}>
           {!getNotificationsBySessionQuery.isLoading ? (
             getNotificationsBySessionQuery.data?.length ? (
               <ul className={styles.list}>
                 {getNotificationsBySessionQuery.data
+                  .filter((notification) =>
+                    activeTab ? notification.type === activeTab : true
+                  )
                   ?.sort((a, b) => {
                     const dateA = new Date(a.createdAt).getTime()
                     const dateB = new Date(b.createdAt).getTime()
