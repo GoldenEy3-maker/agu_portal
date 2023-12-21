@@ -1,9 +1,9 @@
 import { useState } from "react"
 import toast from "react-hot-toast"
-import Button from "~/components/Button"
-import * as Section from "~/components/Section"
-import * as Tabs from "~/components/Tabs"
-import MainLayout from "~/layouts/main"
+import Button from "~/components/ui/Button"
+import Section from "~/components/ui/Section"
+import Tabs from "~/components/ui/Tabs"
+import MainLayout from "~/layouts/Main"
 import { api } from "~/utils/api"
 import { NextPageWithLayout } from "../_app"
 
@@ -32,24 +32,27 @@ const UsersPage: NextPageWithLayout = () => {
   })
   return (
     <main className="content-grid">
-      <Section.Root>
+      <Section>
         <Section.Title>Страница пользователей</Section.Title>
         <Section.Content>
-          <Tabs.Root name="test">
+          <Tabs>
             <Tabs.Track labels={tableTestTabLabel}>
-              {(key, label) => (
+              {Object.keys(tableTestTabLabel).map((key) => (
                 <Tabs.Item
                   key={key}
                   id={key}
-                  label={label}
+                  label={
+                    tableTestTabLabel[key as keyof typeof tableTestTabLabel]
+                  }
                   isActive={activeTab === key}
                   onChange={() =>
                     setActiveTab(key as keyof typeof tableTestTabLabel)
                   }
+                  name="test"
                 />
-              )}
+              ))}
             </Tabs.Track>
-          </Tabs.Root>
+          </Tabs>
           <ul>
             {getUsers.data?.map((user) => (
               <li key={user.id}>
@@ -75,7 +78,7 @@ const UsersPage: NextPageWithLayout = () => {
             ))}
           </ul>
         </Section.Content>
-      </Section.Root>
+      </Section>
     </main>
   )
 }

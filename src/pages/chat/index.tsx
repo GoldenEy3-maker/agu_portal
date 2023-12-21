@@ -1,5 +1,5 @@
 import React from "react"
-import MainLayout from "~/layouts/main"
+import MainLayout from "~/layouts/Main"
 import { NextPageWithLayout } from "../_app"
 
 const ChatPage: NextPageWithLayout = () => {

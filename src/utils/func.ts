@@ -33,5 +33,9 @@ export const getBaseWsUrl = () => {
   if (process.env.NEXT_PUBLIC_APP_HOSTNAME)
     return `wss://${process.env.NEXT_PUBLIC_APP_HOSTNAME}`
 
-  return `ws://127.0.0.1:${process.env.NEXT_PUBLIC_PORT ?? 3000}`
+  return `ws://127.0.0.1:${
+    process.env.NEXT_PUBLIC_PORT ?? process.env.NODE_ENV === "development"
+      ? 3001
+      : 3000
+  }`
 }

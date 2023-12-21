@@ -1,7 +1,7 @@
 import Image from "next/image"
 import HeaderLogo from "~/assets/header_logo_resized.png"
-import * as Modal from "~/components/Modal"
-import Sidebar from "~/components/Sidebar"
+import Modal from "~/components/ui/Modal"
+import Sidebar from "~/components/ui/Sidebar"
 import { useRouterChangeEvent } from "~/hooks/routerEvent.hook"
 import { useModalStore } from "~/store/modal"
 import { ModalKeyMap } from "~/utils/enums"
@@ -14,7 +14,7 @@ const SidebarModal: React.FC = () => {
   useRouterChangeEvent(() => modalStore.close(ModalKeyMap.Sidebar))
 
   return (
-    <Modal.Root state={isModalOpen} asDrawer position="left">
+    <Modal state={isModalOpen} asDrawer position="left">
       <Modal.Header isJustifyContentStart>
         <Modal.Close onClick={() => modalStore.close(ModalKeyMap.Sidebar)} />
         <Image
@@ -28,7 +28,7 @@ const SidebarModal: React.FC = () => {
       <Modal.Content>
         <Sidebar isModal />
       </Modal.Content>
-    </Modal.Root>
+    </Modal>
   )
 }
 

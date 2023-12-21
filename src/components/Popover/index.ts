@@ -1,7 +1,0 @@
-export { Actions } from "./Actions"
-export { Content } from "./Content"
-export { Header } from "./Header"
-export { Root } from "./Root"
-export { Title } from "./Title"
-export { Trigger } from "./Trigger"
-export { Wrapper } from "./Wrapper"

@@ -4,11 +4,11 @@ import { useRef } from "react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { BiLockAlt, BiUser } from "react-icons/bi"
-import Button from "~/components/Button"
-import Checkbox from "~/components/Checkbox"
-import * as Form from "~/components/Form"
-import Input from "~/components/Input"
-import * as Modal from "~/components/Modal"
+import Button from "~/components/ui/Button"
+import Checkbox from "~/components/ui/Checkbox"
+import Form from "~/components/ui/Form"
+import Input from "~/components/ui/Input"
+import Modal from "~/components/ui/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import {
   AuthSignInInput,
@@ -59,13 +59,13 @@ const SignInModal: React.FC = () => {
   useAutoFocus(loginInputRef, isModalOpen)
 
   return (
-    <Modal.Root state={isModalOpen}>
+    <Modal state={isModalOpen}>
       <Modal.Header>
         <Modal.Title>Войти</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
       </Modal.Header>
       <Modal.Content>
-        <Form.Root id="sign-in-form" onSubmit={submitFormHandler}>
+        <Form id="sign-in-form" onSubmit={submitFormHandler}>
           <Form.Fieldset>
             <Controller
               control={form.control}
@@ -137,7 +137,7 @@ const SignInModal: React.FC = () => {
           >
             Забыли логин или пароль?
           </Link>
-        </Form.Root>
+        </Form>
       </Modal.Content>
       <Modal.Footer>
         <Button
@@ -156,7 +156,7 @@ const SignInModal: React.FC = () => {
           Войти
         </Button>
       </Modal.Footer>
-    </Modal.Root>
+    </Modal>
   )
 }
 

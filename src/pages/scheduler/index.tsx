@@ -1,4 +1,4 @@
-import MainLayout from "~/layouts/main"
+import MainLayout from "~/layouts/Main"
 import { NextPageWithLayout } from "../_app"
 
 const SchedulerPage: NextPageWithLayout = () => {

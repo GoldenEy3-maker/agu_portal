@@ -1,16 +1,16 @@
 import CoursesFeed from "~/components/#pages/home/CoursesFeed"
 import NewsFeed from "~/components/#pages/home/NewsFeed"
 import Welcome from "~/components/#pages/home/Welcome"
-import Calendar from "~/components/Calendar"
+import Calendar from "~/components/ui/Calendar"
 import {
   IconCalendar,
   IconFolder,
   IconNews,
   IconRightArrowAlt,
-} from "~/components/Icons"
-import Link from "~/components/Link"
-import * as Section from "~/components/Section"
-import MainLayout from "~/layouts/main"
+} from "~/components/ui/Icons"
+import Link from "~/components/ui/Link"
+import Section from "~/components/ui/Section"
+import MainLayout from "~/layouts/Main"
 import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
 import { NextPageWithLayout } from "./_app"
@@ -21,7 +21,7 @@ const HomePage: NextPageWithLayout = () => {
     <main className={cls(styles.main, "content-grid")}>
       <Welcome />
       <Section.Group>
-        <Section.Root isSpanGridArea>
+        <Section isSpanGridArea>
           <Section.Header>
             <Section.Title>
               <IconFolder /> Курсы
@@ -33,8 +33,8 @@ const HomePage: NextPageWithLayout = () => {
           <Section.Content>
             <CoursesFeed />
           </Section.Content>
-        </Section.Root>
-        <Section.Root isSpanGridArea>
+        </Section>
+        <Section isSpanGridArea>
           <Section.Header>
             <Section.Title>
               <IconNews /> Новости
@@ -52,8 +52,8 @@ const HomePage: NextPageWithLayout = () => {
           <Section.Content>
             <NewsFeed />
           </Section.Content>
-        </Section.Root>
-        <Section.Root>
+        </Section>
+        <Section>
           <Section.Header>
             <Section.Title>
               <IconCalendar /> Календарь
@@ -62,8 +62,8 @@ const HomePage: NextPageWithLayout = () => {
           <Section.Content>
             <Calendar />
           </Section.Content>
-        </Section.Root>
-        <Section.Root>
+        </Section>
+        <Section>
           <Section.Header>
             <Section.Title>Не знаешь с чего начать?</Section.Title>
           </Section.Header>
@@ -79,7 +79,7 @@ const HomePage: NextPageWithLayout = () => {
               allowFullScreen
             ></iframe>
           </Section.Content>
-        </Section.Root>
+        </Section>
       </Section.Group>
     </main>
   )

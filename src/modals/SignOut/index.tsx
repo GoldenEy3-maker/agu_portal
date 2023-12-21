@@ -1,8 +1,8 @@
 import { useRouter } from "next/router"
 import { useRef } from "react"
 import toast from "react-hot-toast"
-import Button from "~/components/Button"
-import * as Modal from "~/components/Modal"
+import Button from "~/components/ui/Button"
+import Modal from "~/components/ui/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
@@ -34,7 +34,7 @@ const SignOutModal: React.FC = () => {
   useAutoFocus(cancelButtonRef, isModalOpen)
 
   return (
-    <Modal.Root state={isModalOpen}>
+    <Modal state={isModalOpen}>
       <Modal.Header>
         <Modal.Title>Вы действительно хотите выйти?</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
@@ -65,7 +65,7 @@ const SignOutModal: React.FC = () => {
           Выйти
         </Button>
       </Modal.Footer>
-    </Modal.Root>
+    </Modal>
   )
 }
 

@@ -1,10 +1,10 @@
 import { Inter } from "next/font/google"
 import Head from "next/head"
 import { PropsWithChildren } from "react"
-import ModalContainer from "~/components/#layouts/main/ModalContaier"
-import Footer from "~/components/Footer"
-import Header from "~/components/Header"
-import Sidebar from "~/components/Sidebar"
+import Footer from "~/components/ui/Footer"
+import Header from "~/components/ui/Header"
+import Sidebar from "~/components/ui/Sidebar"
+import MainModalContainer from "~/modals/Containers/Main"
 
 const inter = Inter({ subsets: ["cyrillic", "latin"] })
 
@@ -28,7 +28,7 @@ const MainLayout: React.FC<MainLayoutProps> = (props) => {
           {props.children}
         </div>
         <Footer />
-        <ModalContainer />
+        <MainModalContainer />
       </div>
     </>
   )

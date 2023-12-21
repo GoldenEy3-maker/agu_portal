@@ -1,7 +1,7 @@
 import Image from "next/image"
 import WelcomeAguJpg from "~/assets/preview.jpg"
-import { IconRightArrowAlt } from "~/components/Icons"
-import Link from "~/components/Link"
+import { IconRightArrowAlt } from "~/components/ui/Icons"
+import Link from "~/components/ui/Link"
 import styles from "./styles.module.sass"
 
 const Welcome: React.FC = () => {

@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import toast from "react-hot-toast"
-import Button from "~/components/Button"
-import * as Modal from "~/components/Modal"
+import Button from "~/components/ui/Button"
+import Modal from "~/components/ui/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import { useModalStore } from "~/store/modal"
 import { api } from "~/utils/api"
@@ -35,7 +35,7 @@ const DeleteNotificationsModal = () => {
   useAutoFocus(cancelButtonRef, isModalOpen)
 
   return (
-    <Modal.Root state={isModalOpen}>
+    <Modal state={isModalOpen}>
       <Modal.Header>
         <Modal.Title>Удалить уведомления</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
@@ -64,7 +64,7 @@ const DeleteNotificationsModal = () => {
           Удалить
         </Button>
       </Modal.Footer>
-    </Modal.Root>
+    </Modal>
   )
 }
 

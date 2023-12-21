@@ -1,4 +1,4 @@
-import * as Modal from "~/components/Modal"
+import Modal from "~/components/ui/Modal"
 import { useModalStore } from "~/store/modal"
 import { ModalKeyMap } from "~/utils/enums"
 
@@ -8,7 +8,7 @@ const ChatModal: React.FC = () => {
   const closeModalHandler = () => modalStore.close(ModalKeyMap.Chat)
 
   return (
-    <Modal.Root state={isModalOpen} asDrawer>
+    <Modal state={isModalOpen} asDrawer>
       <Modal.Header>
         <Modal.Title>Сообщения</Modal.Title>
         <Modal.Close onClick={closeModalHandler} />
@@ -21,7 +21,7 @@ const ChatModal: React.FC = () => {
           <li>Чат 4</li>
         </ul>
       </Modal.Content>
-    </Modal.Root>
+    </Modal>
   )
 }
 
