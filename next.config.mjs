@@ -8,10 +8,6 @@ const config = {
       },
     ],
     dangerouslyAllowSVG: true,
-    unoptimized: false,
-  },
-  httpAgentOptions: {
-    keepAlive: false,
   },
   i18n: {
     locales: ["ru"],
