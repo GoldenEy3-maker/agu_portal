@@ -1,5 +1,5 @@
 import { TRPCError } from "@trpc/server"
-import { TRPC_ERROR_CODE_KEY } from "@trpc/server/rpc"
+import { type TRPC_ERROR_CODE_KEY } from "@trpc/server/rpc"
 
 export default class ApiError extends TRPCError {
   constructor(code: TRPC_ERROR_CODE_KEY, message?: string) {

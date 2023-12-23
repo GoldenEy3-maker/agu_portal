@@ -1,4 +1,4 @@
-import { IconType } from "react-icons"
+import { type IconType } from "react-icons"
 import { BiUser } from "react-icons/bi"
 
 export const IconUser: IconType = (props) => {

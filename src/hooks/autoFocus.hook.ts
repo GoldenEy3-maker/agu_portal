@@ -14,5 +14,5 @@ export const useAutoFocus = (
         target.current!.removeAttribute("data-auto-focus")
       )
     }, 30)
-  }, [condition])
+  }, [condition, target])
 }

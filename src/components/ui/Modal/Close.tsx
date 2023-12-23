@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 import { IconX } from "~/components/ui/Icons"
-import Button, { ButtonProps } from "../Button"
+import Button, { type ButtonProps } from "../Button"
 import styles from "./styles.module.sass"
 
 export const Close = forwardRef<
@@ -15,3 +15,5 @@ export const Close = forwardRef<
     </div>
   )
 })
+
+Close.displayName = "Close"

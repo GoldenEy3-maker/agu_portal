@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useRef } from "react"
@@ -11,8 +13,8 @@ import Input from "~/components/ui/Input"
 import Modal from "~/components/ui/Modal"
 import { useAutoFocus } from "~/hooks/autoFocus.hook"
 import {
-  AuthSignInInput,
   authSignInInput,
+  type AuthSignInInput,
 } from "~/server/api/schemas/auth.schema"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"

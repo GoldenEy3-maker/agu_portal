@@ -2,8 +2,8 @@ import Redis from "ioredis"
 import { ZodError } from "zod"
 import { RedisKeyMap } from "../utils/enums"
 import {
-  NotificationModel,
   notificationModel,
+  type NotificationModel,
 } from "./api/schemas/notification.schema"
 import ApiError from "./exeptions"
 
@@ -26,7 +26,7 @@ class CustomRedis extends Redis {
 
       while (cursor !== "0") {
         const result: [cursor: string, elements: string[]] = await this.scan(
-          cursor || "0",
+          cursor ?? "0",
           "MATCH",
           RedisKeyMap.Notification + ":*"
         )

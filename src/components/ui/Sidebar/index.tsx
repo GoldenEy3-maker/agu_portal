@@ -31,6 +31,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
   return (
     <aside
+      role="aside"
       className={cls(styles.aside, {
         [styles._modal ?? ""]: !!props.isModal,
       })}

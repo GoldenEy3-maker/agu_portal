@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { LocalStorageKeyMap } from "~/utils/enums"
+import { type LocalStorageKeyMap } from "~/utils/enums"
 
 export const useLocalStorage = <T>(
   key: LocalStorageKeyMap,

@@ -66,7 +66,13 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     }
 
     return res
-  }, [currentDate])
+  }, [
+    daysCurrentMonth,
+    endCurrentMonth,
+    endPrevMonth,
+    startCurrentMonth,
+    startNextMonth,
+  ])
 
   const goToPrevDate = () => {
     setCurrentDate((prev) => prev.subtract(1, "month"))

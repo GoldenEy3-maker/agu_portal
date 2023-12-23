@@ -8,5 +8,5 @@ export const useDocEventListener = <T extends keyof DocumentEventMap>(
     document.addEventListener(key, listener)
 
     return () => document.removeEventListener(key, listener)
-  }, [listener])
+  }, [listener, key])
 }

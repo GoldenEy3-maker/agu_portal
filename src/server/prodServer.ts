@@ -6,17 +6,17 @@ import { WebSocketServer } from "ws"
 import { appRouter } from "./api/root"
 import { createTRPCContext } from "./api/trpc"
 
-const port = parseInt(process.env.NEXT_PUBLIC_PORT || "3000", 10)
+const port = parseInt(process.env.NEXT_PUBLIC_PORT ?? "3000", 10)
 const hostname = process.env.NEXT_PUBLIC_APP_HOSTNAME ?? "127.0.0.1"
 const dev = process.env.NODE_ENV !== "production"
 const app = next({ dev, port, hostname, dir: process.cwd() })
 const handle = app.getRequestHandler()
 
 void app.prepare().then(() => {
-  const server = createServer(async (req, res) => {
+  const server = createServer((req, res) => {
     if (!req.url) return
     const parsedUrl = parse(req.url, true)
-    await handle(req, res, parsedUrl)
+    void handle(req, res, parsedUrl)
   })
 
   const wss = new WebSocketServer({

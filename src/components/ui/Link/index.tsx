@@ -38,7 +38,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
 
     const isActive =
       href !== "/"
-        ? router.asPath.includes(href.toString())
+        ? router.asPath.includes(String(href))
         : router.asPath === href
 
     return (
@@ -57,7 +57,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
             [styles._elevated ?? ""]: variant === "elevated",
             [styles._filled ?? ""]: variant === "filled",
             [styles._outlined ?? ""]: variant === "outlined",
-            [styles._asIcon ?? ""]: asIcon!!,
+            [styles._asIcon ?? ""]: asIcon!,
             [styles._sm ?? ""]: size === "sm",
             [styles._defaultClr ?? ""]: color === "default",
             [styles._dangerClr ?? ""]: color === "danger",

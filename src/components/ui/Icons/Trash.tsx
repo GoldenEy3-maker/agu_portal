@@ -1,4 +1,4 @@
-import { IconType } from "react-icons"
+import { type IconType } from "react-icons"
 import { BiTrash } from "react-icons/bi"
 
 export const IconTrash: IconType = (props) => {

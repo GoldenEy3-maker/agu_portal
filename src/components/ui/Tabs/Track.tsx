@@ -3,11 +3,7 @@ import { cls } from "~/utils/func"
 import { useTabsContext } from "./context"
 import styles from "./styles.module.sass"
 
-type TrackProps = {
-  labels: Record<string, string>
-} & React.ComponentProps<"div">
-
-export const Track: React.FC<TrackProps> = ({ labels, ...props }) => {
+export const Track: React.FC<React.ComponentProps<"div">> = (props) => {
   const [isTransitionLock, setIsTransitionLock] = useState(false)
 
   const trackRef = useRef<HTMLDivElement>(null)

@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google"
 import Head from "next/head"
-import { PropsWithChildren } from "react"
+import { type PropsWithChildren } from "react"
 import Footer from "~/components/ui/Footer"
 import Header from "~/components/ui/Header"
 import Sidebar from "~/components/ui/Sidebar"

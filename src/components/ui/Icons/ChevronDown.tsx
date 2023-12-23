@@ -1,4 +1,4 @@
-import { IconType } from "react-icons"
+import { type IconType } from "react-icons"
 import { BiChevronDown } from "react-icons/bi"
 
 export const IconChevronDown: IconType = (props) => {

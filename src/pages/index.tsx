@@ -13,7 +13,7 @@ import Section from "~/components/ui/Section"
 import MainLayout from "~/layouts/Main"
 import { PagePathMap } from "~/utils/enums"
 import { cls } from "~/utils/func"
-import { NextPageWithLayout } from "./_app"
+import { type NextPageWithLayout } from "./_app"
 import styles from "./styles.module.sass"
 
 const HomePage: NextPageWithLayout = () => {

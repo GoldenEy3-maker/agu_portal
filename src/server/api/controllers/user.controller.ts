@@ -2,7 +2,7 @@ import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import ApiError from "../../exeptions"
 import { authProcedure } from "../trpc"
 
-export default new (class UserController {
+class UserController {
   getAll() {
     return authProcedure.query(async (opts) => {
       try {
@@ -23,4 +23,8 @@ export default new (class UserController {
       }
     })
   }
-})()
+}
+
+const userController = new UserController()
+
+export default userController

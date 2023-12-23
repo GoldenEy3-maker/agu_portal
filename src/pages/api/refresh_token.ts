@@ -1,4 +1,4 @@
-import { NextApiHandler } from "next"
+import { type NextApiHandler } from "next"
 import { db } from "~/server/db"
 import ApiError from "~/server/exeptions"
 import tokenService from "~/services/token.service"

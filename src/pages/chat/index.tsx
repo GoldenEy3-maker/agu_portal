@@ -1,6 +1,6 @@
 import React from "react"
 import MainLayout from "~/layouts/Main"
-import { NextPageWithLayout } from "../_app"
+import { type NextPageWithLayout } from "../_app"
 
 const ChatPage: NextPageWithLayout = () => {
   return <main>Страница чата</main>

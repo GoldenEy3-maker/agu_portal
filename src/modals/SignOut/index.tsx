@@ -21,7 +21,7 @@ const SignOutModal: React.FC = () => {
 
   const signOut = api.auth.signOut.useMutation({
     onSuccess() {
-      router.push(PagePathMap.HomePage)
+      void router.push(PagePathMap.HomePage)
       sessionStore.clear()
       modalStore.close(ModalKeyMap.SignOut)
     },

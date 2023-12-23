@@ -16,7 +16,11 @@ import { useRippleEffect } from "~/hooks/rippleEffect.hook"
 import { useModalStore } from "~/store/modal"
 import { useSessionStore } from "~/store/session"
 import { api } from "~/utils/api"
-import { ModalKeyMap, NotificationTypeMap, PagePathMap } from "~/utils/enums"
+import {
+  ModalKeyMap,
+  PagePathMap,
+  type NotificationTypeMap,
+} from "~/utils/enums"
 import { cls } from "~/utils/func"
 import styles from "./PopoverNotifications.module.sass"
 import LoadingSkeleton from "./PopoverNotifications.skeleton"
@@ -132,7 +136,7 @@ const PopoverNotifications: React.FC = () => {
           </Popover.Actions>
         </Popover.Header>
         <Tabs>
-          <Tabs.Track labels={tableNotificationTabLabelByType}>
+          <Tabs.Track>
             <Tabs.Item
               id="all"
               label="Все"
@@ -159,10 +163,7 @@ const PopoverNotifications: React.FC = () => {
             if (getNotificationsBySessionQuery.isLoading)
               return <LoadingSkeleton />
 
-            if (
-              !getNotificationsBySessionQuery.data ||
-              !getNotificationsBySessionQuery.data.length
-            )
+            if (!getNotificationsBySessionQuery.data?.length)
               return (
                 <div className={styles.empty}>
                   <span>

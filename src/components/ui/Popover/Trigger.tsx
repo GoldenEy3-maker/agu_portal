@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 import { cls } from "~/utils/func"
-import Button, { ButtonProps } from "../Button"
+import Button, { type ButtonProps } from "../Button"
 import styles from "./styles.module.sass"
 
 export const Trigger = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -16,3 +16,5 @@ export const Trigger = forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
+
+Trigger.displayName = "Trigger"

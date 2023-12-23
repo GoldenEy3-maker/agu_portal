@@ -1,5 +1,5 @@
 import MainLayout from "~/layouts/Main"
-import { NextPageWithLayout } from "../_app"
+import { type NextPageWithLayout } from "../_app"
 
 const CoursesPage: NextPageWithLayout = () => {
   return <main>Страница курсов</main>

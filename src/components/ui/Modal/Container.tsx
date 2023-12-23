@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import { useDocEventListener } from "~/hooks/docEvent.hook"
 import { cls } from "~/utils/func"
 import styles from "./styles.module.sass"

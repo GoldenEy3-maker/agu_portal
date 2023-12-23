@@ -5,7 +5,7 @@ import Section from "~/components/ui/Section"
 import Tabs from "~/components/ui/Tabs"
 import MainLayout from "~/layouts/Main"
 import { api } from "~/utils/api"
-import { NextPageWithLayout } from "../_app"
+import { type NextPageWithLayout } from "../_app"
 
 const tableTestTabLabel = {
   testReview: "Отзывы",
@@ -36,7 +36,7 @@ const UsersPage: NextPageWithLayout = () => {
         <Section.Title>Страница пользователей</Section.Title>
         <Section.Content>
           <Tabs>
-            <Tabs.Track labels={tableTestTabLabel}>
+            <Tabs.Track>
               {Object.keys(tableTestTabLabel).map((key) => (
                 <Tabs.Item
                   key={key}

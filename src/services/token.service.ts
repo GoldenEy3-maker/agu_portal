@@ -1,6 +1,6 @@
 import { setCookie } from "cookies-next"
 import jwt from "jsonwebtoken"
-import { NextApiRequest, NextApiResponse } from "next"
+import { type NextApiRequest, type NextApiResponse } from "next"
 import { z } from "zod"
 import ApiError from "../server/exeptions"
 import { CookieKeyMap } from "../utils/enums"
@@ -17,7 +17,7 @@ const refreshTokenPayloadSchema = z.object({
 type AccessTokenPayload = z.TypeOf<typeof accessTokenPayloadSchema>
 type RefreshTokenPayload = z.TypeOf<typeof refreshTokenPayloadSchema>
 
-export default new (class TokenService {
+class TokenService {
   generateTokens(
     payload: AccessTokenPayload & RefreshTokenPayload,
     rememberMe?: boolean
@@ -86,4 +86,8 @@ export default new (class TokenService {
       maxAge: -1,
     })
   }
-})()
+}
+
+const tokenService = new TokenService()
+
+export default tokenService

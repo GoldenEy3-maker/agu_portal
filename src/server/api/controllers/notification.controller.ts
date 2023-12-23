@@ -1,15 +1,15 @@
 import { observable } from "@trpc/server/observable"
 import ApiError from "../../exeptions"
 import {
-  NotificationModel,
   notificationModel,
   notificationOnSendInput,
   notificationReadInput,
   notificationSendInput,
+  type NotificationModel,
 } from "../schemas/notification.schema"
 import { authProcedure, publicProcedure } from "../trpc"
 
-export default new (class NotificationController {
+class NotificationController {
   getBySession() {
     return authProcedure.query(
       async (opts) =>
@@ -36,7 +36,7 @@ export default new (class NotificationController {
             emit.next(notification)
           }
 
-          opts.ctx.redis.subscribeToUserNotification(opts.input.userId)
+          void opts.ctx.redis.subscribeToUserNotification(opts.input.userId)
           opts.ctx.redis.on("message", onSend)
 
           return () => {
@@ -77,4 +77,8 @@ export default new (class NotificationController {
       return notification
     })
   }
-})()
+}
+
+const notificationController = new NotificationController()
+
+export default notificationController

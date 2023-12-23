@@ -1,6 +1,6 @@
 import React from "react"
 import MainLayout from "~/layouts/Main"
-import { NextPageWithLayout } from "../_app"
+import { type NextPageWithLayout } from "../_app"
 
 const NotificationsPage: NextPageWithLayout = () => {
   return <main>Страница уведомлений</main>

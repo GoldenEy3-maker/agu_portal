@@ -1,4 +1,4 @@
-import { ValueOf } from "./types"
+import { type ValueOf } from "./types"
 
 export const GlobalDatasetKeyMap = {
   LockByModal: "data-lock-by-modal",

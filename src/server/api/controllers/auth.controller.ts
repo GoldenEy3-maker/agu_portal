@@ -4,7 +4,7 @@ import ApiError from "../../exeptions"
 import { authSignInInput } from "../schemas/auth.schema"
 import { authProcedure, publicProcedure } from "../trpc"
 
-export default new (class AuthController {
+class AuthController {
   getSession() {
     return authProcedure.query((opts) => opts.ctx.user)
   }
@@ -32,7 +32,7 @@ export default new (class AuthController {
         opts.input.rememberMe
       )
 
-      // @ts-ignore
+      // @ts-expect-error setRefreshToken method gets IncomingMessage Request instead of a NextApiRequest
       tokenService.setRefreshToken(refreshToken, opts.ctx.req, opts.ctx.res)
 
       return { accessToken, user }
@@ -41,8 +41,12 @@ export default new (class AuthController {
 
   signOut() {
     return publicProcedure.mutation((opts) => {
-      // @ts-ignore
+      // @ts-expect-error removeRefreshToken method gets IncomingMessage Request instead of a NextApiRequest
       tokenService.removeRefreshToken(opts.ctx.req, opts.ctx.res)
     })
   }
-})()
+}
+
+const authController = new AuthController()
+
+export default authController

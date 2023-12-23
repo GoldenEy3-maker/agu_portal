@@ -8,5 +8,5 @@ export const useWinEventListener = <T extends keyof WindowEventMap>(
     window.addEventListener(key, listener)
 
     return () => window.removeEventListener(key, listener)
-  }, [listener])
+  }, [listener, key])
 }
